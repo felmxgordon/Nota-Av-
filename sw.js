@@ -1,5 +1,5 @@
 // Nota Avı: her şeyi cihazda saklar, internet olmadan açılır.
-var CACHE = "nota-avi-v6";
+var CACHE = "nota-avi-v7";
 var FILES = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-512.png"];
 
 self.addEventListener("install", function (e) {
