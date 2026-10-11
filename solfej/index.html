@@ -14,274 +14,177 @@
 <title>Solfej ve Gam Rehberi</title>
 <style>
   :root{
-    --bg:#f3ede0;
-    --surface:#ffffff;
-    --surface-2:#eae1cd;
-    --text:#2b2620;
-    --text-muted:#6b6154;
-    --accent:#8a1f3d;
-    --accent-2:#a9782f;
-    --accent-2-soft:#e8d5ac;
-    --border:#ddd0b0;
-    --success:#2f6b46;
-    --danger:#a3312a;
-    --key-white:#fffdf8;
-    --key-white-text:#8a8070;
-    --key-black:#2b2620;
-    --key-border:#c9bb98;
-    --shadow: 0 6px 18px rgba(43,38,32,0.10);
-    --radius-s:10px;
-    --radius-m:16px;
+    --bg:#f3ede0; --surface:#ffffff; --surface-2:#eae1cd; --text:#2b2620; --text-muted:#6b6154;
+    --accent:#8a1f3d; --accent-2:#a9782f; --accent-2-soft:#e8d5ac; --border:#ddd0b0;
+    --success:#2f6b46; --danger:#a3312a; --key-white:#fffdf8; --key-white-text:#8a8070; --key-black:#2b2620; --key-border:#c9bb98;
+    --shadow:0 6px 18px rgba(43,38,32,0.10); --radius-m:16px;
+    --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#15121b;
-      --surface:#201c28;
-      --surface-2:#2a2432;
-      --text:#eee7d9;
-      --text-muted:#a79a86;
-      --accent:#e07a95;
-      --accent-2:#d4af6a;
-      --accent-2-soft:#3a3020;
-      --border:#3a3342;
-      --success:#6fbf8b;
-      --danger:#e2837c;
-      --key-white:#2c2734;
-      --key-white-text:#cabfae;
-      --key-black:#0e0c12;
-      --key-border:#453d50;
-      --shadow: 0 6px 20px rgba(0,0,0,0.35);
+      --bg:#15121b; --surface:#201c28; --surface-2:#2a2432; --text:#eee7d9; --text-muted:#a79a86;
+      --accent:#e07a95; --accent-2:#d4af6a; --accent-2-soft:#3a3020; --border:#3a3342;
+      --success:#6fbf8b; --danger:#e2837c; --key-white:#2c2734; --key-white-text:#cabfae; --key-black:#0e0c12; --key-border:#453d50;
+      --shadow:0 6px 20px rgba(0,0,0,0.35);
     }
   }
-  :root[data-theme="dark"]{
-    --bg:#15121b;
-    --surface:#201c28;
-    --surface-2:#2a2432;
-    --text:#eee7d9;
-    --text-muted:#a79a86;
-    --accent:#e07a95;
-    --accent-2:#d4af6a;
-    --accent-2-soft:#3a3020;
-    --border:#3a3342;
-    --success:#6fbf8b;
-    --danger:#e2837c;
-    --key-white:#2c2734;
-    --key-white-text:#cabfae;
-    --key-black:#0e0c12;
-    --key-border:#453d50;
-    --shadow: 0 6px 20px rgba(0,0,0,0.35);
-  }
-
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    min-height:100vh;
-    padding-bottom:env(safe-area-inset-bottom);
-  }
-  .display{ font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; }
+  body{ background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; min-height:100vh; padding-bottom:env(safe-area-inset-bottom); -webkit-text-size-adjust:100%; }
+  #app{ max-width:620px; margin:0 auto; padding:0 16px 48px; }
+  .hidden{ display:none !important; }
+  button{ font-family:inherit; }
 
-  #app{ max-width:560px; margin:0 auto; padding:0 16px 40px; }
+  header.top{ padding:20px 4px 10px; display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+  header.top h1{ font-family:var(--serif); font-weight:600; font-style:italic; font-size:26px; line-height:1.15; margin:0 0 4px; }
+  header.top p{ margin:0; font-size:13px; color:var(--text-muted); max-width:36ch; line-height:1.4; }
+  .info-btn{ flex:0 0 auto; width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:var(--surface); color:var(--text-muted); font-size:15px; font-style:italic; font-family:var(--serif); cursor:pointer; }
 
-  header.top{
-    padding:22px 4px 14px;
-    display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
-    animation:fadeIn .6s ease;
-  }
-  @keyframes fadeIn{ from{opacity:0; transform:translateY(-6px);} to{opacity:1; transform:none;} }
-  header.top h1{
-    font-family: Georgia, "Iowan Old Style", serif;
-    font-weight:600; font-style:italic;
-    font-size:26px; line-height:1.15; margin:0 0 4px;
-    letter-spacing:.2px;
-  }
-  header.top p{ margin:0; font-size:13px; color:var(--text-muted); max-width:34ch; }
-  .info-btn{
-    flex:0 0 auto; width:34px; height:34px; border-radius:50%;
-    border:1px solid var(--border); background:var(--surface); color:var(--text-muted);
-    font-size:15px; font-style:italic; font-family:Georgia,serif; cursor:pointer;
-  }
-  .info-btn:active{ transform:scale(.94); }
-
-  nav.tabs{
-    display:flex; gap:4px; border-bottom:1px solid var(--border); margin-bottom:20px;
-  }
-  nav.tabs button{
-    flex:1; background:none; border:none; padding:10px 4px 12px; cursor:pointer;
-    color:var(--text-muted); font-size:13.5px; font-weight:600;
-    border-bottom:2px solid transparent; margin-bottom:-1px;
-    font-family:inherit;
-  }
+  nav.tabs{ display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:12px; overflow-x:auto; white-space:nowrap; scrollbar-width:none; -webkit-overflow-scrolling:touch; position:sticky; top:0; background:var(--bg); z-index:5; }
+  nav.tabs::-webkit-scrollbar{ display:none; }
+  nav.tabs button{ flex:1 0 auto; background:none; border:none; padding:11px 6px 12px; cursor:pointer; color:var(--text-muted); font-size:13px; font-weight:600; border-bottom:2px solid transparent; margin-bottom:-1px; }
   nav.tabs button.active{ color:var(--text); border-bottom-color:var(--accent); }
-  nav.tabs button:active{ opacity:.7; }
+
+  .clef-bar{ display:flex; align-items:center; gap:10px; margin:0 0 14px; font-size:12px; color:var(--text-muted); font-weight:600; }
+  .clef-bar .chips{ margin:0; }
 
   .tab-panel{ display:none; }
-  .tab-panel.active{ display:block; animation:fadeIn .35s ease; }
+  .tab-panel.active{ display:block; }
+  .lead{ font-size:13.5px; color:var(--text-muted); margin:0 0 14px; line-height:1.55; }
+  .lead b{ color:var(--text); }
 
-  .lead{ font-size:13.5px; color:var(--text-muted); margin:0 0 16px; line-height:1.5; }
-
-  /* Mode switch */
-  .mode-switch{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:22px;
-  }
-  .mode-switch button{
-    font-family:inherit; font-size:11.5px; font-weight:600; text-align:center;
-    padding:9px 2px; border-radius:10px; border:1px solid var(--border);
-    background:var(--surface); color:var(--text-muted); cursor:pointer; line-height:1.25;
-  }
-  .mode-switch button.active{
-    background:var(--accent); border-color:var(--accent); color:#fff;
-  }
-
-  /* Circle of fifths */
-  .circle-wrap{
-    position:relative; width:min(300px,78vw); aspect-ratio:1/1; margin:6px auto 22px;
-  }
-  .circle-track{
-    position:absolute; inset:8%; border-radius:50%; border:1px dashed var(--border);
-  }
-  .key-btn{
-    position:absolute; width:50px; height:50px; margin-left:-25px; margin-top:-25px;
-    border-radius:50%; border:1px solid var(--border); background:var(--surface);
-    color:var(--text); font-family:inherit; font-weight:700; font-size:13px;
-    display:flex; align-items:center; justify-content:center; cursor:pointer;
-    box-shadow:var(--shadow); transition:transform .15s ease, background .15s ease, color .15s ease;
-  }
-  .key-btn.selected{ background:var(--accent); border-color:var(--accent); color:#fff; transform:scale(1.12); z-index:2;}
-  .key-btn:active{ transform:scale(.95); }
-  .circle-center{
-    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-    text-align:center; pointer-events:none; width:74px;
-  }
-  .circle-center .big{ font-family:Georgia,serif; font-size:22px; font-weight:700; }
-  .circle-center .small{ font-size:10px; color:var(--text-muted); margin-top:2px; }
-
-  /* Scale result */
-  .scale-card{
-    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m);
-    padding:18px 16px 20px; box-shadow:var(--shadow); margin-bottom:20px;
-  }
-  .scale-card h2{
-    font-family:Georgia,serif; font-style:italic; font-weight:600;
-    font-size:21px; margin:0 0 4px;
-  }
-  .scale-meta{ font-size:12.5px; color:var(--text-muted); margin:0 0 16px; line-height:1.5; }
-  .scale-meta b{ color:var(--text); font-weight:600; }
-
-  .note-cards{
-    display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; margin-bottom:16px;
-    -webkit-overflow-scrolling:touch;
-  }
-  .note-card{
-    flex:0 0 auto; width:56px; padding:10px 4px 8px; border-radius:12px;
-    border:1px solid var(--border); background:var(--surface-2); text-align:center; cursor:pointer;
-  }
-  .note-card.root{ border-color:var(--accent); background:var(--accent-2-soft); }
-  .note-card .nn{ font-family:Georgia,serif; font-size:18px; font-weight:700; }
-  .note-card .sf{ font-size:9.5px; color:var(--text-muted); margin-top:3px; line-height:1.2; }
-  .note-card:active{ transform:scale(.95); }
-
-  .scale-controls{ display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
-  .btn{
-    font-family:inherit; font-size:13px; font-weight:600; padding:10px 14px;
-    border-radius:10px; border:1px solid var(--border); background:var(--surface-2);
-    color:var(--text); cursor:pointer;
-  }
+  /* küçük bileşenler */
+  .chips{ display:flex; gap:6px; overflow-x:auto; padding:2px 1px 6px; margin:0 0 8px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  .chips::-webkit-scrollbar{ display:none; }
+  .chips.wrap{ flex-wrap:wrap; overflow:visible; }
+  .chip{ flex:0 0 auto; font-size:13px; font-weight:600; padding:8px 13px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--text-muted); cursor:pointer; white-space:nowrap; }
+  .chip.active{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  .chip small{ font-size:10px; opacity:.75; margin-left:3px; font-weight:500; }
+  .seg{ display:flex; gap:4px; padding:3px; background:var(--surface-2); border-radius:12px; margin:0 0 16px; }
+  .seg button{ flex:1; border:none; background:transparent; color:var(--text-muted); font-size:13px; font-weight:600; padding:9px 4px; border-radius:9px; cursor:pointer; line-height:1.2; }
+  .seg button.active{ background:var(--surface); color:var(--text); box-shadow:0 1px 4px rgba(0,0,0,.12); }
+  .lab{ display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin:12px 0 6px; }
+  .lab:first-child{ margin-top:0; }
+  select{ width:100%; font-size:14.5px; padding:11px 12px; border-radius:10px; border:1px solid var(--border); background:var(--surface); color:var(--text); }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .btn{ font-size:13px; font-weight:600; padding:10px 14px; border-radius:10px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); cursor:pointer; }
   .btn.primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
   .btn.ghost{ background:transparent; }
   .btn:active{ opacity:.75; }
-  .btn:disabled{ opacity:.4; }
+  .btn-row{ display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 4px; }
+  .check{ display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text); margin:8px 0; }
+  .check input{ width:18px; height:18px; accent-color:var(--accent); }
 
-  .piano-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:12px; }
-  .piano{ position:relative; height:104px; min-width:640px; }
-  .pk-white{
-    position:absolute; top:0; height:100%; background:var(--key-white);
-    border:1px solid var(--key-border); border-radius:0 0 6px 6px;
-    display:flex; align-items:flex-end; justify-content:center; padding-bottom:5px;
-    font-size:9px; color:var(--key-white-text); font-weight:600;
-  }
-  .pk-black{
-    position:absolute; top:0; height:62%; width:1.6%; background:var(--key-black);
-    border-radius:0 0 4px 4px; z-index:1;
-  }
-  .pk-white.on{ background:var(--accent-2-soft); }
-  .pk-white.root{ background:var(--accent); color:#fff; }
-  .pk-black.on{ background:var(--accent-2); }
-  .pk-black.root{ background:var(--accent); }
+  .card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m); padding:16px 14px 16px; box-shadow:var(--shadow); margin-bottom:16px; }
+  .card h2{ font-family:var(--serif); font-style:italic; font-weight:600; font-size:21px; margin:0 0 4px; }
+  .card h3{ font-family:var(--serif); font-style:italic; font-weight:600; font-size:17px; margin:0 0 8px; }
+  .meta{ font-size:12.5px; color:var(--text-muted); margin:0 0 12px; line-height:1.55; }
+  .meta b{ color:var(--text); font-weight:600; }
+  .hint{ font-size:12.5px; line-height:1.55; color:var(--text-muted); background:var(--surface-2); border-radius:10px; padding:10px 12px; margin:10px 0 0; }
+  .hint b{ color:var(--text); }
 
-  /* Solfège practice */
-  .field-row{ margin-bottom:14px; }
-  .field-row label{ display:block; font-size:12px; color:var(--text-muted); margin-bottom:6px; font-weight:600; }
-  select{
-    width:100%; font-family:inherit; font-size:14.5px; padding:11px 12px; border-radius:10px;
-    border:1px solid var(--border); background:var(--surface); color:var(--text);
-  }
-  .practice-modes{ display:flex; gap:8px; margin:14px 0 18px; }
-  .practice-modes button{ flex:1; }
+  /* porte */
+  .staff-wrap{ margin:4px 0 10px; color:var(--text); }
+  .staff-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  svg.staff{ display:block; max-width:none; margin:0 auto; }
+  .stx{ font-size:9.5px; fill:var(--text-muted); font-family:-apple-system,"Segoe UI",sans-serif; font-weight:600; }
+  .stx.cap{ font-style:italic; font-weight:500; font-size:10px; }
+  .scol.on{ color:var(--accent); }
+  .scol.on .stx{ fill:var(--accent); }
+  .glyph{ color:var(--text); }
 
-  .quiz-stats{
-    display:flex; justify-content:space-between; font-size:12.5px; color:var(--text-muted);
-    margin-bottom:14px; padding:10px 12px; background:var(--surface-2); border-radius:10px;
-  }
+  /* nota kartları */
+  .note-cards{ display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; margin-bottom:12px; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .note-card{ flex:0 0 auto; width:56px; padding:8px 4px 8px; border-radius:12px; border:1px solid var(--border); background:var(--surface-2); text-align:center; cursor:pointer; }
+  .note-card.root{ border-color:var(--accent); background:var(--accent-2-soft); }
+  .note-card.on{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  .note-card.on .sf, .note-card.on .dg{ color:#fff; }
+  .note-card .dg{ font-size:9px; color:var(--text-muted); font-weight:700; height:11px; }
+  .note-card .nn{ font-family:var(--serif); font-size:18px; font-weight:700; }
+  .note-card .sf{ font-size:9.5px; color:var(--text-muted); margin-top:2px; line-height:1.2; }
+
+  /* beşliler çemberi */
+  .circle-wrap{ position:relative; width:min(300px,78vw); aspect-ratio:1/1; margin:6px auto 12px; }
+  .circle-track{ position:absolute; inset:8%; border-radius:50%; border:1px dashed var(--border); }
+  .key-btn{ position:absolute; width:50px; height:50px; margin-left:-25px; margin-top:-25px; border-radius:50%; border:1px solid var(--border); background:var(--surface); color:var(--text); font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:var(--shadow); transition:transform .15s ease, background .15s ease; }
+  .key-btn.selected{ background:var(--accent); border-color:var(--accent); color:#fff; transform:scale(1.12); z-index:2; }
+  .circle-center{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; pointer-events:none; width:84px; }
+  .circle-center .big{ font-family:var(--serif); font-size:22px; font-weight:700; }
+  .circle-center .small{ font-size:10px; color:var(--text-muted); margin-top:2px; line-height:1.25; }
+  .enh-row{ display:flex; align-items:center; justify-content:center; gap:8px; margin:0 0 14px; font-size:12px; color:var(--text-muted); flex-wrap:wrap; }
+
+  /* piyano */
+  .piano-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:12px; margin-top:6px; }
+  .piano{ position:relative; height:96px; min-width:600px; }
+  .pk-white{ position:absolute; top:0; height:100%; background:var(--key-white); border:1px solid var(--key-border); border-radius:0 0 6px 6px; display:flex; align-items:flex-end; justify-content:center; padding-bottom:5px; font-size:9px; color:var(--key-white-text); font-weight:600; }
+  .pk-black{ position:absolute; top:0; height:60%; background:var(--key-black); border-radius:0 0 4px 4px; z-index:1; }
+  .pk-white.on{ background:var(--accent-2-soft); } .pk-white.root{ background:#d9a7b5; color:#fff; } .pk-white.cur{ background:var(--accent); color:#fff; }
+  .pk-black.on{ background:var(--accent-2); } .pk-black.root{ background:#b8506c; } .pk-black.cur{ background:var(--accent); }
+
+  /* aralık cetveli */
+  table.tbl{ width:100%; border-collapse:collapse; font-size:13px; }
+  table.tbl th{ text-align:left; font-size:11px; color:var(--text-muted); font-weight:700; padding:4px 6px 8px; }
+  table.tbl td{ padding:9px 6px; border-top:1px solid var(--border); vertical-align:middle; }
+  table.tbl tr.rowbtn{ cursor:pointer; }
+  table.tbl tr.rowbtn:active{ background:var(--surface-2); }
+  table.tbl .nm{ font-weight:700; }
+  table.tbl .ab{ font-size:11px; color:var(--text-muted); }
+  table.tbl .ex{ font-family:var(--serif); font-weight:700; white-space:nowrap; }
+  .pill{ display:inline-block; font-size:10.5px; font-weight:700; padding:2px 7px; border-radius:999px; background:var(--accent-2-soft); color:var(--accent-2); margin-left:6px; }
+
+  /* sınav */
+  .quiz-stats{ display:flex; justify-content:space-between; font-size:12.5px; color:var(--text-muted); margin-bottom:12px; padding:10px 12px; background:var(--surface-2); border-radius:10px; }
   .quiz-stats b{ color:var(--text); font-size:14px; }
-  .quiz-play-big{
-    width:100%; padding:16px; font-size:15px; margin-bottom:16px;
-  }
-  .quiz-options{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
-  .quiz-opt{
-    font-family:inherit; font-size:13.5px; font-weight:600; padding:13px 6px;
-    border-radius:10px; border:1px solid var(--border); background:var(--surface);
-    color:var(--text); cursor:pointer;
-  }
+  .quiz-play-big{ width:100%; padding:15px; font-size:15px; margin-bottom:12px; }
+  .quiz-options{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 12px; }
+  .quiz-options.n7{ grid-template-columns:repeat(4,1fr); }
+  .quiz-opt{ font-size:13.5px; font-weight:600; padding:13px 6px; border-radius:10px; border:1px solid var(--border); background:var(--surface); color:var(--text); cursor:pointer; }
   .quiz-opt.correct{ background:var(--success); border-color:var(--success); color:#fff; }
   .quiz-opt.wrong{ background:var(--danger); border-color:var(--danger); color:#fff; }
-  .quiz-opt:disabled{ opacity:.55; }
-  #quiz-feedback{ min-height:20px; font-size:13px; font-weight:600; margin:0 0 12px; }
-  #quiz-feedback.ok{ color:var(--success); }
-  #quiz-feedback.no{ color:var(--danger); }
-  .hidden{ display:none !important; }
+  .quiz-opt:disabled{ opacity:.6; }
+  .quiz-fb{ min-height:20px; font-size:13px; font-weight:600; margin:0 0 10px; line-height:1.5; }
+  .quiz-fb.ok{ color:var(--success); } .quiz-fb.no{ color:var(--danger); }
 
-  /* Glossary */
-  #term-search{
-    width:100%; font-family:inherit; font-size:14.5px; padding:11px 14px; border-radius:10px;
-    border:1px solid var(--border); background:var(--surface); color:var(--text); margin-bottom:12px;
-  }
-  .term-chips{ display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:14px; }
-  .term-chip{
-    flex:0 0 auto; font-family:inherit; font-size:12px; font-weight:600; padding:7px 13px;
-    border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--text-muted);
-    cursor:pointer; white-space:nowrap;
-  }
-  .term-chip.active{ background:var(--accent); border-color:var(--accent); color:#fff; }
-  .term-item{
-    border-bottom:1px solid var(--border); padding:12px 2px;
-  }
-  .term-item .tt{ font-family:Georgia,serif; font-style:italic; font-weight:700; font-size:15.5px; }
-  .term-item .tc{ font-size:10.5px; color:var(--accent-2); font-weight:700; text-transform:uppercase; letter-spacing:.4px; margin-left:8px;}
-  .term-item .td{ font-size:13px; color:var(--text-muted); margin-top:3px; line-height:1.45; }
+  /* solfej söyle */
+  .sing-now{ text-align:center; font-family:var(--serif); font-size:44px; font-weight:700; min-height:60px; line-height:1.2; margin:4px 0; color:var(--accent); }
+  .sing-now small{ display:block; font-size:12px; color:var(--text-muted); font-family:inherit; font-weight:500; }
+
+  /* ritim */
+  .rv-row{ display:grid; grid-template-columns:48px 1fr 40px; gap:8px 10px; align-items:center; padding:10px 0; border-top:1px solid var(--border); }
+  .rv-row:first-of-type{ border-top:none; }
+  .rv-name{ font-weight:700; font-size:14px; }
+  .rv-sub{ font-size:12px; color:var(--text-muted); }
+  .rv-bar{ grid-column:2 / 4; display:flex; gap:2px; height:9px; }
+  .rv-bar i{ flex:1; background:var(--accent-2); border-radius:2px; opacity:.85; }
+  .rv-rest{ text-align:center; }
+  .ts{ display:inline-flex; flex-direction:column; align-items:center; font-family:var(--serif); font-weight:700; font-size:20px; line-height:1; border-left:2px solid var(--text); padding-left:8px; margin-right:10px; }
+  .ts span + span{ border-top:2px solid var(--text); margin-top:2px; padding-top:2px; }
+  .beats{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:10px 0 6px; min-height:34px; }
+  .beat{ width:30px; height:30px; border-radius:50%; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--text-muted); }
+  .beat.strong{ border-color:var(--accent); }
+  .beat.on{ background:var(--accent); border-color:var(--accent); color:#fff; transform:scale(1.15); }
+  .bpm-row{ display:flex; align-items:center; gap:10px; margin:6px 0; }
+  .bpm-row input[type=range]{ flex:1; accent-color:var(--accent); }
+  .bpm-val{ font-family:var(--serif); font-weight:700; font-size:22px; min-width:70px; text-align:center; }
+  .bpm-val small{ font-size:11px; font-weight:500; color:var(--text-muted); font-family:inherit; }
+
+  /* terimler */
+  #term-search{ width:100%; font-size:14.5px; padding:11px 14px; border-radius:10px; border:1px solid var(--border); background:var(--surface); color:var(--text); margin-bottom:10px; }
+  .term-item{ border-bottom:1px solid var(--border); padding:12px 2px; }
+  .term-item .tt{ font-family:var(--serif); font-style:italic; font-weight:700; font-size:15.5px; }
+  .term-item .tc{ font-size:10.5px; color:var(--accent-2); font-weight:700; letter-spacing:.3px; margin-left:8px; }
+  .term-item .td{ font-size:13px; color:var(--text-muted); margin-top:3px; line-height:1.5; }
+  #term-count{ font-size:12px; color:var(--text-muted); margin:0 0 6px; }
   #term-empty{ text-align:center; color:var(--text-muted); font-size:13px; padding:30px 0; }
 
-  /* Modal */
-  .modal-back{
-    position:fixed; inset:0; background:rgba(0,0,0,.45); display:flex; align-items:flex-end;
-    justify-content:center; z-index:50;
-  }
-  .modal-back.hidden{ display:none; }
-  .modal-sheet{
-    background:var(--surface); width:100%; max-width:560px; border-radius:20px 20px 0 0;
-    padding:22px 20px calc(24px + env(safe-area-inset-bottom));
-    max-height:82vh; overflow-y:auto;
-  }
-  .modal-sheet h3{ font-family:Georgia,serif; font-style:italic; margin:0 0 12px; font-size:19px; }
+  /* bilgi penceresi */
+  .modal-back{ position:fixed; inset:0; background:rgba(0,0,0,.45); display:flex; align-items:flex-end; justify-content:center; z-index:50; }
+  .modal-sheet{ background:var(--surface); width:100%; max-width:620px; border-radius:20px 20px 0 0; padding:22px 20px calc(24px + env(safe-area-inset-bottom)); max-height:84vh; overflow-y:auto; }
+  .modal-sheet h3{ font-family:var(--serif); font-style:italic; margin:0 0 12px; font-size:19px; }
   .modal-sheet p{ font-size:13.5px; line-height:1.6; color:var(--text-muted); margin:0 0 10px; }
   .modal-sheet ol{ padding-left:18px; font-size:13.5px; line-height:1.7; color:var(--text-muted); }
-  .modal-close{
-    display:block; width:100%; margin-top:14px; padding:12px; border-radius:10px;
-    border:1px solid var(--border); background:var(--surface-2); color:var(--text);
-    font-family:inherit; font-weight:600; font-size:14px;
-  }
+  .modal-close{ display:block; width:100%; margin-top:14px; padding:12px; border-radius:10px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); font-weight:600; font-size:14px; }
+
 </style>
 </head>
 <body>
@@ -290,84 +193,243 @@
   <header class="top">
     <div>
       <h1>Solfej &amp; Gam Rehberi</h1>
-      <p>12 tonalitede diziler, sabit-do solfej alıştırması ve müzik terimleri sözlüğü.</p>
+      <p>Gamlar, aralıklar, akorlar, solfej ve ritim çalışmaları; dört anahtarda, sesli ve testli.</p>
     </div>
     <button class="info-btn" id="info-open" aria-label="Bilgi">i</button>
   </header>
 
-  <nav class="tabs">
-    <button class="tab-btn active" data-tab="gam">Gam Kütüphanesi</button>
-    <button class="tab-btn" data-tab="solfej">Solfej Çalışması</button>
-    <button class="tab-btn" data-tab="terim">Müzik Terimleri</button>
+  <nav class="tabs" id="tabs">
+    <button data-tab="gam" class="active">Gamlar</button>
+    <button data-tab="ara">Aralıklar</button>
+    <button data-tab="akor">Akorlar</button>
+    <button data-tab="solfej">Solfej</button>
+    <button data-tab="ritim">Ritim</button>
+    <button data-tab="terim">Terimler</button>
   </nav>
 
-  <!-- TAB 1: GAM KÜTÜPHANESİ -->
-  <section class="tab-panel active" id="tab-gam">
-    <div class="mode-switch" id="mode-switch">
-      <button data-mode="major" class="active">Majör</button>
-      <button data-mode="natural">Doğal Minör</button>
-      <button data-mode="harmonic">Armonik Minör</button>
-      <button data-mode="melodic">Melodik Minör (Çıkış)</button>
-    </div>
+  <div class="clef-bar" id="clef-bar"><span>Anahtar</span><div class="chips" id="clef-chips"></div></div>
 
+  <!-- GAMLAR -->
+  <section class="tab-panel active" id="tab-gam">
+    <label class="lab" for="gam-type">Gam türü</label>
+    <select id="gam-type"></select>
     <div class="circle-wrap" id="circle-wrap">
       <div class="circle-track"></div>
-      <div class="circle-center"><div class="big" id="circle-center-big">Do</div><div class="small">beşliler çemberi</div></div>
+      <div class="circle-center"><div class="big" id="circle-big">Do</div><div class="small">beşliler çemberi</div></div>
     </div>
+    <div class="enh-row" id="gam-enh"></div>
 
-    <div class="scale-card">
-      <h2 id="scale-title">Do Majör</h2>
-      <p class="scale-meta" id="scale-meta">—</p>
-      <div class="note-cards" id="note-cards"></div>
-      <div class="scale-controls">
-        <button class="btn primary" id="play-asc">▶ Çıkış Dizi</button>
-        <button class="btn" id="play-desc">▶ İniş Dizi</button>
-        <button class="btn ghost" id="stop-play">■ Durdur</button>
+    <div class="card">
+      <h2 id="gam-title">Do Majör</h2>
+      <p class="meta" id="gam-meta"></p>
+      <div class="staff-wrap" id="gam-staff"></div>
+      <div class="note-cards" id="gam-cards"></div>
+      <div class="btn-row">
+        <button class="btn primary" id="gam-asc">▶ Çıkış</button>
+        <button class="btn" id="gam-desc">▶ İniş</button>
+        <button class="btn ghost" id="gam-stop">■ Durdur</button>
       </div>
-      <div class="piano-scroll"><div class="piano" id="piano"></div></div>
+      <div class="piano-scroll"><div class="piano" id="gam-piano"></div></div>
+      <div class="hint" id="gam-info"></div>
     </div>
   </section>
 
-  <!-- TAB 2: SOLFEJ ÇALIŞMASI -->
+  <!-- ARALIKLAR -->
+  <section class="tab-panel" id="tab-ara">
+    <div class="seg" id="ara-seg">
+      <button data-p="kesfet" class="active">Keşfet</button>
+      <button data-p="cetvel">Aralık cetveli</button>
+      <button data-p="test">Test</button>
+    </div>
+
+    <div id="ara-kesfet">
+      <p class="lead">Aralık, iki nota arasındaki uzaklıktır. <b>Sayı</b> (ikili, üçlü…) iki nota arasında kaç harf adı geçtiğini, <b>nitelik</b> (majör, minör, tam, artık, eksik) ise yarım ses sayısını belirler.</p>
+      <span class="lab">Alt nota</span>
+      <div id="ara-root"></div>
+      <span class="lab">Aralığın sayısı</span>
+      <div class="chips" id="ara-num"></div>
+      <span class="lab">Niteliği</span>
+      <div class="chips" id="ara-qual"></div>
+      <div class="card">
+        <h2 id="ara-title">Majör ikili</h2>
+        <p class="meta" id="ara-meta"></p>
+        <div class="staff-wrap" id="ara-staff"></div>
+        <div class="btn-row">
+          <button class="btn primary" id="ara-mel">▶ Melodik</button>
+          <button class="btn" id="ara-harm">▶ Armonik</button>
+          <button class="btn" id="ara-rand">🎲 Rastgele</button>
+        </div>
+        <div class="piano-scroll"><div class="piano" id="ara-piano"></div></div>
+        <div class="hint" id="ara-hint"></div>
+      </div>
+    </div>
+
+    <div id="ara-cetvel" class="hidden">
+      <p class="lead">Aralık cetveli: bir satıra dokununca o aralık, seçili alt nota üzerinden <b>Keşfet</b> bölümünde açılır.</p>
+      <div class="card">
+        <div class="check"><input type="checkbox" id="ara-allq"><label for="ara-allq">Artık ve eksik aralıkları da göster</label></div>
+        <table class="tbl" id="ara-table"></table>
+      </div>
+    </div>
+
+    <div id="ara-test" class="hidden">
+      <div class="seg" id="ara-test-mode"><button data-m="ear" class="active">Duyarak</button><button data-m="staff">Notadan</button></div>
+      <span class="lab">Düzey</span>
+      <div class="chips wrap" id="ara-level"></div>
+      <div id="ara-quiz"></div>
+    </div>
+  </section>
+
+  <!-- AKORLAR -->
+  <section class="tab-panel" id="tab-akor">
+    <div class="seg" id="akor-seg">
+      <button data-p="kur" class="active">Akor kur</button>
+      <button data-p="derece">Derece akorları</button>
+      <button data-p="test">Test</button>
+    </div>
+
+    <div id="akor-kur">
+      <p class="lead">Akor, üst üste dizilmiş üçlülerden oluşur. Üç sesli olana <b>üçlü akor</b>, dört sesli olana <b>yedili akor</b> denir.</p>
+      <span class="lab">Kök nota</span>
+      <div id="akor-root"></div>
+      <span class="lab">Üç sesli akorlar</span>
+      <div class="chips wrap" id="akor-tri"></div>
+      <span class="lab">Dört sesli (yedili) akorlar</span>
+      <div class="chips wrap" id="akor-sev"></div>
+      <span class="lab">Durum (çevrim)</span>
+      <div class="chips wrap" id="akor-inv"></div>
+      <div class="card">
+        <h2 id="akor-title">Do Majör üçlü</h2>
+        <p class="meta" id="akor-meta"></p>
+        <div class="staff-wrap" id="akor-staff"></div>
+        <div class="btn-row">
+          <button class="btn primary" id="akor-block">▶ Birlikte</button>
+          <button class="btn" id="akor-up">▶ Arpej ↑</button>
+          <button class="btn" id="akor-down">▶ Arpej ↓</button>
+        </div>
+        <div class="piano-scroll"><div class="piano" id="akor-piano"></div></div>
+        <div class="hint" id="akor-hint"></div>
+      </div>
+    </div>
+
+    <div id="akor-derece" class="hidden">
+      <p class="lead">Bir gamın her derecesi üzerine, gamın kendi seslerinden bir akor kurulur. Bunlara <b>derece akorları</b> denir.</p>
+      <div class="row2">
+        <div><label class="lab" for="dg-type">Tür</label>
+          <select id="dg-type"><option value="major">Majör</option><option value="natural">Doğal minör</option><option value="harmonic">Armonik minör</option></select></div>
+        <div><label class="lab" for="dg-key">Tonalite</label><select id="dg-key"></select></div>
+      </div>
+      <div class="check"><input type="checkbox" id="dg-sev"><label for="dg-sev">Yedili akorları göster</label></div>
+      <div class="card">
+        <h2 id="dg-title">Do Majör</h2>
+        <div class="staff-wrap" id="dg-staff"></div>
+        <div class="btn-row">
+          <button class="btn primary" id="dg-all">▶ I–VII</button>
+          <button class="btn" id="dg-cad">▶ Kadans (I–IV–V–I)</button>
+          <button class="btn ghost" id="dg-stop">■ Durdur</button>
+        </div>
+        <table class="tbl" id="dg-table"></table>
+      </div>
+    </div>
+
+    <div id="akor-test" class="hidden">
+      <div class="seg" id="akor-test-mode"><button data-m="ear" class="active">Duyarak</button><button data-m="staff">Notadan</button></div>
+      <span class="lab">Düzey</span>
+      <div class="chips wrap" id="akor-level"></div>
+      <div id="akor-quiz"></div>
+    </div>
+  </section>
+
+  <!-- SOLFEJ -->
   <section class="tab-panel" id="tab-solfej">
-    <p class="lead">Bir tonalite seç; ister serbestçe dinleyip solfej söyle, ister kendini test et. Sistem <b>sabit-do</b> solfejine göredir (Do = C, Re = D …).</p>
-
-    <div class="field-row">
-      <label for="quiz-scale-select">Tonalite</label>
-      <select id="quiz-scale-select"></select>
+    <div class="seg" id="sol-seg">
+      <button data-p="soyle" class="active">Solfej söyle</button>
+      <button data-p="oku">Nota okuma</button>
+      <button data-p="duy">Duyarak tanı</button>
     </div>
 
-    <div class="practice-modes">
-      <button class="btn primary" id="mode-listen-btn">🎧 Dinleme</button>
-      <button class="btn" id="mode-test-btn">📝 Test</button>
-    </div>
-
-    <div id="listen-panel">
-      <div class="note-cards" id="practice-note-cards"></div>
-      <div class="scale-controls">
-        <button class="btn primary" id="practice-play-asc">▶ Çıkış Dizi</button>
-        <button class="btn" id="practice-play-desc">▶ İniş Dizi</button>
-        <button class="btn ghost" id="practice-stop">■ Durdur</button>
+    <div id="sol-soyle">
+      <p class="lead">Bir gam seç, tempoyu ayarla; nota sırayla yanarken <b>solfej adlarını söyle</b>. Notaları gizleyip portedeki notalardan okuyarak da çalışabilirsin.</p>
+      <div class="row2">
+        <div><label class="lab" for="so-type">Gam türü</label>
+          <select id="so-type"><option value="major">Majör</option><option value="natural">Doğal minör</option><option value="harmonic">Armonik minör</option><option value="melodic">Melodik minör</option></select></div>
+        <div><label class="lab" for="so-key">Tonalite</label><select id="so-key"></select></div>
+      </div>
+      <span class="lab">Tempo</span>
+      <div class="chips" id="so-tempo"></div>
+      <span class="lab">Yön</span>
+      <div class="chips" id="so-dir"></div>
+      <div class="check"><input type="checkbox" id="so-sound" checked><label for="so-sound">Notaları çal (kapalıysa yalnızca vuruş sesi duyulur)</label></div>
+      <div class="check"><input type="checkbox" id="so-hide"><label for="so-hide">Nota adlarını gizle (portedeki notadan oku)</label></div>
+      <div class="card">
+        <h2 id="so-title">Do Majör</h2>
+        <div class="staff-wrap" id="so-staff"></div>
+        <div class="sing-now" id="so-now">&nbsp;</div>
+        <div class="btn-row">
+          <button class="btn primary" id="so-play">▶ Başlat</button>
+          <button class="btn ghost" id="so-stop">■ Durdur</button>
+        </div>
       </div>
     </div>
 
-    <div id="test-panel" class="hidden">
-      <div class="quiz-stats">
-        <span>Skor: <b id="quiz-score">0</b>/<b id="quiz-total">0</b></span>
-        <span>Şu anki seri: <b id="quiz-streak">0</b></span>
-        <span>En iyi: <b id="quiz-best">0</b></span>
+    <div id="sol-oku" class="hidden">
+      <p class="lead">Portedeki notanın <b>solfej adını</b> bul. Sabit-do sistemi: Do = C, Re = D, Mi = E, Fa = F, Sol = G, La = A, Si = B.</p>
+      <span class="lab">Kapsam</span>
+      <div class="chips" id="ok-range"></div>
+      <div class="check"><input type="checkbox" id="ok-acc"><label for="ok-acc">Diyez ve bemollü notalar da gelsin</label></div>
+      <div class="check"><input type="checkbox" id="ok-mix"><label for="ok-mix">Anahtarlar karışık gelsin</label></div>
+      <div id="ok-quiz"></div>
+    </div>
+
+    <div id="sol-duy" class="hidden">
+      <p class="lead">Çalınan notanın solfej adını bul. Notalar seçtiğin gamdan gelir.</p>
+      <div class="row2">
+        <div><label class="lab" for="du-type">Gam türü</label>
+          <select id="du-type"><option value="major">Majör</option><option value="natural">Doğal minör</option><option value="harmonic">Armonik minör</option></select></div>
+        <div><label class="lab" for="du-key">Tonalite</label><select id="du-key"></select></div>
       </div>
-      <button class="btn primary quiz-play-big" id="quiz-play-note">🔊 Notayı Çal</button>
-      <div class="quiz-options" id="quiz-options"></div>
-      <p id="quiz-feedback"></p>
-      <button class="btn primary hidden" id="quiz-next" style="width:100%;">Sonraki nota →</button>
+      <div id="du-quiz" style="margin-top:12px"></div>
     </div>
   </section>
 
-  <!-- TAB 3: MÜZİK TERİMLERİ -->
+  <!-- RİTİM -->
+  <section class="tab-panel" id="tab-ritim">
+    <div class="card">
+      <h2>Süre değerleri</h2>
+      <p class="meta">Her nota değeri bir öncekinin yarısı kadar sürer. Her notanın aynı süreli bir de <b>susu</b> vardır. Süreler dörtlük notayı 1 vuruş sayarak verilmiştir.</p>
+      <div id="rv-list"></div>
+    </div>
+    <div class="card">
+      <h2>Noktalı süreler</h2>
+      <p class="meta">Notanın yanındaki <b>nokta</b>, o notanın süresinin yarısını ekler. İkinci bir nokta, ilk noktanın yarısını daha ekler.</p>
+      <div id="dot-list"></div>
+    </div>
+    <div class="card">
+      <h2>Ölçü türleri</h2>
+      <p class="meta">Üstteki sayı ölçüde kaç vuruş olduğunu, alttaki sayı vuruşun hangi nota değeriyle sayıldığını gösterir (2 = ikilik, 4 = dörtlük, 8 = sekizlik).</p>
+      <div id="ts-list"></div>
+    </div>
+    <div class="card">
+      <h2>Metronom</h2>
+      <p class="meta" id="mt-info"></p>
+      <label class="lab" for="mt-ts">Ölçü</label>
+      <select id="mt-ts"></select>
+      <div class="bpm-row">
+        <button class="btn" id="mt-minus" aria-label="Yavaşlat">−</button>
+        <input type="range" id="mt-bpm" min="40" max="208" value="80">
+        <button class="btn" id="mt-plus" aria-label="Hızlandır">+</button>
+        <div class="bpm-val" id="mt-val">80<br><small>vuruş/dk</small></div>
+      </div>
+      <div class="beats" id="mt-beats"></div>
+      <div class="btn-row"><button class="btn primary" id="mt-go">▶ Başlat</button></div>
+    </div>
+  </section>
+
+  <!-- TERİMLER -->
   <section class="tab-panel" id="tab-terim">
-    <input type="search" id="term-search" placeholder="Terim ara… (örn. adagio, legato)">
-    <div class="term-chips" id="term-chips"></div>
+    <input type="search" id="term-search" placeholder="Terim ara… (örn. adagio, legato, triyol)">
+    <div class="chips" id="term-chips"></div>
+    <p id="term-count"></p>
     <div id="term-list"></div>
     <div id="term-empty" class="hidden">Eşleşen terim bulunamadı.</div>
   </section>
@@ -376,568 +438,1912 @@
 
 <div class="modal-back hidden" id="info-modal">
   <div class="modal-sheet">
-    <h3>Ana ekrana ekle</h3>
-    <p>Bu uygulamayı App Store olmadan, doğrudan Safari üzerinden telefonunun ana ekranına ekleyebilirsin:</p>
+    <h3>Nasıl kullanılır?</h3>
+    <p><b>Gamlar:</b> beşliler çemberinden tonalite seç; gam portede (seçili anahtarda ve armürüyle), piyanoda ve nota kartlarında görünür. Notalara dokununca sesi duyarsın.</p>
+    <p><b>Aralıklar:</b> iki nota ve aralığın niteliği (majör ikili, minör üçlü, tam beşli…) ile istediğin aralığı kurabilir, dinleyebilir ve test olabilirsin.</p>
+    <p><b>Akorlar:</b> üçlü ve yedili akorlar, çevrimleri ve gamın derece akorları.</p>
+    <p><b>Solfej:</b> notaları sırayla söyleme çalışması, nota okuma ve duyarak tanıma testleri. Sistem <b>sabit-do</b>dur: nota hangi tonalitede olursa olsun kendi harfine göre okunur (F♯ → “Fa diyez”).</p>
+    <p><b>Ana ekrana eklemek için:</b></p>
     <ol>
-      <li>Bu sayfayı <b>Safari</b> ile aç (Chrome değil).</li>
-      <li>Alt ortadaki <b>Paylaş</b> simgesine dokun (kare içinden ok çıkan simge).</li>
-      <li>Aşağı kaydır, <b>“Ana Ekrana Ekle”</b> seçeneğine dokun.</li>
-      <li>Sağ üstten <b>“Ekle”</b>ye bas — artık bir uygulama gibi ikonla açılır.</li>
+      <li>Sayfayı <b>Safari</b>'de aç.</li>
+      <li>Alttaki <b>Paylaş</b> simgesine dokun.</li>
+      <li><b>“Ana Ekrana Ekle”</b> → <b>“Ekle”</b>.</li>
     </ol>
-    <p>Sistem <b>sabit-do</b> solfej yöntemini kullanır: her nota, hangi tonalitede olursa olsun kendi harfine göre adlandırılır (F♯ → “Fa diyez” gibi). Sesler, cihazın hoparlöründen üretilir; ilk dokunuşta ses izni gerekebilir.</p>
+    <p>Sesler cihazda üretilir; ilk dokunuştan sonra internet olmadan da çalışır.</p>
     <button class="modal-close" id="info-close">Kapat</button>
   </div>
 </div>
 
 <script>
 (function(){
-"use strict";
+/* ---- theory.js ---- */
+/* ===== Müzik teorisi motoru ===== */
+var T = (function(){
+  var L = ['C','D','E','F','G','A','B'];
+  var PC = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+  var ACC_V = {'bb':-2,'b':-1,'':0,'#':1,'x':2};
+  var V_ACC = {'-2':'bb','-1':'b','0':'','1':'#','2':'x'};
+  var SYM = {'bb':'♭♭','b':'♭','':'','#':'♯','x':'♯♯'};
+  var ACC_TR = {'bb':' çift bemol','b':' bemol','':'','#':' diyez','x':' çift diyez'};
+  var SOLF = {C:'Do',D:'Re',E:'Mi',F:'Fa',G:'Sol',A:'La',B:'Si'};
+  var KEYNAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
-/* ============ MÜZİK TEORİSİ VERİSİ ============ */
+  function N(l,a,o){ return {l:l, a:a||'', o:o}; }
+  function parse(s){ return {l:s.charAt(0), a:s.slice(1)}; }
+  function step(n){ return n.o*7 + L.indexOf(n.l); }
+  function semi(n){ return n.o*12 + PC[n.l] + ACC_V[n.a]; }
+  function freq(n){ return 440*Math.pow(2,(semi(n)-57)/12); }
+  function label(n){ return n.l + SYM[n.a]; }
+  function solf(n){ return SOLF[n.l] + ACC_TR[n.a]; }
+  function solfShort(n){ return SOLF[n.l] + SYM[n.a]; }
+  function keyId(n){ var s = semi(n); return KEYNAMES[((s%12)+12)%12] + Math.floor(s/12); }
+  function same(a,b){ return a.l===b.l && a.a===b.a; }
+  function nameOf(s){ var p = parse(s); return SOLF[p.l] + ACC_TR[p.a]; }       // 'F#' -> 'Fa diyez'
+  function nameSym(s){ var p = parse(s); return p.l + SYM[p.a]; }                // 'F#' -> 'F♯'
 
-const LETTER_ORDER = ['C','D','E','F','G','A','B'];
-const LETTER_SEMITONE = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
-const ACC_ORDER = ['bb','b','','#','x'];
-const ACC_VALUE = {'bb':-2,'b':-1,'':0,'#':1,'x':2};
-const ACC_TR = {'bb':' çift bemol','b':' bemol','':'','#':' diyez','x':' çift diyez'};
-const ACC_SYM = {'bb':'♭♭','b':'♭','':'','#':'♯','x':'♯♯'};
-const LETTER_SOLFEGE = {C:'Do',D:'Re',E:'Mi',F:'Fa',G:'Sol',A:'La',B:'Si'};
-
-function parseNote(n){ return { letter:n[0], acc:n.slice(1) }; }
-function noteLabel(n){ const {letter,acc}=parseNote(n); return letter+ACC_SYM[acc]; }
-function noteSolfege(n){ const {letter,acc}=parseNote(n); return LETTER_SOLFEGE[letter]+ACC_TR[acc]; }
-function raise(n){ const {letter,acc}=parseNote(n); const idx=ACC_ORDER.indexOf(acc); return letter+ACC_ORDER[Math.min(idx+1,4)]; }
-function rotate(arr,k){ return arr.slice(k).concat(arr.slice(0,k)); }
-
-// Circle-of-fifths order, major key roots
-const CIRCLE = ['C','G','D','A','E','B','F#','Db','Ab','Eb','Bb','F'];
-
-const MAJOR = {
-  'C':['C','D','E','F','G','A','B'],
-  'G':['G','A','B','C','D','E','F#'],
-  'D':['D','E','F#','G','A','B','C#'],
-  'A':['A','B','C#','D','E','F#','G#'],
-  'E':['E','F#','G#','A','B','C#','D#'],
-  'B':['B','C#','D#','E','F#','G#','A#'],
-  'F#':['F#','G#','A#','B','C#','D#','E#'],
-  'Db':['Db','Eb','F','Gb','Ab','Bb','C'],
-  'Ab':['Ab','Bb','C','Db','Eb','F','G'],
-  'Eb':['Eb','F','G','Ab','Bb','C','D'],
-  'Bb':['Bb','C','D','Eb','F','G','A'],
-  'F':['F','G','A','Bb','C','D','E']
-};
-const REL_MINOR = {'C':'A','G':'E','D':'B','A':'F#','E':'C#','B':'G#','F#':'D#','Db':'Bb','Ab':'F','Eb':'C','Bb':'G','F':'D'};
-
-const NATURAL_MINOR = {}, HARMONIC_MINOR = {}, MELODIC_MINOR = {};
-CIRCLE.forEach(function(maj){
-  const minorRoot = REL_MINOR[maj];
-  const nat = rotate(MAJOR[maj],5);
-  NATURAL_MINOR[minorRoot] = nat;
-  const harm = nat.slice(); harm[6] = raise(harm[6]);
-  HARMONIC_MINOR[minorRoot] = harm;
-  const mel = nat.slice(); mel[5] = raise(mel[5]); mel[6] = raise(mel[6]);
-  MELODIC_MINOR[minorRoot] = mel;
-});
-
-function scaleFor(mode, majorRootFromCircle){
-  if(mode==='major') return { root:majorRootFromCircle, notes:MAJOR[majorRootFromCircle] };
-  const mRoot = REL_MINOR[majorRootFromCircle];
-  const table = mode==='natural'?NATURAL_MINOR: mode==='harmonic'?HARMONIC_MINOR: MELODIC_MINOR;
-  return { root:mRoot, notes:table[mRoot] };
-}
-
-function scaleTitle(mode, root){
-  const name = noteSolfege(root);
-  if(mode==='major') return name+' Majör';
-  if(mode==='natural') return name+' Minör (Doğal)';
-  if(mode==='harmonic') return name+' Minör (Armonik)';
-  return name+' Minör (Melodik – Çıkış)';
-}
-
-function withOctaves(notes, startOct){
-  const seq = notes.concat([notes[0]]);
-  let oct = startOct, prevIdx = null;
-  return seq.map(function(n,i){
-    const {letter,acc}=parseNote(n);
-    const idx = LETTER_ORDER.indexOf(letter);
-    if(i>0 && idx<=prevIdx) oct++;
-    prevIdx = idx;
-    return { raw:n, letter:letter, acc:acc, octave:oct };
-  });
-}
-
-function semitoneFromC0(item){ return LETTER_SEMITONE[item.letter]+ACC_VALUE[item.acc]+12*item.octave; }
-function freqOf(item){
-  const s = semitoneFromC0(item);
-  const a4 = LETTER_SEMITONE['A']+12*4;
-  return 440*Math.pow(2,(s-a4)/12);
-}
-function physicalKeyId(item){
-  const s = semitoneFromC0(item);
-  const physOct = Math.floor(s/12);
-  const pc = ((s%12)+12)%12;
-  const NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-  return NAMES[pc]+physOct;
-}
-
-/* ============ SES MOTORU ============ */
-let audioCtx = null;
-const timers = [];
-function ensureAudio(){
-  if(!audioCtx){
-    try{ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){}
+  /* Bir notayı num (1=aynı, 2=ikili ...) ve yarım ses sayısına göre doğru yazımla taşır */
+  function transpose(n,num,semis){
+    var st = step(n) + (num-1);
+    var l = L[((st%7)+7)%7], o = Math.floor(st/7);
+    var natural = o*12 + PC[l];
+    var a = V_ACC[semi(n) + semis - natural];
+    if(a === undefined) return null;
+    return N(l,a,o);
   }
-  if(audioCtx && audioCtx.state==='suspended'){ audioCtx.resume(); }
-}
-function playTone(freq, dur){
-  if(!audioCtx) return;
-  const t0 = audioCtx.currentTime;
-  const gain = audioCtx.createGain();
-  gain.gain.setValueAtTime(0.0001,t0);
-  gain.gain.linearRampToValueAtTime(0.3,t0+0.018);
-  gain.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
-  const o1 = audioCtx.createOscillator(); o1.type='sine'; o1.frequency.value=freq;
-  const o2 = audioCtx.createOscillator(); o2.type='sine'; o2.frequency.value=freq*2;
-  const g2 = audioCtx.createGain(); g2.gain.value=0.10;
-  o2.connect(g2); g2.connect(gain);
-  o1.connect(gain); gain.connect(audioCtx.destination);
-  o1.start(t0); o1.stop(t0+dur+0.05);
-  o2.start(t0); o2.stop(t0+dur+0.05);
-}
-function clearTimers(){ timers.forEach(clearTimeout); timers.length=0; }
-function playSequence(items, reverse){
-  ensureAudio(); clearTimers(); clearPianoHighlight();
-  const seq = reverse ? items.slice().reverse() : items;
-  const step = 520;
-  seq.forEach(function(it,i){
-    const id = setTimeout(function(){
-      playTone(freqOf(it), step/1000*0.92);
-      highlightKey(physicalKeyId(it), it.letter===seq[0].letter && it.acc===seq[0].acc);
-    }, i*step);
-    timers.push(id);
-  });
-  const endId = setTimeout(clearPianoHighlight, seq.length*step+300);
-  timers.push(endId);
-}
 
-/* ============ PİYANO ============ */
-const PIANO_OCTAVES = [4,5,6];
-const WHITE_LETTERS = ['C','D','E','F','G','A','B'];
-const BLACK_AFTER = {C:'C#',D:'D#',F:'F#',G:'G#',A:'A#'};
-let pianoBuilt = false;
-function buildPiano(){
-  const piano = document.getElementById('piano');
-  piano.innerHTML='';
-  const totalWhite = PIANO_OCTAVES.length*7;
-  const whiteW = 100/totalWhite;
-  let wi = 0;
-  PIANO_OCTAVES.forEach(function(oct){
-    WHITE_LETTERS.forEach(function(letter){
-      const el = document.createElement('div');
-      el.className='pk-white';
-      el.dataset.key = letter+oct;
-      el.style.left = (wi*whiteW)+'%';
-      el.style.width = whiteW+'%';
-      if(letter==='C'){ el.textContent = 'Do'+oct; }
-      piano.appendChild(el);
-      if(BLACK_AFTER[letter]){
-        const b = document.createElement('div');
-        b.className='pk-black';
-        const bLetter = BLACK_AFTER[letter];
-        b.dataset.key = bLetter+oct;
-        b.style.left = (((wi+1)*whiteW) - 0.8)+'%';
-        piano.appendChild(b);
-      }
-      wi++;
-    });
-  });
-  pianoBuilt = true;
-}
-function clearPianoHighlight(){
-  document.querySelectorAll('.pk-white.on,.pk-white.root').forEach(function(k){k.classList.remove('on','root');});
-  document.querySelectorAll('.pk-black.on,.pk-black.root').forEach(function(k){k.classList.remove('on','root');});
-}
-function highlightKey(keyId, isRoot){
-  const el = document.querySelector('[data-key="'+keyId+'"]');
-  if(el){ el.classList.add(isRoot?'root':'on'); }
-}
-function showScaleOnPiano(items){
-  clearPianoHighlight();
-  items.forEach(function(it,i){
-    const id = physicalKeyId(it);
-    const isRoot = (it.letter===items[0].letter && it.acc===items[0].acc);
-    highlightKey(id, isRoot);
-  });
-}
+  /* ---------- Anahtarlar ---------- */
+  var CLEFS = {
+    G:  {id:'G',  name:'Sol anahtarı',          short:'Sol',      type:'g', bottom:30, line:2, sharps:[8,5,9,6,3,7,4], flats:[4,7,3,6,2,5,1], w:32},
+    F:  {id:'F',  name:'Fa anahtarı',           short:'Fa',       type:'f', bottom:18, line:6, sharps:[6,3,7,4,1,5,2], flats:[2,5,1,4,0,3,6], w:36},
+    A:  {id:'A',  name:'Do anahtarı (alto)',    short:'Do alto',  type:'c', bottom:24, line:4, sharps:[7,4,8,5,2,6,3], flats:[3,6,2,5,1,4,0], w:32},
+    Tn: {id:'Tn', name:'Do anahtarı (tenor)',   short:'Do tenor', type:'c', bottom:22, line:6, sharps:[2,6,3,7,4,8,5], flats:[5,8,4,7,3,6,2], w:32}
+  };
+  var CLEF_IDS = ['G','F','A','Tn'];
 
-/* ============ GAM KÜTÜPHANESİ SEKMESİ ============ */
-let currentMode = 'major';
-let currentCircleIdx = 0;
+  /* Harf için, kökün porteye rahat oturacağı oktav (kök, alt çizgiden en çok 2 ek çizgi aşağıda .. 4 yarım adım yukarıda) */
+  function placeRoot(clefId, name){
+    var p = parse(name), idx = L.indexOf(p.l), b = CLEFS[clefId].bottom;
+    var o = Math.ceil((b-2-idx)/7);
+    return N(p.l,p.a,o);
+  }
+  function pos(n,clefId){ return step(n) - CLEFS[clefId].bottom; }
 
-function renderCircle(){
-  const wrap = document.getElementById('circle-wrap');
-  Array.from(wrap.querySelectorAll('.key-btn')).forEach(function(b){ b.remove(); });
-  const size = wrap.getBoundingClientRect().width || 300;
-  const radius = size*0.40;
-  CIRCLE.forEach(function(majRoot, i){
-    const angle = (i*30 - 90) * Math.PI/180;
-    const btn = document.createElement('button');
-    btn.className = 'key-btn'+(i===currentCircleIdx?' selected':'');
-    const label = currentMode==='major' ? noteLabel(majRoot) : noteLabel(REL_MINOR[majRoot])+'m';
-    btn.textContent = label;
-    btn.style.left = (size/2 + radius*Math.cos(angle))+'px';
-    btn.style.top = (size/2 + radius*Math.sin(angle))+'px';
-    btn.addEventListener('click', function(){ currentCircleIdx=i; renderGamTab(); });
-    wrap.appendChild(btn);
-  });
-}
+  /* ---------- Aralıklar ---------- */
+  var PERF = {1:0,4:5,5:7,8:12}, MAJ = {2:2,3:4,6:9,7:11};
+  var NUM_TR = ['', 'birli','ikili','üçlü','dörtlü','beşli','altılı','yedili','sekizli'];
+  var NUM_AP = ['', "1'li","2'li","3'lü","4'lü","5'li","6'lı","7'li","8'li"];
+  var QUAL_TR = {perf:'Tam', maj:'Majör', min:'Minör', aug:'Artık', dim:'Eksik'};
+  var QUAL_AB = {perf:'T', maj:'B', min:'K', aug:'A', dim:'E'};
+  var QUAL_ALT = {maj:'Büyük', min:'Küçük'};
 
-function renderGamTab(){
-  renderCircle();
-  const majRoot = CIRCLE[currentCircleIdx];
-  const scale = scaleFor(currentMode, majRoot);
-  const items = withOctaves(scale.notes, 4);
+  function qualities(num){
+    if(PERF[num] !== undefined) return num===1 ? ['perf','aug'] : ['dim','perf','aug'];
+    return ['dim','min','maj','aug'];
+  }
+  function ivSemis(num,q){
+    if(PERF[num] !== undefined){ var b = PERF[num]; return q==='perf' ? b : (q==='aug' ? b+1 : b-1); }
+    var m = MAJ[num]; return q==='maj' ? m : (q==='min' ? m-1 : (q==='aug' ? m+1 : m-2));
+  }
+  function ivName(num,q){ return QUAL_TR[q] + ' ' + NUM_TR[num]; }
+  function ivNameCap(num,q){ var s = ivName(num,q); return s.charAt(0).toLocaleUpperCase('tr') + s.slice(1); }
+  function ivAlt(num,q){ return QUAL_ALT[q] ? QUAL_ALT[q] + ' ' + NUM_AP[num] : null; }
+  function ivAbbr(num,q){ return QUAL_AB[q] + num; }
+  function semisText(s){
+    if(s === 1) return '1 yarım ses (½ ses)';
+    if(s === 0) return '0 yarım ses';
+    var t = (s%2===0) ? String(s/2) : (Math.floor(s/2) ? Math.floor(s/2) : '') + '½';
+    return s + ' yarım ses (' + t + ' ses)';
+  }
+  function makeInterval(root,num,q){
+    var s = ivSemis(num,q), hi = transpose(root,num,s);
+    if(!hi) return null;
+    return {low:root, high:hi, num:num, q:q, semis:s};
+  }
+  /* temel aralıklar (cetvel) */
+  var BASIC = [[1,'perf'],[2,'min'],[2,'maj'],[3,'min'],[3,'maj'],[4,'perf'],[4,'aug'],[5,'dim'],[5,'perf'],[6,'min'],[6,'maj'],[7,'min'],[7,'maj'],[8,'perf']];
 
-  document.getElementById('circle-center-big').textContent =
-    currentMode==='major' ? noteLabel(majRoot) : noteLabel(scale.root)+'m';
-
-  document.getElementById('scale-title').textContent = scaleTitle(currentMode, scale.root);
-
-  const sharpCount = scale.notes.filter(function(n){return n.includes('#');}).length;
-  const flatCount = scale.notes.filter(function(n){return n.includes('b');}).length;
-  let sig = 'Diyezsiz / bemolsüz';
-  if(sharpCount>0) sig = sharpCount+' diyezli';
-  else if(flatCount>0) sig = flatCount+' bemollü';
-  const seqStr = items.map(noteLabel).join(' – ');
-  document.getElementById('scale-meta').innerHTML = '<b>'+sig+'</b> · '+seqStr;
-
-  const cardsWrap = document.getElementById('note-cards');
-  cardsWrap.innerHTML='';
-  items.forEach(function(it,i){
-    const card = document.createElement('div');
-    card.className='note-card'+((i===0||i===7)?' root':'');
-    card.innerHTML = '<div class="nn">'+noteLabel(it.raw)+'</div><div class="sf">'+noteSolfege(it.raw)+'</div>';
-    card.addEventListener('click', function(){
-      ensureAudio(); clearPianoHighlight();
-      playTone(freqOf(it), 0.9);
-      highlightKey(physicalKeyId(it), i===0||i===7);
-      setTimeout(clearPianoHighlight, 700);
-    });
-    cardsWrap.appendChild(card);
-  });
-
-  if(!pianoBuilt) buildPiano();
-  showScaleOnPiano(items);
-
-  document.getElementById('play-asc').onclick = function(){ playSequence(items,false); };
-  document.getElementById('play-desc').onclick = function(){ playSequence(items,true); };
-  document.getElementById('stop-play').onclick = function(){ clearTimers(); clearPianoHighlight(); };
-}
-
-document.getElementById('mode-switch').addEventListener('click', function(e){
-  const btn = e.target.closest('button[data-mode]');
-  if(!btn) return;
-  currentMode = btn.dataset.mode;
-  Array.from(document.querySelectorAll('#mode-switch button')).forEach(function(b){b.classList.toggle('active', b===btn);});
-  renderGamTab();
-});
-
-/* ============ SOLFEJ ÇALIŞMASI SEKMESİ ============ */
-const ALL_SCALES = []; // {label, mode, root}
-CIRCLE.forEach(function(m){ ALL_SCALES.push({label:noteLabel(m)+' Majör', mode:'major', root:m}); });
-CIRCLE.forEach(function(m){ ALL_SCALES.push({label:noteLabel(REL_MINOR[m])+' Minör (Doğal)', mode:'natural', root:m}); });
-CIRCLE.forEach(function(m){ ALL_SCALES.push({label:noteLabel(REL_MINOR[m])+' Minör (Armonik)', mode:'harmonic', root:m}); });
-CIRCLE.forEach(function(m){ ALL_SCALES.push({label:noteLabel(REL_MINOR[m])+' Minör (Melodik)', mode:'melodic', root:m}); });
-
-function buildScaleSelect(){
-  const sel = document.getElementById('quiz-scale-select');
-  const groups = [
-    {name:'Majör Tonaliteler', mode:'major'},
-    {name:'Doğal Minör', mode:'natural'},
-    {name:'Armonik Minör', mode:'harmonic'},
-    {name:'Melodik Minör (Çıkış)', mode:'melodic'}
+  /* ---------- Gamlar ---------- */
+  var DIA = [0,1,2,3,4,5,6];
+  var SC = [
+    {id:'major',   name:'Majör',                 grp:'Majör ve minör', pat:[0,2,4,5,7,9,11], minor:false, ks:true},
+    {id:'natural', name:'Doğal minör',           grp:'Majör ve minör', pat:[0,2,3,5,7,8,10], minor:true,  ks:true},
+    {id:'harmonic',name:'Armonik minör',         grp:'Majör ve minör', pat:[0,2,3,5,7,8,11], minor:true,  ks:true},
+    {id:'melodic', name:'Melodik minör',         grp:'Majör ve minör', pat:[0,2,3,5,7,9,11], minor:true,  ks:true},
+    {id:'dorian',  name:'Dor (Dorian) modu',     grp:'Modlar', pat:[0,2,3,5,7,9,10]},
+    {id:'phrygian',name:'Frig (Phrygian) modu',  grp:'Modlar', pat:[0,1,3,5,7,8,10]},
+    {id:'lydian',  name:'Lidyen (Lydian) modu',  grp:'Modlar', pat:[0,2,4,6,7,9,11]},
+    {id:'mixo',    name:'Miksolidyen modu',      grp:'Modlar', pat:[0,2,4,5,7,9,10]},
+    {id:'locrian', name:'Lokriyen modu',         grp:'Modlar', pat:[0,1,3,5,6,8,10]},
+    {id:'pentmaj', name:'Majör pentatonik',      grp:'Diğer gamlar', pat:[0,2,4,7,9],  steps:[0,1,2,4,5]},
+    {id:'pentmin', name:'Minör pentatonik',      grp:'Diğer gamlar', pat:[0,3,5,7,10], steps:[0,2,3,4,6], minor:true},
+    {id:'whole',   name:'Bütün sesler gamı',     grp:'Diğer gamlar', pat:[0,2,4,6,8,10], steps:[0,1,2,3,4,5]},
+    {id:'chrom',   name:'Kromatik gam',          grp:'Diğer gamlar', chrom:true}
   ];
-  groups.forEach(function(g){
-    const og = document.createElement('optgroup'); og.label = g.name;
-    ALL_SCALES.filter(function(s){return s.mode===g.mode;}).forEach(function(s,idx){
-      const globalIdx = ALL_SCALES.indexOf(s);
-      const opt = document.createElement('option');
-      opt.value = globalIdx; opt.textContent = s.label;
-      og.appendChild(opt);
-    });
-    sel.appendChild(og);
-  });
-}
-buildScaleSelect();
+  function scType(id){ for(var i=0;i<SC.length;i++) if(SC[i].id===id) return SC[i]; return SC[0]; }
 
-function currentPracticeItems(){
-  const sel = document.getElementById('quiz-scale-select');
-  const s = ALL_SCALES[parseInt(sel.value,10)];
-  const scale = scaleFor(s.mode, s.root);
-  return withOctaves(scale.notes,4);
-}
-
-function renderPracticeCards(){
-  const items = currentPracticeItems();
-  const wrap = document.getElementById('practice-note-cards');
-  wrap.innerHTML='';
-  items.forEach(function(it,i){
-    const card = document.createElement('div');
-    card.className='note-card'+((i===0||i===7)?' root':'');
-    card.innerHTML = '<div class="nn">'+noteLabel(it.raw)+'</div><div class="sf">'+noteSolfege(it.raw)+'</div>';
-    card.addEventListener('click', function(){ ensureAudio(); playTone(freqOf(it),0.9); });
-    wrap.appendChild(card);
-  });
-}
-document.getElementById('quiz-scale-select').addEventListener('change', function(){
-  renderPracticeCards();
-  resetQuizRound();
-});
-document.getElementById('practice-play-asc').onclick = function(){ playSequence(currentPracticeItems(),false); };
-document.getElementById('practice-play-desc').onclick = function(){ playSequence(currentPracticeItems(),true); };
-document.getElementById('practice-stop').onclick = function(){ clearTimers(); clearPianoHighlight(); };
-
-document.getElementById('mode-listen-btn').addEventListener('click', function(){
-  this.classList.add('primary');
-  document.getElementById('mode-test-btn').classList.remove('primary');
-  document.getElementById('listen-panel').classList.remove('hidden');
-  document.getElementById('test-panel').classList.add('hidden');
-  clearTimers();
-});
-document.getElementById('mode-test-btn').addEventListener('click', function(){
-  this.classList.add('primary');
-  document.getElementById('mode-listen-btn').classList.remove('primary');
-  document.getElementById('test-panel').classList.remove('hidden');
-  document.getElementById('listen-panel').classList.add('hidden');
-  clearTimers();
-  resetQuizRound();
-});
-
-let quizScore=0, quizTotal=0, quizStreak=0, quizBest=0, quizCurrent=null, quizLocked=false;
-try{ quizBest = parseInt(localStorage.getItem('sgr_best_streak')||'0',10) || 0; }catch(e){}
-document.getElementById('quiz-best').textContent = quizBest;
-
-function resetQuizRound(){
-  quizCurrent = null; quizLocked=false;
-  document.getElementById('quiz-feedback').textContent='';
-  document.getElementById('quiz-feedback').className='';
-  document.getElementById('quiz-next').classList.add('hidden');
-  const items = currentPracticeItems().slice(0,7);
-  const shuffled = items.slice().sort(function(){return Math.random()-0.5;});
-  const optsWrap = document.getElementById('quiz-options');
-  optsWrap.innerHTML='';
-  shuffled.forEach(function(it){
-    const b = document.createElement('button');
-    b.className='quiz-opt';
-    b.textContent = noteSolfege(it.raw);
-    b.addEventListener('click', function(){ answerQuiz(it,b); });
-    optsWrap.appendChild(b);
-  });
-  quizCurrent = items[Math.floor(Math.random()*items.length)];
-}
-document.getElementById('quiz-play-note').addEventListener('click', function(){
-  ensureAudio();
-  if(!quizCurrent) resetQuizRound();
-  playTone(freqOf(quizCurrent), 1.0);
-});
-function answerQuiz(chosenItem, btnEl){
-  if(quizLocked || !quizCurrent) return;
-  quizLocked = true;
-  quizTotal++;
-  const correct = chosenItem.letter===quizCurrent.letter && chosenItem.acc===quizCurrent.acc;
-  const fb = document.getElementById('quiz-feedback');
-  Array.from(document.querySelectorAll('.quiz-opt')).forEach(function(b){ b.disabled=true; });
-  if(correct){
-    quizScore++; quizStreak++;
-    if(quizStreak>quizBest){ quizBest=quizStreak; try{localStorage.setItem('sgr_best_streak',String(quizBest));}catch(e){} }
-    btnEl.classList.add('correct');
-    fb.textContent = 'Doğru — '+noteSolfege(quizCurrent.raw)+' ✓';
-    fb.className='ok';
-  } else {
-    quizStreak = 0;
-    btnEl.classList.add('wrong');
-    Array.from(document.querySelectorAll('.quiz-opt')).forEach(function(b){
-      if(b.textContent===noteSolfege(quizCurrent.raw)) b.classList.add('correct');
-    });
-    fb.textContent = 'Doğrusu: '+noteSolfege(quizCurrent.raw);
-    fb.className='no';
+  var CIRCLE = ['C','G','D','A','E','B','F#','Db','Ab','Eb','Bb','F','C#','Gb','Cb'];  // ilk 12 çemberde, son 3 enharmonik
+  var REL_MINOR = {'C':'A','G':'E','D':'B','A':'F#','E':'C#','B':'G#','F#':'D#','Db':'Bb','Ab':'F','Eb':'C','Bb':'G','F':'D','C#':'A#','Gb':'Eb','Cb':'Ab'};
+  var KS = {'C':0,'G':1,'D':2,'A':3,'E':4,'B':5,'F#':6,'C#':7,'F':-1,'Bb':-2,'Eb':-3,'Ab':-4,'Db':-5,'Gb':-6,'Cb':-7};
+  var SHARP_ORDER = ['F','C','G','D','A','E','B'], FLAT_ORDER = ['B','E','A','D','G','C','F'];
+  function ksLetters(count){
+    if(count > 0) return {kind:'#', letters:SHARP_ORDER.slice(0,count)};
+    if(count < 0) return {kind:'b', letters:FLAT_ORDER.slice(0,-count)};
+    return {kind:'', letters:[]};
   }
-  document.getElementById('quiz-score').textContent=quizScore;
-  document.getElementById('quiz-total').textContent=quizTotal;
-  document.getElementById('quiz-streak').textContent=quizStreak;
-  document.getElementById('quiz-best').textContent=quizBest;
-  document.getElementById('quiz-next').classList.remove('hidden');
-}
-document.getElementById('quiz-next').addEventListener('click', function(){
-  resetQuizRound();
-  ensureAudio();
-  setTimeout(function(){ if(quizCurrent) playTone(freqOf(quizCurrent),1.0); }, 150);
-});
 
-/* ============ MÜZİK TERİMLERİ SEKMESİ ============ */
-const TERMS = [
-  {t:'Grave', c:'tempo', d:'Çok ağır, ciddi ve yavaş bir tempo.'},
-  {t:'Largo', c:'tempo', d:'Geniş ve yavaş; grave’den biraz canlı.'},
-  {t:'Lento', c:'tempo', d:'Yavaş tempo.'},
-  {t:'Adagio', c:'tempo', d:'Rahat ve ağırca; lirik, sakin bir yavaşlık.'},
-  {t:'Andante', c:'tempo', d:'Yürüyüş temposunda, orta-yavaş.'},
-  {t:'Andantino', c:'tempo', d:'Andante’den biraz daha canlı.'},
-  {t:'Moderato', c:'tempo', d:'Orta hızda.'},
-  {t:'Allegretto', c:'tempo', d:'Allegro’dan biraz daha ölçülü, hafif canlı.'},
-  {t:'Allegro', c:'tempo', d:'Hızlı ve canlı.'},
-  {t:'Vivace', c:'tempo', d:'Canlı, çevik, parlak bir hız.'},
-  {t:'Presto', c:'tempo', d:'Çok hızlı.'},
-  {t:'Prestissimo', c:'tempo', d:'Mümkün olan en hızlı tempo.'},
-  {t:'Ritardando (rit.)', c:'tempo', d:'Tempoyu giderek yavaşlatarak.'},
-  {t:'Rallentando (rall.)', c:'tempo', d:'Ritardando’ya yakın, yavaşlayarak.'},
-  {t:'Accelerando (accel.)', c:'tempo', d:'Tempoyu giderek hızlandırarak.'},
-  {t:'A tempo', c:'tempo', d:'Önceki (asıl) tempoya dönerek.'},
-  {t:'Rubato', c:'tempo', d:'Esnek, ifadeye göre hafifçe hızlanıp yavaşlayan tempo.'},
-  {t:'Meno mosso', c:'tempo', d:'Daha az hareketli, biraz yavaşlayarak.'},
-  {t:'Più mosso', c:'tempo', d:'Daha hareketli, biraz hızlanarak.'},
+  function buildScale(root,pat,steps,withOct){
+    var base = step(root), rs = semi(root), out = [];
+    for(var i=0;i<pat.length;i++){
+      var st = base + (steps ? steps[i] : i);
+      var l = L[st%7], o = Math.floor(st/7);
+      var a = V_ACC[rs + pat[i] - (o*12 + PC[l])];
+      if(a === undefined) return null;
+      out.push(N(l,a,o));
+    }
+    if(withOct) out.push(N(root.l,root.a,root.o+1));
+    return out;
+  }
+  var CH_SHARP = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+  var CH_FLAT  = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+  function chromatic(root,flats){
+    var tbl = flats ? CH_FLAT : CH_SHARP, out = [], rs = semi(root);
+    for(var k=0;k<=12;k++){
+      var s = rs + k, nm = parse(tbl[((s%12)+12)%12]);
+      var o = (s - PC[nm.l] - ACC_V[nm.a]) / 12;
+      out.push(N(nm.l,nm.a,o));
+    }
+    return out;
+  }
 
-  {t:'Pianissimo (pp)', c:'dinamik', d:'Çok hafif / çok kısık ses.'},
-  {t:'Piano (p)', c:'dinamik', d:'Hafif / kısık ses.'},
-  {t:'Mezzo piano (mp)', c:'dinamik', d:'Orta derecede hafif.'},
-  {t:'Mezzo forte (mf)', c:'dinamik', d:'Orta derecede kuvvetli.'},
-  {t:'Forte (f)', c:'dinamik', d:'Kuvvetli ses.'},
-  {t:'Fortissimo (ff)', c:'dinamik', d:'Çok kuvvetli ses.'},
-  {t:'Crescendo (cresc.)', c:'dinamik', d:'Sesi giderek kuvvetlendirerek.'},
-  {t:'Decrescendo', c:'dinamik', d:'Sesi giderek hafifleterek.'},
-  {t:'Diminuendo (dim.)', c:'dinamik', d:'Sesi azaltarak, hafifleterek.'},
-  {t:'Sforzando (sfz)', c:'dinamik', d:'Notayı ani ve vurgulu şekilde kuvvetlendirerek.'},
-  {t:'Fortepiano (fp)', c:'dinamik', d:'Kuvvetli çalıp hemen hafifleterek.'},
-  {t:'Subito', c:'dinamik', d:'Aniden, birdenbire (subito piano gibi).'},
+  /* tür + çember kökünden gam üretir */
+  function scaleFor(typeId, circleRoot, clefId){
+    var t = scType(typeId);
+    var tonic = t.minor ? REL_MINOR[circleRoot] : circleRoot;
+    var root = placeRoot(clefId, tonic);
+    var asc, desc;
+    if(t.chrom){
+      var fl = (root.a === 'b') || root.l === 'F';
+      asc = chromatic(root,false); desc = chromatic(root,true);
+      if(fl){ asc = chromatic(root,true); desc = asc; }
+      desc = desc.slice().reverse();
+    } else {
+      asc = buildScale(root, t.pat, t.steps, true);
+      if(!asc) return null;
+      if(t.id === 'melodic'){
+        var nat = buildScale(root, scType('natural').pat, null, true);
+        desc = nat.slice().reverse();
+      } else desc = asc.slice().reverse();
+    }
+    var ks = t.ks ? KS[circleRoot] : null;
+    return {type:t, tonic:tonic, root:root, asc:asc, desc:desc, ks:ks, circleRoot:circleRoot};
+  }
+  function patternText(notes){
+    var out = [];
+    for(var i=1;i<notes.length;i++){
+      var d = semi(notes[i]) - semi(notes[i-1]);
+      out.push(d===1 ? 'Y' : d===2 ? 'T' : d===3 ? '1½' : d===4 ? '2' : String(d));
+    }
+    return out.join(' ');
+  }
 
-  {t:'Cantabile', c:'ifade', d:'Şarkı söyler gibi, akıcı ve lirik.'},
-  {t:'Dolce', c:'ifade', d:'Tatlı, yumuşak bir ifadeyle.'},
-  {t:'Espressivo', c:'ifade', d:'Anlamlı, duygulu bir ifadeyle.'},
-  {t:'Grazioso', c:'ifade', d:'Zarif, incelikli bir üslupla.'},
-  {t:'Maestoso', c:'ifade', d:'Görkemli, ağırbaşlı bir tavırla.'},
-  {t:'Agitato', c:'ifade', d:'Heyecanlı, çalkantılı bir ruh haliyle.'},
-  {t:'Con brio', c:'ifade', d:'Canlılık ve parlaklıkla.'},
-  {t:'Con moto', c:'ifade', d:'Hareketli bir şekilde.'},
-  {t:'Con fuoco', c:'ifade', d:'Ateşli, tutkuyla.'},
-  {t:'Vivo', c:'ifade', d:'Canlı, diri.'},
-  {t:'Tranquillo', c:'ifade', d:'Sakin, huzurlu.'},
-  {t:'Semplice', c:'ifade', d:'Sade, yalın bir üslupla.'},
-  {t:'Leggiero', c:'ifade', d:'Hafif, uçarı bir tavırla.'},
-  {t:'Pesante', c:'ifade', d:'Ağır, baskılı bir şekilde.'},
-  {t:'Sostenuto', c:'ifade', d:'Sesleri tutarak, uzatarak.'},
-  {t:'Animato', c:'ifade', d:'Canlanarak, canlı bir ruhla.'},
-  {t:'Appassionato', c:'ifade', d:'Tutkulu, ateşli bir coşkuyla.'},
-  {t:'Scherzando', c:'ifade', d:'Şakacı, oyunbaz bir üslupla.'},
-  {t:'Risoluto', c:'ifade', d:'Kararlı, kesin bir tavırla.'},
+  /* ---------- Derece adları ve akorlar ---------- */
+  function degreeInfo(i,leadSemis){
+    var names = [['I','Tonik'],['II','Süpertonik'],['III','Medyan'],['IV','Subdominant (alt baskın)'],['V','Dominant (baskın)'],['VI','Submedyan (üst medyan)'],['VII', leadSemis===1 ? 'Hassas (duyucu)' : 'Subtonik']];
+    return names[i];
+  }
+  var CH = {
+    maj:   {name:'Majör üçlü',            sym:'',      iv:[4,7],     short:'majör'},
+    min:   {name:'Minör üçlü',            sym:'m',     iv:[3,7],     short:'minör'},
+    dim:   {name:'Eksik üçlü',            sym:'°',     iv:[3,6],     short:'eksik'},
+    aug:   {name:'Artık üçlü',            sym:'+',     iv:[4,8],     short:'artık'},
+    maj7:  {name:'Majör yedili akor',     sym:'maj7',  iv:[4,7,11],  short:'majör 7\'li'},
+    dom7:  {name:'Dominant yedili akor',  sym:'7',     iv:[4,7,10],  short:'dominant 7\'li'},
+    min7:  {name:'Minör yedili akor',     sym:'m7',    iv:[3,7,10],  short:'minör 7\'li'},
+    hdim7: {name:'Yarı eksik yedili akor',sym:'ø7',    iv:[3,6,10],  short:'yarı eksik 7\'li'},
+    dim7:  {name:'Eksik yedili akor',     sym:'°7',    iv:[3,6,9],   short:'eksik 7\'li'},
+    mmaj7: {name:'Minör-majör yedili akor',sym:'m(maj7)',iv:[3,7,11],short:'minör-majör 7\'li'}
+  };
+  var TRIADS = ['maj','min','dim','aug'], SEVENTHS = ['maj7','dom7','min7','hdim7','dim7','mmaj7'];
+  var NUMS = [3,5,7];
+  function chordNotes(root,type){
+    var iv = CH[type].iv, out = [root];
+    for(var i=0;i<iv.length;i++){ var n = transpose(root,NUMS[i],iv[i]); if(!n) return null; out.push(n); }
+    return out;
+  }
+  function invert(notes,k){
+    var a = notes.slice();
+    for(var i=0;i<k;i++){ var f = a.shift(); a.push(N(f.l,f.a,f.o+1)); }
+    return a;
+  }
+  var INV_TRIAD = ['Kök durum (5/3)','1. çevrim (6/3, sekst akoru)','2. çevrim (6/4, kuartsekst akoru)'];
+  var INV_SEV = ['Kök durum (7)','1. çevrim (6/5)','2. çevrim (4/3)','3. çevrim (4/2)'];
+  function chordSymbol(root,type){ return label(root) + CH[type].sym; }
+  function classify(semis){          // [3.,5.(,7.)] yarım ses -> tür
+    for(var k in CH){
+      var iv = CH[k].iv;
+      if(iv.length === semis.length){
+        var ok = true; for(var i=0;i<iv.length;i++) if(iv[i] !== semis[i]) ok = false;
+        if(ok) return k;
+      }
+    }
+    return null;
+  }
+  /* bir gamın (8 notalı, oktav dahil) derece akorları */
+  function degreeChords(scaleNotes, sevenths){
+    var out = [], base = scaleNotes.slice(0,7);
+    var ext = base.concat(base.map(function(n){ return N(n.l,n.a,n.o+1); }), base.map(function(n){ return N(n.l,n.a,n.o+2); }));
+    for(var i=0;i<7;i++){
+      var r = ext[i], idx = sevenths ? [0,2,4,6] : [0,2,4];
+      var ns = idx.map(function(k){ return ext[i+k]; });
+      var semis = []; for(var j=1;j<ns.length;j++) semis.push(semi(ns[j]) - semi(r));
+      var type = classify(semis);
+      var lead = semi(N(base[0].l,base[0].a,base[0].o+1)) - semi(base[6]);
+      out.push({deg:i, root:r, notes:ns, type:type, info:degreeInfo(i,lead)});
+    }
+    return out;
+  }
+  function roman(d,sevenths){
+    var r = d.info[0], t = d.type;
+    if(!t) return r;
+    var lower = (t==='min' || t==='dim' || t==='min7' || t==='hdim7' || t==='dim7' || t==='mmaj7');
+    var s = lower ? r.toLocaleLowerCase('en') : r;
+    var suffix = {maj:'',min:'',dim:'°',aug:'+',maj7:'maj7',dom7:'7',min7:'7',hdim7:'ø7',dim7:'°7',mmaj7:'(maj7)'}[t];
+    return s + suffix;
+  }
 
-  {t:'Legato', c:'artikulasyon', d:'Notaları birbirine bağlayarak, kesintisiz.'},
-  {t:'Staccato', c:'artikulasyon', d:'Notaları kısa ve kesik kesik çalarak.'},
-  {t:'Marcato', c:'artikulasyon', d:'Her notayı belirgin şekilde vurgulayarak.'},
-  {t:'Tenuto', c:'artikulasyon', d:'Notanın tam süresince basılı tutularak.'},
-  {t:'Aksan (>)', c:'artikulasyon', d:'Notayı vurgulayan işaret.'},
-  {t:'Glissando', c:'artikulasyon', d:'İki nota arasında kayarak geçiş.'},
-  {t:'Portamento', c:'artikulasyon', d:'Bir sesten diğerine yumuşak kayışla geçiş.'},
-  {t:'Vibrato', c:'artikulasyon', d:'Sesin perdesinde küçük, düzenli titreşim.'},
-  {t:'Tremolo', c:'artikulasyon', d:'Aynı notanın ya da iki notanın hızla tekrarlanması.'},
-  {t:'Pizzicato', c:'artikulasyon', d:'Yaylı çalgılarda telin parmakla çekilmesi.'},
-  {t:'Arco', c:'artikulasyon', d:'Pizzicato’dan sonra yaya dönüş; yayla çalma.'},
-  {t:'Con sordino', c:'artikulasyon', d:'Sordinle (sesi kısan aparatla) çalarak.'},
+  return {
+    L:L, PC:PC, ACC_V:ACC_V, V_ACC:V_ACC, SYM:SYM, SOLF:SOLF,
+    N:N, parse:parse, step:step, semi:semi, freq:freq, label:label, solf:solf, solfShort:solfShort, keyId:keyId, same:same,
+    nameOf:nameOf, nameSym:nameSym, transpose:transpose,
+    CLEFS:CLEFS, CLEF_IDS:CLEF_IDS, placeRoot:placeRoot, pos:pos,
+    NUM_TR:NUM_TR, NUM_AP:NUM_AP, QUAL_TR:QUAL_TR, qualities:qualities, ivSemis:ivSemis, ivName:ivName, ivNameCap:ivNameCap,
+    ivAlt:ivAlt, ivAbbr:ivAbbr, semisText:semisText, makeInterval:makeInterval, BASIC:BASIC,
+    SC:SC, scType:scType, CIRCLE:CIRCLE, REL_MINOR:REL_MINOR, KS:KS, ksLetters:ksLetters,
+    buildScale:buildScale, scaleFor:scaleFor, patternText:patternText,
+    CH:CH, TRIADS:TRIADS, SEVENTHS:SEVENTHS, chordNotes:chordNotes, invert:invert,
+    INV_TRIAD:INV_TRIAD, INV_SEV:INV_SEV, chordSymbol:chordSymbol, classify:classify, degreeChords:degreeChords, roman:roman
+  };
+})();
+if(typeof module !== 'undefined') module.exports = T;
 
-  {t:'Da capo (D.C.)', c:'yapi', d:'Başa dönüp yeniden çalmak.'},
-  {t:'Dal segno (D.S.)', c:'yapi', d:'İşaretli (segno) yere dönmek.'},
-  {t:'Fine', c:'yapi', d:'Eserin biteceği yer.'},
-  {t:'Coda', c:'yapi', d:'Eserin sonunda yer alan kapanış bölümü.'},
-  {t:'Segno', c:'yapi', d:'Dal segno için dönüş noktasını gösteren işaret.'},
-  {t:'Attacca', c:'yapi', d:'Duraksamadan bir sonraki bölüme hemen geçmek.'},
-  {t:'Tacet', c:'yapi', d:'Bir çalgının bölüm boyunca sessiz kalması.'},
-  {t:'Tutti', c:'yapi', d:'Tüm icracıların birlikte çalması.'},
-  {t:'Solo', c:'yapi', d:'Tek bir icracının çalması.'},
-  {t:'Unisono', c:'yapi', d:'Aynı sesin birden çok çalgı/ses tarafından birlikte icrası.'},
-  {t:'A cappella', c:'yapi', d:'Çalgı eşliği olmadan, yalnızca ses(ler)le icra.'},
-  {t:'Fermata', c:'yapi', d:'Notanın veya susun süresini icracının takdirine göre uzatan işaret.'},
-  {t:'Kadenz (Cadenza)', c:'yapi', d:'Solistin serbestçe icra ettiği virtüözik bölüm.'},
+/* ---- audio.js ---- */
+/* ===== Ses motoru (Web Audio) ===== */
+var Au = (function(){
+  var ctx = null, master = null, wave = null;
+  var active = [], timers = [];
 
-  {t:'Majör', c:'temel', d:'Büyük (majör) gam; tam ses-tam ses-yarım ses… dizilişine sahip.'},
-  {t:'Minör', c:'temel', d:'Küçük (minör) gam; doğal, armonik ve melodik türleri vardır.'},
-  {t:'Diyez (♯)', c:'temel', d:'Notayı yarım ses tizleştiren değiştirme işareti.'},
-  {t:'Bemol (♭)', c:'temel', d:'Notayı yarım ses pesleştiren değiştirme işareti.'},
-  {t:'Natürel / Bekar (♮)', c:'temel', d:'Önceki değiştirme işaretini iptal edip notayı doğal haline döndürür.'},
-  {t:'Enharmonik', c:'temel', d:'Aynı sesin farklı adlarla yazılması (örn. D♯ = E♭).'},
-  {t:'Relatif (akraba) tonalite', c:'temel', d:'Aynı diyez/bemol sayısına sahip majör-minör tonalite çifti (örn. Do Majör – La minör).'},
-  {t:'Paralel tonalite', c:'temel', d:'Aynı tonik üzerine kurulu majör ve minör tonalite (örn. Do Majör – Do minör).'},
-  {t:'Kromatik', c:'temel', d:'Ardışık yarım seslerden oluşan dizi/hareket.'},
-  {t:'Diyatonik', c:'temel', d:'Bir tonalitenin kendi gam notalarından oluşan yapı.'},
-  {t:'Aralık (interval)', c:'temel', d:'İki nota arasındaki uzaklık.'},
-  {t:'Oktav', c:'temel', d:'Frekansı iki katı olan, aynı adı taşıyan bir üst/alt ses.'},
-  {t:'Tam ses / Yarım ses', c:'temel', d:'Batı müziğinde en küçük aralık birimleri; iki yarım ses bir tam sese eşittir.'},
-  {t:'Gam (dizi)', c:'temel', d:'Belirli bir düzende sıralanmış notalar bütünü.'},
-  {t:'Arpej', c:'temel', d:'Bir akorun seslerinin art arda (aynı anda değil) çalınması.'},
-  {t:'Sol anahtarı', c:'temel', d:'İkinci çizgiyi Sol (G4) olarak belirleyen anahtar.'},
-  {t:'Fa anahtarı', c:'temel', d:'Dördüncü çizgiyi Fa (F3) olarak belirleyen anahtar.'}
-];
-const CAT_NAMES = {tempo:'Tempo', dinamik:'Dinamik', ifade:'İfade', artikulasyon:'Artikülasyon', yapi:'Yapı & İşaret', temel:'Temel Kavramlar'};
-let activeCat = 'all';
-function buildChips(){
-  const wrap = document.getElementById('term-chips');
-  const cats = ['all','tempo','dinamik','ifade','artikulasyon','yapi','temel'];
-  cats.forEach(function(c){
-    const chip = document.createElement('button');
-    chip.className='term-chip'+(c==='all'?' active':'');
-    chip.textContent = c==='all' ? 'Tümü' : CAT_NAMES[c];
-    chip.dataset.cat = c;
-    chip.addEventListener('click', function(){
-      activeCat = c;
-      Array.from(wrap.children).forEach(function(ch){ch.classList.toggle('active', ch===chip);});
-      renderTerms();
+  function ensure(){
+    if(!ctx){
+      try{
+        var AC = window.AudioContext || window.webkitAudioContext;
+        ctx = new AC();
+        master = ctx.createGain(); master.gain.value = 0.9;
+        var comp = ctx.createDynamicsCompressor();
+        master.connect(comp); comp.connect(ctx.destination);
+        var re = new Float32Array(10), im = new Float32Array(10);
+        var amps = [0, 1, 0.5, 0.34, 0.2, 0.13, 0.08, 0.05, 0.03, 0.02];
+        for(var i=0;i<10;i++) im[i] = amps[i];
+        wave = ctx.createPeriodicWave(re, im);
+      }catch(e){ ctx = null; }
+    }
+    if(ctx && ctx.state === 'suspended'){ try{ ctx.resume(); }catch(e){} }
+    return !!ctx;
+  }
+  function tone(f, when, dur, vol){
+    if(!ensure()) return;
+    var t0 = ctx.currentTime + (when || 0);
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.linearRampToValueAtTime(vol || 0.3, t0 + 0.012);
+    g.gain.exponentialRampToValueAtTime((vol || 0.3) * 0.4, t0 + Math.min(0.3, dur*0.5));
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    var o = ctx.createOscillator();
+    o.setPeriodicWave(wave);
+    o.frequency.value = f;
+    o.connect(g); g.connect(master);
+    o.start(t0); o.stop(t0 + dur + 0.05);
+    active.push(o);
+    o.onended = function(){ var i = active.indexOf(o); if(i >= 0) active.splice(i,1); };
+  }
+  function click(when, accent){
+    if(!ensure()) return;
+    var t0 = ctx.currentTime + (when || 0);
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(accent >= 2 ? 0.5 : accent >= 1.5 ? 0.38 : 0.26, t0);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.07);
+    var o = ctx.createOscillator(); o.type = 'square';
+    o.frequency.value = accent >= 2 ? 1500 : accent >= 1.5 ? 1100 : 800;
+    o.connect(g); g.connect(master);
+    o.start(t0); o.stop(t0 + 0.09);
+  }
+  function stopAll(){
+    timers.forEach(clearTimeout); timers = [];
+    active.slice().forEach(function(o){ try{ o.stop(); }catch(e){} });
+    active = [];
+  }
+  function later(fn, ms){ var id = setTimeout(fn, ms); timers.push(id); return id; }
+
+  /* Notaları art arda çalar; onStep(i) görsel vurgu için */
+  function seq(notes, step, onStep, onEnd, opts){
+    stopAll(); if(!ensure()) return 0;
+    opts = opts || {};
+    var s = step || 0.5;
+    notes.forEach(function(n,i){
+      if(!opts.silent) tone(T.freq(n), 0.06 + i*s, s*1.7, 0.26);
+      else click(0.06 + i*s, i === 0 ? 2 : 1);
+      if(onStep) later(function(){ onStep(i); }, (0.06 + i*s)*1000);
     });
-    wrap.appendChild(chip);
-  });
-}
-function renderTerms(){
-  const q = document.getElementById('term-search').value.trim().toLocaleLowerCase('tr');
-  const list = document.getElementById('term-list');
-  list.innerHTML='';
-  const filtered = TERMS.filter(function(term){
-    const matchCat = activeCat==='all' || term.c===activeCat;
-    const matchQ = !q || term.t.toLocaleLowerCase('tr').includes(q) || term.d.toLocaleLowerCase('tr').includes(q);
-    return matchCat && matchQ;
-  });
-  document.getElementById('term-empty').classList.toggle('hidden', filtered.length>0);
-  filtered.forEach(function(term){
-    const div = document.createElement('div');
-    div.className='term-item';
-    div.innerHTML = '<span class="tt">'+term.t+'</span><span class="tc">'+CAT_NAMES[term.c]+'</span><div class="td">'+term.d+'</div>';
-    list.appendChild(div);
-  });
-}
-document.getElementById('term-search').addEventListener('input', renderTerms);
-buildChips();
-renderTerms();
+    var total = (0.06 + notes.length*s);
+    if(onEnd) later(onEnd, total*1000 + 150);
+    return total;
+  }
+  /* Aynı anda çalar */
+  function chord(notes, dur, delayMs){
+    ensure();
+    var d = dur || 1.4, v = Math.min(0.22, 0.5 / notes.length);
+    notes.forEach(function(n,i){ tone(T.freq(n), 0.04 + (delayMs ? i*delayMs/1000 : 0), d, v); });
+    return d;
+  }
+  function one(n, dur){ ensure(); tone(T.freq(n), 0.02, dur || 1.0, 0.3); }
 
-/* ============ SEKME GEÇİŞİ ============ */
-document.querySelectorAll('.tab-btn').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.toggle('active', b===btn);});
-    document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
-    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
-    if(btn.dataset.tab==='gam') renderCircle();
-  });
-});
+  return {ensure:ensure, tone:tone, click:click, stopAll:stopAll, later:later, seq:seq, chord:chord, one:one,
+          now:function(){ return ctx ? ctx.currentTime : 0; }, ctx:function(){ return ctx; }};
+})();
 
-/* ============ BİLGİ MODALI ============ */
-document.getElementById('info-open').addEventListener('click', function(){ document.getElementById('info-modal').classList.remove('hidden'); });
-document.getElementById('info-close').addEventListener('click', function(){ document.getElementById('info-modal').classList.add('hidden'); });
-document.getElementById('info-modal').addEventListener('click', function(e){ if(e.target===this) this.classList.add('hidden'); });
+/* ---- glyphs.js ---- */
+/* ===== Nota yazısı şekilleri (el çizimi SVG). 1 porte aralığı = 10 birim, y aşağı doğru artar ===== */
+var G = (function(){
+  function catmull(pts){
+    var d = 'M' + pts[0][0] + ',' + pts[0][1];
+    for(var i=0;i<pts.length-1;i++){
+      var p0 = pts[Math.max(0,i-1)], p1 = pts[i], p2 = pts[i+1], p3 = pts[Math.min(pts.length-1,i+2)];
+      var c1x = p1[0] + (p2[0]-p0[0])/6, c1y = p1[1] + (p2[1]-p0[1])/6;
+      var c2x = p2[0] - (p3[0]-p1[0])/6, c2y = p2[1] - (p3[1]-p1[1])/6;
+      d += ' C' + c1x.toFixed(1) + ',' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ',' + c2y.toFixed(1) + ' ' + p2[0] + ',' + p2[1];
+    }
+    return d;
+  }
+  function ell(rx,ry,deg){
+    var a = deg*Math.PI/180, c = Math.cos(a), s = Math.sin(a);
+    return 'M' + (-rx*c).toFixed(2) + ',' + (-rx*s).toFixed(2) + ' A' + rx + ',' + ry + ' ' + deg + ' 1 0 ' + (rx*c).toFixed(2) + ',' + (rx*s).toFixed(2) +
+           ' A' + rx + ',' + ry + ' ' + deg + ' 1 0 ' + (-rx*c).toFixed(2) + ',' + (-rx*s).toFixed(2) + 'Z';
+  }
+  var TREBLE = [[-8,19],[-5,26],[1,27.5],[3.5,22],[2,10],[0.5,-2],[0,-14],[1,-27],[3,-39],[6,-43.5],[10,-38],[9,-29],[2,-22],[-5,-16],[-10,-6],[-9,4],[-3,10.5],[5,9.5],[10.5,2],[8.5,-6],[2.5,-9],[-3,-6],[-2.5,-2],[1,-2.5]];
+  var g = {};
+  g.gClef = '<path d="' + catmull(TREBLE) + '" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-8" cy="19" r="2.4" fill="currentColor"/>';
+  g.fClef = '<circle cx="-5" cy="-1" r="4.4" fill="currentColor"/><path d="M-9,-2 C-8,-12 4,-14 9,-8 C14,-1 10,14 -9,29" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><circle cx="14" cy="-6" r="2" fill="currentColor"/><circle cx="14" cy="6" r="2" fill="currentColor"/>';
+  g.cClef = function(yTop,yBot){
+    return '<rect x="-10" y="' + yTop + '" width="3.6" height="' + (yBot-yTop) + '" fill="currentColor"/>' +
+           '<rect x="-4.2" y="' + yTop + '" width="1.3" height="' + (yBot-yTop) + '" fill="currentColor"/>' +
+           '<path d="M-2,-10 C6,-11 12,-6 8,-2.5 C6,-1 3,-1.5 0,0 C3,1.5 6,1 8,2.5 C12,6 6,11 -2,10" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>';
+  };
+  g.sharp = '<path d="M-2.6,-12 V13 M2.6,-13 V12" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M-6,-2 L6,-5.2 M-6,6.4 L6,3.2" stroke="currentColor" stroke-width="3" fill="none"/>';
+  g.flat = '<path d="M-3,-17 V5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M-3,5 C0,2.5 7.5,-1 7.5,-5.2 C7.5,-8.8 3,-9 -3,-3.5 C0.5,-6 3.5,-6 3.8,-3.8 C4.2,-0.8 1,2 -3,5 Z" fill="currentColor" stroke="currentColor" stroke-width="0.8" stroke-linejoin="round"/>';
+  g.natural = '<path d="M-3,-14 V6.5 M3,-6.5 V14" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M-3,3.6 L3,1.8 M-3,-1.8 L3,-3.6" stroke="currentColor" stroke-width="3" fill="none"/>';
+  g.x = '<path d="M-4.4,-4.4 L4.4,4.4 M-4.4,4.4 L4.4,-4.4" stroke="currentColor" stroke-width="3" fill="none"/>';
+  g.bb = '<g transform="translate(-4,0)">' + g.flat + '</g><g transform="translate(4.5,0)">' + g.flat + '</g>';
+  g.whole = '<path fill-rule="evenodd" fill="currentColor" d="' + ell(7.8,5.1,0) + ' ' + ell(2.7,4.7,-14) + '"/>';
+  g.half = '<path fill-rule="evenodd" fill="currentColor" d="' + ell(6.4,4.5,-22) + ' ' + ell(4.7,1.7,-34) + '"/>';
+  g.quarter = '<path fill="currentColor" d="' + ell(6.3,4.5,-22) + '"/>';
+  g.stemUp = '<rect x="4.8" y="-33" width="1.4" height="33" fill="currentColor"/>';
+  g.stemDown = '<rect x="-6.2" y="0" width="1.4" height="33" fill="currentColor"/>';
+  g.flagUp = function(n){
+    var s = '';
+    for(var i=0;i<n;i++){
+      var y = -33 + i*6.5;
+      s += '<path d="M6.2,' + y + ' C6.5,' + (y+9) + ' 15,' + (y+11) + ' 13.5,' + (y+24) + ' C12.5,' + (y+17) + ' 8.5,' + (y+14) + ' 6.2,' + (y+12) + 'Z" fill="currentColor"/>';
+    }
+    return s;
+  };
+  g.dot = '<circle cx="0" cy="0" r="1.9" fill="currentColor"/>';
+  g.restWhole = '<rect x="-6" y="-10" width="12" height="5" fill="currentColor"/>';
+  g.restHalf = '<rect x="-6" y="-5" width="12" height="5" fill="currentColor"/>';
+  g.restQuarter = '<path d="M-2,-15 L3.5,-8 L-2.5,-1 C2,1.5 3.5,5 1.5,9 C0,11.5 -2.5,11 -3,9 C-1,8 0.5,9.5 2,13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>';
+  g.rest8 = '<circle cx="-3" cy="-4" r="2.4" fill="currentColor"/><path d="M-3,-4 C1,-4 4,-6 5,-8.5 M5,-8 L-2,14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+  g.rest16 = '<circle cx="-2" cy="-4" r="2.4" fill="currentColor"/><circle cx="-4.5" cy="4" r="2.4" fill="currentColor"/><path d="M-2,-4 C2,-4 5,-6 6,-8.5 M-4.5,4 C-0.5,4 2.5,2 3.5,-0.5 M6,-8 L-4,18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+  g.rest32 = '<circle cx="-0.5" cy="-10" r="2.2" fill="currentColor"/><circle cx="-3" cy="-2" r="2.2" fill="currentColor"/><circle cx="-5.5" cy="6" r="2.2" fill="currentColor"/><path d="M-0.5,-10 C3.5,-10 6.5,-12 7.5,-14.5 M-3,-2 C1,-2 4,-4 5,-6.5 M-5.5,6 C-1.5,6 1.5,4 2.5,1.5 M7.5,-14 L-6,22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>';
+  return g;
+})();
 
-window.addEventListener('resize', function(){ if(document.getElementById('tab-gam').classList.contains('active')) renderCircle(); });
+/* ---- staff.js ---- */
+/* ===== Porte çizimi (SVG) ===== */
+var Staff = (function(){
+  var HEAD = 13;   // yan yana (ikili) notalarda ikinci notanın kayma miktarı
+  function yOf(p, top){ return (top - p) * 5; }
+  function accGlyph(a){ return a==='' ? G.natural : a==='#' ? G.sharp : a==='b' ? G.flat : a==='x' ? G.x : G.bb; }
 
-/* ============ BAŞLANGIÇ ============ */
-renderGamTab();
-renderPracticeCards();
-resetQuizRound();
+  /* o: {clef, ks, cols:[{notes:[], label?, bar?}], style:'whole'|'quarter', captions, endBar, minCol} */
+  function build(o){
+    var C = T.CLEFS[o.clef], style = o.style || 'whole';
+    var ks = o.ks ? T.ksLetters(o.ks) : {kind:'', letters:[]};
+    var ksMap = {}; ks.letters.forEach(function(l){ ksMap[l] = ks.kind; });
+    var minP = 0, maxP = 8, anyLabel = false;
+    o.cols.forEach(function(c){
+      if(c.label) anyLabel = true;
+      (c.notes || []).forEach(function(n){
+        var p = T.pos(n, o.clef);
+        var lo = p, hi = p;
+        if(style === 'quarter'){ if(p >= 4) lo = p - 7; else hi = p + 7; }
+        minP = Math.min(minP, lo); maxP = Math.max(maxP, hi);
+      });
+    });
+    var topP = Math.max(12, maxP + 4), botP = Math.min(-4, minP - 4);
+    var H = (topP - botP) * 5 + (anyLabel || (o.captions && o.captions.length) ? 16 : 2);
+    var out = [], x0 = 4;
 
-if('serviceWorker' in navigator){
-  window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
-}
+    /* anahtar */
+    var cy = yOf(C.line, topP);
+    var clefSvg = C.type === 'g' ? G.gClef : C.type === 'f' ? G.fClef : G.cClef(yOf(8,topP) - cy, yOf(0,topP) - cy);
+    out.push('<g transform="translate(' + (x0 + 14) + ',' + cy + ')">' + clefSvg + '</g>');
+    var cursor = x0 + C.w;
+
+    /* donanım (armür) */
+    if(ks.letters.length){
+      var list = ks.kind === '#' ? C.sharps : C.flats;
+      for(var i=0;i<ks.letters.length;i++){
+        out.push('<g transform="translate(' + (cursor + 6 + i*11) + ',' + yOf(list[i], topP) + ')">' + (ks.kind === '#' ? G.sharp : G.flat) + '</g>');
+      }
+      cursor += ks.letters.length*11 + 10;
+    }
+    cursor += 4;
+
+    var state = {}, centers = [], colIdx = 0;
+    o.cols.forEach(function(c){
+      if(c.bar){
+        out.push('<line x1="' + (cursor+4) + '" x2="' + (cursor+4) + '" y1="' + yOf(8,topP) + '" y2="' + yOf(0,topP) + '" stroke="currentColor" stroke-width="1.3"/>');
+        cursor += 16; state = {}; centers.push(cursor); return;
+      }
+      var items = c.notes.map(function(n){ return {n:n, p:T.pos(n,o.clef), st:T.step(n)}; });
+      items.sort(function(a,b){ return a.st - b.st; });
+      var disp = false;
+      items.forEach(function(it,i){
+        it.disp = false;
+        if(i > 0){
+          var d = it.st - items[i-1].st;
+          if(d <= 1 && !items[i-1].disp){ it.disp = true; }
+        }
+      });
+      var hasDisp = items.some(function(it){ return it.disp; });
+      /* değiştirme işaretleri */
+      items.forEach(function(it){
+        var key = it.n.l + it.n.o;
+        var cur = state[key] !== undefined ? state[key] : (ksMap[it.n.l] || '');
+        it.acc = (it.n.a !== cur) ? it.n.a : null;
+        state[key] = it.n.a;
+      });
+      var accItems = items.filter(function(it){ return it.acc !== null; }).sort(function(a,b){ return b.p - a.p; });
+      var last = [];
+      accItems.forEach(function(it){
+        var k = 0;
+        while(last[k] !== undefined && last[k] - it.p < 6) k++;
+        last[k] = it.p; it.col = k;
+      });
+      var nCols = last.length;
+      var leftExtra = nCols ? nCols*12 + 2 : 0;
+      var headX = cursor + leftExtra + 10;
+      var parts = [];
+      items.forEach(function(it){
+        var cx = headX + (it.disp ? HEAD : 0), y = yOf(it.p, topP);
+        /* ek çizgiler */
+        if(it.p <= -2){ for(var p=-2;p>=it.p;p-=2) parts.push('<line x1="' + (cx-10.5) + '" x2="' + (cx+10.5) + '" y1="' + yOf(p,topP) + '" y2="' + yOf(p,topP) + '" stroke="currentColor" stroke-width="1.3"/>'); }
+        if(it.p >= 10){ for(var q=10;q<=it.p;q+=2) parts.push('<line x1="' + (cx-10.5) + '" x2="' + (cx+10.5) + '" y1="' + yOf(q,topP) + '" y2="' + yOf(q,topP) + '" stroke="currentColor" stroke-width="1.3"/>'); }
+        if(it.acc !== null) parts.push('<g transform="translate(' + (headX - 15 - it.col*12) + ',' + y + ')">' + accGlyph(it.acc) + '</g>');
+        if(style === 'quarter'){
+          parts.push('<g transform="translate(' + cx + ',' + y + ')">' + G.quarter + (it.p >= 4 ? G.stemDown : G.stemUp) + '</g>');
+        } else {
+          parts.push('<g transform="translate(' + cx + ',' + y + ')">' + G.whole + '</g>');
+        }
+      });
+      var colW = Math.max(o.minCol || 34, leftExtra + 22 + (hasDisp ? HEAD : 0) + 10);
+      var cxMid = headX + (hasDisp ? HEAD/2 : 0);
+      centers.push(cxMid);
+      var lab = c.label ? '<text x="' + cxMid + '" y="' + (H-4) + '" text-anchor="middle" class="stx">' + c.label + '</text>' : '';
+      out.push('<g class="scol" data-i="' + colIdx + '"><rect x="' + cursor + '" y="0" width="' + colW + '" height="' + H + '" fill="transparent"/>' + parts.join('') + lab + '</g>');
+      cursor += colW; colIdx++;
+    });
+    if(o.endBar){
+      out.push('<line x1="' + (cursor+2) + '" x2="' + (cursor+2) + '" y1="' + yOf(8,topP) + '" y2="' + yOf(0,topP) + '" stroke="currentColor" stroke-width="1.3"/>' +
+               '<line x1="' + (cursor+6.5) + '" x2="' + (cursor+6.5) + '" y1="' + yOf(8,topP) + '" y2="' + yOf(0,topP) + '" stroke="currentColor" stroke-width="3.6"/>');
+      cursor += 12;
+    }
+    var W = cursor + 6;
+    var lines = '';
+    for(var i2=0;i2<5;i2++){ var yy = yOf(i2*2, topP); lines += '<line x1="2" x2="' + (W-2) + '" y1="' + yy + '" y2="' + yy + '" stroke="currentColor" stroke-width="1.1"/>'; }
+    /* başlıklar (captions) */
+    var caps = '';
+    (o.captions || []).forEach(function(cp){
+      var a = centers[cp.from], b = centers[cp.to];
+      if(a === undefined || b === undefined) return;
+      caps += '<text x="' + ((a+b)/2) + '" y="' + (H-4) + '" text-anchor="middle" class="stx cap">' + cp.text + '</text>';
+    });
+    return {W:W, H:H, html:'<g>' + lines + '</g>' + out.join('') + caps};
+  }
+
+  /* Bir kapsayıcıya porte çizer. onCol(i) sütuna dokununca çağrılır. */
+  function mount(el, o, onCol){
+    var r = build(o);
+    var cw = el.clientWidth || 320, scale = o.scale || 1, w = r.W * scale;
+    if(w > cw && w <= cw * 1.3) w = cw;   // hafif taşıyorsa sığdır
+    el.innerHTML = '<div class="staff-scroll"><svg class="staff" viewBox="0 0 ' + r.W + ' ' + r.H + '" width="' + w.toFixed(0) + '" height="' + (r.H * w / r.W).toFixed(0) + '" role="img" aria-label="Porte üzerinde notalar">' + r.html + '</svg></div>';
+    if(onCol){
+      el.querySelectorAll('.scol').forEach(function(g){
+        g.style.cursor = 'pointer';
+        g.addEventListener('click', function(){ onCol(parseInt(g.getAttribute('data-i'),10)); });
+      });
+    }
+    return r;
+  }
+  function highlight(el, i){
+    var cols = el.querySelectorAll('.scol');
+    for(var k=0;k<cols.length;k++) cols[k].classList.toggle('on', k === i);
+  }
+  function clearHighlight(el){ highlight(el, -1); }
+
+  /* Süre değeri ve sus simgeleri (porte olmadan) */
+  var ICONS = {
+    n1:[G.whole,'-12 -10 24 20'], n2:[G.half + G.stemUp,'-12 -38 26 46'], n4:[G.quarter + G.stemUp,'-12 -38 26 46'],
+    n8:[G.quarter + G.stemUp + G.flagUp(1),'-12 -38 30 46'], n16:[G.quarter + G.stemUp + G.flagUp(2),'-12 -38 30 46'], n32:[G.quarter + G.stemUp + G.flagUp(3),'-12 -38 30 46'],
+    r1:['<line x1="-10" x2="10" y1="-10" y2="-10" stroke="currentColor" stroke-width="1.1"/>' + G.restWhole,'-12 -16 24 24'],
+    r2:['<line x1="-10" x2="10" y1="0" y2="0" stroke="currentColor" stroke-width="1.1"/>' + G.restHalf,'-12 -16 24 24'],
+    r4:[G.restQuarter,'-12 -20 24 40'], r8:[G.rest8,'-12 -16 24 36'], r16:[G.rest16,'-12 -16 24 40'], r32:[G.rest32,'-12 -20 24 46']
+  };
+  function icon(kind, w, h, dots){
+    var d = ICONS[kind], vb = d[1], inner = d[0];
+    if(dots){
+      var p = vb.split(' ').map(Number); p[2] += 8 + dots*4; vb = p.join(' ');
+      for(var i=0;i<dots;i++) inner += '<circle cx="' + (12 + i*5) + '" cy="-2.5" r="1.9" fill="currentColor"/>';
+    }
+    return '<svg class="glyph" viewBox="' + vb + '" width="' + (w||34) + '" height="' + (h||44) + '" aria-hidden="true">' + inner + '</svg>';
+  }
+  return {build:build, mount:mount, highlight:highlight, clearHighlight:clearHighlight, icon:icon};
+})();
+
+/* ---- ui_core.js ---- */
+/* ===== Ortak arayüz parçaları ===== */
+var App = (function(){
+  function $(id){ return document.getElementById(id); }
+  var store = {
+    get:function(k,d){ try{ var v = localStorage.getItem(k); return v === null ? d : v; }catch(e){ return d; } },
+    set:function(k,v){ try{ localStorage.setItem(k,String(v)); }catch(e){} }
+  };
+  var S = {clef: store.get('sgr_clef','G'), tab:'gam'};
+  if(!T.CLEFS[S.clef]) S.clef = 'G';
+  var modules = {};
+  function rnd(n){ return Math.floor(Math.random()*n); }
+  function pick(a){ return a[rnd(a.length)]; }
+  function shuffle(a){ var b = a.slice(); for(var i=b.length-1;i>0;i--){ var j = rnd(i+1), t = b[i]; b[i] = b[j]; b[j] = t; } return b; }
+
+  /* chip dizisi: items [{id,label,sub}] */
+  function Chips(el, items, sel, cb){
+    var self = {items:items, sel:sel};
+    function build(){
+      el.innerHTML = '';
+      self.items.forEach(function(it){
+        var b = document.createElement('button');
+        b.className = 'chip' + (it.id === self.sel ? ' active' : '');
+        b.setAttribute('data-id', it.id);
+        b.innerHTML = it.label + (it.sub ? '<small>' + it.sub + '</small>' : '');
+        b.addEventListener('click', function(){ self.sel = it.id; self.set(it.id); cb(it.id); });
+        el.appendChild(b);
+      });
+    }
+    self.set = function(id){
+      self.sel = id;
+      var bs = el.querySelectorAll('.chip');
+      for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-id') === String(id));
+    };
+    self.rebuild = function(newItems, newSel){ self.items = newItems; self.sel = newSel; build(); };
+    build();
+    return self;
+  }
+  /* alt sekme (segment) */
+  function Seg(el, onPick){
+    var bs = el.querySelectorAll('button');
+    for(var i=0;i<bs.length;i++){
+      bs[i].addEventListener('click', (function(b){ return function(){
+        for(var k=0;k<bs.length;k++) bs[k].classList.toggle('active', bs[k] === b);
+        onPick(b.getAttribute('data-p') || b.getAttribute('data-m'));
+      }; })(bs[i]));
+    }
+  }
+  /* kök nota seçici: harf + (♭ ♮ ♯) */
+  function RootPicker(el, st, cb){
+    el.innerHTML = '<div class="chips" data-r="l"></div><div class="seg" data-r="a" style="max-width:240px;margin-bottom:6px"><button data-a="b" aria-label="bemol">♭</button><button data-a="" aria-label="doğal">♮</button><button data-a="#" aria-label="diyez">♯</button></div>';
+    var chips = Chips(el.querySelector('[data-r=l]'), T.L.map(function(l){ return {id:l, label:T.SOLF[l], sub:l}; }), st.l, function(l){ st.l = l; cb(); });
+    var segEl = el.querySelector('[data-r=a]'), bs = segEl.querySelectorAll('button');
+    function showAcc(){ for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-a') === st.a); }
+    for(var i=0;i<bs.length;i++) bs[i].addEventListener('click', function(){ st.a = this.getAttribute('data-a'); showAcc(); cb(); });
+    showAcc();
+    return {set:function(){ chips.set(st.l); showAcc(); }};
+  }
+
+  /* ---------- Piyano ---------- */
+  var Piano = (function(){
+    var WL = ['C','D','E','F','G','A','B'], BA = {C:'C#',D:'D#',F:'F#',G:'G#',A:'A#'};
+    function build(el, start, nOct){
+      el.innerHTML = ''; el.setAttribute('data-start', start); el.setAttribute('data-n', nOct);
+      el.style.minWidth = (nOct*7*27) + 'px';
+      var total = nOct*7, w = 100/total, wi = 0;
+      for(var o=start;o<start+nOct;o++){
+        WL.forEach(function(l){
+          var k = document.createElement('div');
+          k.className = 'pk-white'; k.setAttribute('data-key', l+o);
+          k.style.left = (wi*w) + '%'; k.style.width = w + '%';
+          if(l === 'C') k.textContent = 'Do' + o;
+          el.appendChild(k);
+          if(BA[l]){
+            var b = document.createElement('div');
+            b.className = 'pk-black'; b.setAttribute('data-key', BA[l]+o);
+            b.style.width = (w*0.6) + '%'; b.style.left = ((wi+1)*w - w*0.3) + '%';
+            el.appendChild(b);
+          }
+          wi++;
+        });
+      }
+    }
+    function clear(el){
+      var ks = el.querySelectorAll('.on,.root,.cur');
+      for(var i=0;i<ks.length;i++) ks[i].classList.remove('on','root','cur');
+    }
+    function show(el, notes, root){
+      if(!notes.length) return;
+      var lo = 1e9, hi = -1e9;
+      notes.forEach(function(n){ var o = Math.floor(T.semi(n)/12); lo = Math.min(lo,o); hi = Math.max(hi,o); });
+      var nOct = Math.max(2, hi - lo + 1);
+      if(el.getAttribute('data-start') !== String(lo) || el.getAttribute('data-n') !== String(nOct)) build(el, lo, nOct);
+      clear(el);
+      var rk = root ? T.keyId(root).replace(/\d+$/,'') : null;
+      notes.forEach(function(n){
+        var k = el.querySelector('[data-key="' + T.keyId(n) + '"]');
+        if(k){ k.classList.add('on'); if(rk && T.keyId(n).replace(/\d+$/,'') === rk) k.classList.add('root'); }
+      });
+    }
+    function cur(el, n){
+      var ks = el.querySelectorAll('.cur'); for(var i=0;i<ks.length;i++) ks[i].classList.remove('cur');
+      if(!n) return;
+      var k = el.querySelector('[data-key="' + T.keyId(n) + '"]'); if(k) k.classList.add('cur');
+    }
+    return {show:show, cur:cur, clear:clear};
+  })();
+
+  /* ---------- Test (quiz) ---------- */
+  /* cfg.next() -> {options:[{id,label}], answer, play?, staffOpts?(), prompt?, explain} */
+  function Quiz(el, id, cfg){
+    var self = {}, q = null, locked = false, score = 0, total = 0, streak = 0;
+    var best = parseInt(store.get('sgr_best_' + id, '0'), 10) || 0;
+    el.innerHTML =
+      '<div class="quiz-stats"><span>Skor: <b data-k="score">0</b>/<b data-k="total">0</b></span><span>Seri: <b data-k="streak">0</b></span><span>En iyi: <b data-k="best">' + best + '</b></span></div>' +
+      '<div class="card"><p class="meta" data-k="prompt"></p><div class="staff-wrap" data-k="staff"></div>' +
+      '<button class="btn primary quiz-play-big hidden" data-k="play">🔊 Çal</button>' +
+      '<div class="quiz-options" data-k="opts"></div><p class="quiz-fb" data-k="fb"></p>' +
+      '<button class="btn primary hidden" data-k="next" style="width:100%">Sonraki →</button></div>';
+    function k(n){ return el.querySelector('[data-k=' + n + ']'); }
+    function stats(){ k('score').textContent = score; k('total').textContent = total; k('streak').textContent = streak; k('best').textContent = best; }
+    function drawStaff(){
+      var box = k('staff');
+      if(q && q.staffOpts){ box.classList.remove('hidden'); Staff.mount(box, q.staffOpts()); }
+      else { box.classList.add('hidden'); box.innerHTML = ''; }
+    }
+    self.start = function(autoPlay){
+      Au.stopAll();
+      q = cfg.next(); locked = false;
+      k('prompt').innerHTML = q.prompt || '';
+      k('fb').textContent = ''; k('fb').className = 'quiz-fb';
+      k('next').classList.add('hidden');
+      var pl = k('play');
+      if(q.play){ pl.classList.remove('hidden'); pl.textContent = q.playLabel || '🔊 Çal'; } else pl.classList.add('hidden');
+      var opts = k('opts'); opts.innerHTML = '';
+      opts.className = 'quiz-options' + (q.options.length === 7 ? ' n7' : '');
+      q.options.forEach(function(o){
+        var b = document.createElement('button'); b.className = 'quiz-opt'; b.innerHTML = o.label; b.setAttribute('data-id', o.id);
+        b.addEventListener('click', function(){ answer(o.id, b); });
+        opts.appendChild(b);
+      });
+      drawStaff();
+      if(autoPlay && q.play) setTimeout(q.play, 120);
+    };
+    function answer(oid, btn){
+      if(locked) return; locked = true; total++;
+      var ok = (oid === q.answer), fb = k('fb');
+      var bs = k('opts').querySelectorAll('.quiz-opt'); for(var i=0;i<bs.length;i++) bs[i].disabled = true;
+      if(ok){
+        score++; streak++;
+        if(streak > best){ best = streak; store.set('sgr_best_' + id, best); }
+        btn.classList.add('correct'); fb.textContent = 'Doğru — ' + (q.explain || ''); fb.className = 'quiz-fb ok';
+      } else {
+        streak = 0; btn.classList.add('wrong');
+        for(var j=0;j<bs.length;j++) if(bs[j].getAttribute('data-id') === q.answer) bs[j].classList.add('correct');
+        fb.textContent = 'Doğrusu: ' + (q.explain || ''); fb.className = 'quiz-fb no';
+      }
+      stats(); k('next').classList.remove('hidden');
+    }
+    k('play').addEventListener('click', function(){ if(q && q.play) q.play(); });
+    k('next').addEventListener('click', function(){ self.start(true); });
+    self.redraw = drawStaff;
+    self.reset = function(){ score = 0; total = 0; streak = 0; stats(); };
+    stats();
+    return self;
+  }
+
+  /* ---------- Anahtar seçici ve sekmeler ---------- */
+  var clefChips;
+  function initClef(){
+    clefChips = Chips($('clef-chips'), T.CLEF_IDS.map(function(id){ return {id:id, label:T.CLEFS[id].short}; }), S.clef, function(id){
+      S.clef = id; store.set('sgr_clef', id);
+      var m = modules[S.tab]; if(m && m.show) m.show();
+    });
+  }
+  function showTab(id){
+    Au.stopAll();
+    S.tab = id;
+    var bs = document.querySelectorAll('#tabs button');
+    for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-tab') === id);
+    var ps = document.querySelectorAll('.tab-panel');
+    for(var j=0;j<ps.length;j++) ps[j].classList.toggle('active', ps[j].id === 'tab-' + id);
+    $('clef-bar').classList.toggle('hidden', id === 'ritim' || id === 'terim');
+    var m = modules[id]; if(m && m.show) m.show();
+    window.scrollTo(0,0);
+  }
+  function register(id, m){ modules[id] = m; }
+
+  /* tonalite listesi (select için) */
+  function fillKeySelect(sel, minor){
+    sel.innerHTML = '';
+    T.CIRCLE.forEach(function(r,i){
+      var o = document.createElement('option'); o.value = i;
+      var tonic = minor ? T.REL_MINOR[r] : r;
+      var ks = T.KS[r];
+      o.textContent = T.nameOf(tonic) + (minor ? ' minör' : ' majör') + ' (' + (ks === 0 ? 'armürsüz' : ks > 0 ? ks + ' diyez' : (-ks) + ' bemol') + ')';
+      sel.appendChild(o);
+    });
+  }
+
+  return {$:$, store:store, S:S, rnd:rnd, pick:pick, shuffle:shuffle, Chips:Chips, Seg:Seg, RootPicker:RootPicker, Piano:Piano, Quiz:Quiz,
+          initClef:initClef, showTab:showTab, register:register, fillKeySelect:fillKeySelect, modules:modules};
+})();
+
+/* ---- ui_gam.js ---- */
+/* ===== Gamlar sekmesi ===== */
+var Gam = (function(){
+  var $ = App.$, st = {type:'major', idx:0}, cur = null, colNotes = [];
+  var MODE_INFO = {
+    dorian:'Doğal minöre benzer; yalnızca 6. derecesi yarım ses yüksektir.',
+    phrygian:'Doğal minöre benzer; 2. derecesi yarım ses alçaktır (1. ve 2. derece arası yarım ses).',
+    lydian:'Majöre benzer; 4. derecesi yarım ses yüksektir.',
+    mixo:'Majöre benzer; 7. derecesi yarım ses alçaktır.',
+    locrian:'Doğal minörden 2. ve 5. derecelerinin alçak olmasıyla ayrılır.',
+    whole:'Bütün aralıkları tam ses olan, 6 sesli gam.',
+    pentmaj:'Majör gamdan 4. ve 7. derece çıkarılarak elde edilen, 5 sesli gam.',
+    pentmin:'Doğal minör gamdan 2. ve 6. derece çıkarılarak elde edilen, 5 sesli gam.',
+    chrom:'Bütün aralıkları yarım ses olan, 12 sesli gam. Çıkışta diyezle yazılır, inişte bemolle (bemollü tonlarda iki yönde de bemolle).'
+  };
+  var ROMAN = ['I','II','III','IV','V','VI','VII','VIII'];
+
+  function tonicOf(i){ var t = T.scType(st.type), r = T.CIRCLE[i]; return t.minor ? T.REL_MINOR[r] : r; }
+  function btnLabel(i){ var t = T.scType(st.type); return T.nameSym(tonicOf(i)) + (t.minor ? 'm' : ''); }
+
+  function titleOf(sc){
+    var nm = T.nameOf(sc.tonic), id = sc.type.id;
+    if(id === 'major') return nm + ' Majör';
+    if(id === 'natural') return nm + ' Minör (doğal)';
+    if(id === 'harmonic') return nm + ' Minör (armonik)';
+    if(id === 'melodic') return nm + ' Minör (melodik)';
+    return nm + ' – ' + sc.type.name;
+  }
+  function ksText(sc){
+    var c = sc.ks;
+    if(c === 0) return 'Armürde diyez ya da bemol yok.';
+    var ks = T.ksLetters(c);
+    var names = ks.letters.map(function(l){ return T.SOLF[l] + (ks.kind === '#' ? '♯' : '♭'); }).join(', ');
+    return '<b>Armür:</b> ' + Math.abs(c) + ' ' + (c > 0 ? 'diyez' : 'bemol') + ' (' + names + ').';
+  }
+
+  function buildSelect(){
+    var sel = $('gam-type'), groups = {}, order = [];
+    T.SC.forEach(function(t){
+      if(!groups[t.grp]){ var og = document.createElement('optgroup'); og.label = t.grp; groups[t.grp] = og; order.push(og); }
+      var o = document.createElement('option'); o.value = t.id; o.textContent = t.name; groups[t.grp].appendChild(o);
+    });
+    order.forEach(function(og){ sel.appendChild(og); });
+    sel.value = st.type;
+    sel.addEventListener('change', function(){ st.type = sel.value; render(); });
+  }
+
+  function renderCircle(){
+    var wrap = $('circle-wrap');
+    Array.prototype.slice.call(wrap.querySelectorAll('.key-btn')).forEach(function(b){ b.remove(); });
+    var size = wrap.getBoundingClientRect().width || 300, radius = size*0.40;
+    for(var i=0;i<12;i++){
+      (function(i){
+        var a = (i*30 - 90) * Math.PI/180, b = document.createElement('button');
+        b.className = 'key-btn' + (i === st.idx ? ' selected' : '');
+        b.textContent = btnLabel(i);
+        b.style.left = (size/2 + radius*Math.cos(a)) + 'px'; b.style.top = (size/2 + radius*Math.sin(a)) + 'px';
+        b.addEventListener('click', function(){ st.idx = i; render(); });
+        wrap.appendChild(b);
+      })(i);
+    }
+    var row = $('gam-enh'); row.innerHTML = '<span>Enharmonik tonlar:</span>';
+    for(var j=12;j<15;j++){
+      (function(j){
+        var b = document.createElement('button'); b.className = 'chip' + (j === st.idx ? ' active' : '');
+        b.textContent = btnLabel(j);
+        b.addEventListener('click', function(){ st.idx = j; render(); });
+        row.appendChild(b);
+      })(j);
+    }
+  }
+
+  function playlist(dir){
+    var sc = cur, n = sc.asc.length, melodic = sc.type.id === 'melodic', out = [];
+    function descList(){
+      return sc.desc.map(function(x,i){ return {n:x, col: melodic ? (i === 0 ? n-1 : n-1+i) : n-1-i}; });
+    }
+    if(dir === 'asc') return sc.asc.map(function(x,i){ return {n:x, col:i}; });
+    return descList();
+  }
+  function flash(i){
+    Staff.highlight($('gam-staff'), i);
+    var cards = $('gam-cards').children;
+    for(var k=0;k<cards.length;k++) cards[k].classList.toggle('on', k === i);
+  }
+  function play(dir){
+    if(!cur) return;
+    var pl = playlist(dir);
+    Au.seq(pl.map(function(p){ return p.n; }), 0.5, function(i){
+      var col = pl[i].col; flash(col);
+      App.Piano.cur($('gam-piano'), pl[i].n);
+    }, function(){ flash(-1); App.Piano.cur($('gam-piano'), null); });
+  }
+
+  function render(){
+    renderCircle();
+    var t = T.scType(st.type), croot = T.CIRCLE[st.idx];
+    $('circle-big').textContent = btnLabel(st.idx);
+    var sc = T.scaleFor(st.type, croot, App.S.clef);
+    cur = sc;
+    var staffEl = $('gam-staff'), cards = $('gam-cards');
+    Au.stopAll();
+    if(!sc){
+      $('gam-title').textContent = T.nameOf(tonicOf(st.idx)) + ' – ' + t.name;
+      $('gam-meta').textContent = '';
+      staffEl.innerHTML = ''; cards.innerHTML = ''; $('gam-piano').innerHTML = '';
+      $('gam-info').innerHTML = 'Bu tonikte bu gam, üçlü diyez ya da bemol gerektirir ve yazılamaz. Başka bir tonik seç.';
+      return;
+    }
+    $('gam-title').textContent = titleOf(sc);
+    var cols = sc.asc.map(function(n){ return {notes:[n], label:T.solfShort(n)}; });
+    colNotes = sc.asc.slice();
+    if(t.id === 'melodic') sc.desc.slice(1).forEach(function(n){ cols.push({notes:[n], label:T.solfShort(n)}); colNotes.push(n); });
+    Staff.mount(staffEl, {clef:App.S.clef, ks:sc.ks, cols:cols, endBar:true}, function(i){
+      var n = colNotes[i]; Au.one(n, 0.9); Staff.highlight(staffEl, i); App.Piano.cur($('gam-piano'), n);
+      setTimeout(function(){ Staff.highlight(staffEl, -1); App.Piano.cur($('gam-piano'), null); }, 700);
+    });
+    /* meta */
+    var seq = sc.asc.map(T.label).join(' – ');
+    $('gam-meta').innerHTML = (sc.ks !== null && sc.ks !== undefined ? ksText(sc) + ' ' : '') + seq;
+    /* kartlar */
+    cards.innerHTML = '';
+    var diat = t.pat && t.pat.length === 7;
+    sc.asc.forEach(function(n,i){
+      var c = document.createElement('div'); c.className = 'note-card' + ((i === 0 || i === sc.asc.length-1) ? ' root' : '');
+      c.innerHTML = '<div class="dg">' + (diat ? ROMAN[i] : '') + '</div><div class="nn">' + T.label(n) + '</div><div class="sf">' + T.solf(n) + '</div>';
+      c.addEventListener('click', function(){ Au.one(n, 0.9); flash(i); App.Piano.cur($('gam-piano'), n); setTimeout(function(){ flash(-1); App.Piano.cur($('gam-piano'), null); }, 700); });
+      cards.appendChild(c);
+    });
+    App.Piano.show($('gam-piano'), sc.asc.concat(sc.type.id === 'melodic' ? sc.desc : []), sc.root);
+    /* bilgi */
+    var info = [];
+    if(t.ks){
+      info.push(ksText(sc));
+      if(t.id === 'major') info.push('<b>Relatifi:</b> ' + T.nameOf(T.REL_MINOR[croot]) + ' minör · <b>Paraleli:</b> ' + T.nameOf(croot) + ' minör');
+      else info.push('<b>Relatifi:</b> ' + T.nameOf(croot) + ' majör · <b>Paraleli:</b> ' + T.nameOf(sc.tonic) + ' majör');
+    }
+    info.push('<b>Aralık dizilimi:</b> ' + T.patternText(sc.asc) + ' (T = tam ses, Y = yarım ses' + (t.id === 'harmonic' ? '; 1½ = artık ikili' : '') + ')');
+    if(t.id === 'harmonic') info.push('Armonik minörde <b>7. derece</b> yarım ses yükseltilir; 6. ile 7. derece arası artık ikili olur.');
+    if(t.id === 'melodic') info.push('Melodik minörde çıkışta <b>6. ve 7. derece</b> yükseltilir; inişte doğal minör çalınır.');
+    if(MODE_INFO[t.id]) info.push(MODE_INFO[t.id]);
+    if(t.ks) info.push('Diyez sırası: Fa–Do–Sol–Re–La–Mi–Si. Bemol sırası: Si–Mi–La–Re–Sol–Do–Fa.');
+    $('gam-info').innerHTML = info.join('<br>');
+  }
+
+  function init(){
+    buildSelect();
+    $('gam-asc').addEventListener('click', function(){ play('asc'); });
+    $('gam-desc').addEventListener('click', function(){ play('desc'); });
+    $('gam-stop').addEventListener('click', function(){ Au.stopAll(); flash(-1); App.Piano.cur($('gam-piano'), null); });
+    window.addEventListener('resize', function(){ if(App.S.tab === 'gam') renderCircle(); });
+  }
+  App.register('gam', {show:render});
+  return {init:init, state:st};
+})();
+
+/* ---- ui_ara.js ---- */
+/* ===== Aralıklar sekmesi ===== */
+var Ara = (function(){
+  var $ = App.$, root = {l:'C', a:''}, num = 2, q = 'maj', numChips, qualChips, rootPicker, quiz = null, level = 1, testMode = 'ear', showAll = false, curIv = null;
+
+  var HINTS = {
+    '1perf':'Aynı ses: iki nota aynı perdededir (0 yarım ses).',
+    '2min':'En küçük aralık: yarım ses. Doğal notalarda Mi–Fa ve Si–Do küçük ikilidir; piyanoda bitişik iki tuştur.',
+    '2maj':'Bir tam ses (iki yarım ses). Doğal notalarda Mi–Fa ve Si–Do dışındaki bitişik notalar majör ikilidir.',
+    '3min':'Bir buçuk ses (3 yarım ses). Minör üçlü akorun tabanındaki aralıktır.',
+    '3maj':'İki ses (4 yarım ses). Majör üçlü akorun tabanındaki aralıktır.',
+    '4perf':'İki buçuk ses (5 yarım ses). Doğal notalarda Fa–Si dışındaki bütün dörtlüler tamdır.',
+    '4aug':'Üç tam ses olduğu için <b>triton</b> da denir (6 yarım ses). Doğal notalarda Fa–Si artık dörtlüdür.',
+    '5dim':'Artık dörtlünün ters yazılmış hâlidir (6 yarım ses). Doğal notalarda Si–Fa eksik beşlidir.',
+    '5perf':'Üç buçuk ses (7 yarım ses). Majör ve minör üçlü akorun dış aralığıdır. Doğal notalarda Si–Fa dışındaki bütün beşliler tamdır.',
+    '6min':'Dört ses (8 yarım ses).',
+    '6maj':'Dört buçuk ses (9 yarım ses).',
+    '7min':'Beş ses (10 yarım ses). Dominant yedili akorun üst aralığıdır.',
+    '7maj':'Beş buçuk ses (11 yarım ses): oktava yalnızca yarım ses eksiktir.',
+    '8perf':'Altı ses (12 yarım ses): aynı adlı notanın bir oktav üstü ya da altı.'
+  };
+  function hintFor(n,qq){
+    var h = HINTS[n + qq];
+    if(h) return h;
+    if(qq === 'aug') return 'Artık aralık: ' + (T.qualities(n).indexOf('perf') >= 0 ? 'tam' : 'majör') + ' aralığın yarım ses genişletilmiş hâlidir.';
+    if(qq === 'dim') return 'Eksik aralık: ' + (T.qualities(n).indexOf('perf') >= 0 ? 'tam' : 'minör') + ' aralığın yarım ses daraltılmış hâlidir.';
+    return '';
+  }
+  function tonesTxt(s){ return s % 2 === 0 ? String(s/2) : (Math.floor(s/2) ? Math.floor(s/2) : '') + '½'; }
+  function rootName(){ return root.l + root.a; }
+  function defaultQ(n){ return T.qualities(n).indexOf('perf') >= 0 ? 'perf' : 'maj'; }
+
+  function placed(clef){ return T.placeRoot(clef, rootName()); }
+
+  function ivStaffOpts(iv, clef){
+    return {clef:clef, ks:0,
+      cols:[{notes:[iv.low]},{notes:[iv.high]},{bar:true},{notes:[iv.low,iv.high]}],
+      captions:[{from:0,to:1,text:'melodik'},{from:3,to:3,text:'armonik'}], endBar:true};
+  }
+
+  function render(){
+    var ql = T.qualities(num);
+    if(ql.indexOf(q) < 0) q = defaultQ(num);
+    qualChips.rebuild(ql.map(function(id){ return {id:id, label:T.QUAL_TR[id]}; }), q);
+    numChips.set(num); rootPicker.set();
+    var iv = T.makeInterval(placed(App.S.clef), num, q);
+    curIv = iv;
+    var title = $('ara-title'), staffEl = $('ara-staff');
+    Au.stopAll();
+    if(!iv){
+      title.textContent = T.ivNameCap(num,q);
+      $('ara-meta').textContent = '';
+      staffEl.innerHTML = ''; $('ara-piano').innerHTML = '';
+      $('ara-hint').innerHTML = 'Bu kökten bu aralık, üçlü diyez ya da bemol gerektirir ve yazılamaz. Başka bir alt nota seç.';
+      return;
+    }
+    var alt = T.ivAlt(num,q);
+    title.innerHTML = T.ivNameCap(num,q) + '<span class="pill">' + T.ivAbbr(num,q) + '</span>';
+    $('ara-meta').innerHTML = '<b>' + T.label(iv.low) + ' → ' + T.label(iv.high) + '</b> · ' + T.semisText(iv.semis) + '<br>Solfej: ' + T.solf(iv.low) + ' – ' + T.solf(iv.high) + (alt ? '<br>' + alt : '');
+    Staff.mount(staffEl, ivStaffOpts(iv, App.S.clef), function(i){
+      if(i === 0) Au.one(iv.low, 0.9); else if(i === 1) Au.one(iv.high, 0.9); else Au.chord([iv.low,iv.high], 1.4);
+      Staff.highlight(staffEl, i); setTimeout(function(){ Staff.highlight(staffEl, -1); }, 800);
+    });
+    App.Piano.show($('ara-piano'), [iv.low, iv.high], iv.low);
+    $('ara-hint').innerHTML = hintFor(num,q);
+  }
+
+  function playMel(){
+    if(!curIv) return;
+    var el = $('ara-staff');
+    Au.seq([curIv.low, curIv.high], 0.7, function(i){ Staff.highlight(el, i); App.Piano.cur($('ara-piano'), i === 0 ? curIv.low : curIv.high); },
+      function(){ Staff.highlight(el, -1); App.Piano.cur($('ara-piano'), null); });
+  }
+  function playHarm(){
+    if(!curIv) return;
+    var el = $('ara-staff'); Au.stopAll(); Au.chord([curIv.low, curIv.high], 1.5);
+    Staff.highlight(el, 2); Au.later(function(){ Staff.highlight(el, -1); }, 1500);
+  }
+
+  /* ---- cetvel ---- */
+  function renderTable(){
+    var rows = [];
+    if(showAll){ for(var n=1;n<=8;n++) T.qualities(n).forEach(function(qq){ rows.push([n,qq]); }); }
+    else rows = T.BASIC;
+    var base = placed('G');
+    var h = '<tr><th>Aralık</th><th>Yarım ses</th><th>Ses</th><th>' + T.label(T.N(root.l,root.a,4)) + ' üzerinde</th></tr>';
+    rows.forEach(function(r){
+      var iv = T.makeInterval(base, r[0], r[1]);
+      var alt = T.ivAlt(r[0], r[1]);
+      var s = T.ivSemis(r[0], r[1]);
+      h += '<tr class="rowbtn" data-n="' + r[0] + '" data-q="' + r[1] + '"><td><span class="nm">' + T.ivNameCap(r[0], r[1]) + '</span><br><span class="ab">' + T.ivAbbr(r[0], r[1]) + (alt ? ' · ' + alt : '') + '</span></td><td>' + s + '</td><td>' + tonesTxt(s) + '</td><td class="ex">' + (iv ? T.label(iv.low) + '–' + T.label(iv.high) : '—') + '</td></tr>';
+    });
+    $('ara-table').innerHTML = h;
+    var trs = $('ara-table').querySelectorAll('tr.rowbtn');
+    for(var i=0;i<trs.length;i++) trs[i].addEventListener('click', function(){
+      num = parseInt(this.getAttribute('data-n'),10); q = this.getAttribute('data-q');
+      subPanel('kesfet'); var bs = $('ara-seg').querySelectorAll('button'); for(var k=0;k<bs.length;k++) bs[k].classList.toggle('active', bs[k].getAttribute('data-p') === 'kesfet');
+    });
+  }
+
+  /* ---- test ---- */
+  var POOL = {
+    1: [[2,'min'],[2,'maj'],[3,'min'],[3,'maj']],
+    2: [[2,'min'],[2,'maj'],[3,'min'],[3,'maj'],[4,'perf'],[5,'perf'],[6,'min'],[6,'maj'],[7,'min'],[7,'maj'],[8,'perf']],
+    3: null
+  };
+  POOL[3] = T.BASIC.concat([[2,'aug'],[3,'dim'],[3,'aug'],[4,'dim'],[5,'aug'],[6,'aug'],[7,'dim']]);
+  function genQuestion(){
+    var pool = POOL[level], clef = testMode === 'ear' ? 'G' : App.S.clef, iv = null, tries = 0;
+    while(!iv && tries++ < 80){
+      var l = App.pick(T.L), a = level === 1 ? '' : App.pick(['','','#','b']);
+      var pr = App.pick(pool);
+      var cand = T.makeInterval(T.placeRoot(clef, l + a), pr[0], pr[1]);
+      if(!cand) continue;
+      if(level < 3 && (cand.high.a === 'x' || cand.high.a === 'bb')) continue;
+      if(cand.high.a === 'x' || cand.high.a === 'bb' || cand.low.a === 'x' || cand.low.a === 'bb') continue;
+      iv = cand;
+    }
+    var ans = iv.num + iv.q, opts;
+    if(level === 1) opts = pool.slice();
+    else {
+      var others = App.shuffle(pool.filter(function(p){ return (p[0] + p[1]) !== ans; })).slice(0,5);
+      opts = others.concat([[iv.num, iv.q]]);
+    }
+    opts.sort(function(a,b){ return T.ivSemis(a[0],a[1]) - T.ivSemis(b[0],b[1]) || a[0] - b[0]; });
+    var q0 = {
+      options: opts.map(function(p){ return {id:p[0] + p[1], label:T.ivNameCap(p[0], p[1])}; }),
+      answer: ans,
+      explain: T.ivNameCap(iv.num, iv.q) + ' (' + T.label(iv.low) + '–' + T.label(iv.high) + ', ' + T.semisText(iv.semis) + ')',
+      prompt: testMode === 'ear' ? 'Çalınan aralığın adını bul. Önce ardışık, sonra birlikte çalınır.' : 'Portedeki aralığın adını bul. (Yarım ses sayısını sayarak bulabilirsin.)'
+    };
+    if(testMode === 'ear'){
+      q0.play = function(){
+        Au.seq([iv.low, iv.high], 0.7);
+        Au.later(function(){ Au.chord([iv.low, iv.high], 1.4); }, 1700);
+      };
+      q0.playLabel = '🔊 Aralığı çal';
+    } else {
+      q0.staffOpts = function(){ return ivStaffOpts(iv, App.S.clef); };
+      q0.play = function(){ Au.seq([iv.low, iv.high], 0.7); Au.later(function(){ Au.chord([iv.low, iv.high], 1.2); }, 1700); };
+      q0.playLabel = '🔊 Dinle';
+    }
+    return q0;
+  }
+  function newQuiz(){
+    quiz = App.Quiz($('ara-quiz'), 'ara_' + testMode + '_' + level, {next:genQuestion});
+    quiz.start(false);
+  }
+
+  function subPanel(p){
+    $('ara-kesfet').classList.toggle('hidden', p !== 'kesfet');
+    $('ara-cetvel').classList.toggle('hidden', p !== 'cetvel');
+    $('ara-test').classList.toggle('hidden', p !== 'test');
+    Au.stopAll();
+    if(p === 'kesfet') render();
+    if(p === 'cetvel') renderTable();
+    if(p === 'test') newQuiz();
+  }
+  function curSub(){
+    if(!$('ara-cetvel').classList.contains('hidden')) return 'cetvel';
+    if(!$('ara-test').classList.contains('hidden')) return 'test';
+    return 'kesfet';
+  }
+
+  function init(){
+    rootPicker = App.RootPicker($('ara-root'), root, function(){ render(); });
+    numChips = App.Chips($('ara-num'), [1,2,3,4,5,6,7,8].map(function(n){ return {id:n, label:T.NUM_TR[n].charAt(0).toLocaleUpperCase('tr') + T.NUM_TR[n].slice(1)}; }), num, function(n){ num = n; render(); });
+    qualChips = App.Chips($('ara-qual'), [], q, function(id){ q = id; render(); });
+    $('ara-mel').addEventListener('click', playMel);
+    $('ara-harm').addEventListener('click', playHarm);
+    $('ara-rand').addEventListener('click', function(){
+      var pr = App.pick(T.BASIC); num = pr[0]; q = pr[1];
+      root.l = App.pick(T.L); root.a = App.pick(['','','','#','b']);
+      render();
+    });
+    $('ara-allq').addEventListener('change', function(){ showAll = this.checked; renderTable(); });
+    App.Seg($('ara-seg'), subPanel);
+    App.Seg($('ara-test-mode'), function(m){ testMode = m; newQuiz(); });
+    App.Chips($('ara-level'), [{id:1,label:"Başlangıç (2'li, 3'lü)"},{id:2,label:'Temel (majör, minör, tam)'},{id:3,label:'İleri (artık, eksik dahil)'}], level, function(l){ level = l; newQuiz(); });
+  }
+  App.register('ara', {show:function(){
+    var s = curSub();
+    if(s === 'kesfet') render();
+    else if(s === 'cetvel') renderTable();
+    else if(testMode === 'staff') { if(quiz) quiz.start(false); } else if(quiz) quiz.redraw();
+  }});
+  return {init:init};
+})();
+
+/* ---- ui_akor.js ---- */
+/* ===== Akorlar sekmesi ===== */
+var Akor = (function(){
+  var $ = App.$, root = {l:'C', a:''}, type = 'maj', inv = 0, triChips, sevChips, invChips, rootPicker, curNotes = [], base = null;
+  var dg = {type:'major', idx:0, sev:false}, dgChords = [], dgScale = null;
+  var quiz = null, qLevel = 1, qMode = 'ear';
+  var CHORD_HINT = {
+    maj:"Majör üçlü: kök, büyük 3'lü ve tam 5'li. Parlak ve açık bir sesi vardır.",
+    min:"Minör üçlü: kök, küçük 3'lü ve tam 5'li. Daha durgun ve hüzünlü bir sesi vardır.",
+    dim:"Eksik üçlü: iki küçük 3'lüden oluşur; kök ile 5. ses arası eksik 5'lidir. Gergin bir sesi vardır. Majör gamın 7., minör gamın 2. derecesi üzerinde kurulur.",
+    aug:"Artık üçlü: iki büyük 3'lüden oluşur; kök ile 5. ses arası artık 5'lidir. Armonik minör gamın 3. derecesi üzerinde kurulur.",
+    maj7:"Majör yedili akor: majör üçlü + büyük 7'li. Majör gamın 1. ve 4. derecelerinde kurulur.",
+    dom7:"Dominant yedili akor: majör üçlü + küçük 7'li. Majör ve armonik minör gamın 5. derecesinde (dominant) kurulur.",
+    min7:"Minör yedili akor: minör üçlü + küçük 7'li. Majör gamın 2., 3. ve 6. derecelerinde kurulur.",
+    hdim7:"Yarı eksik yedili akor: eksik üçlü + küçük 7'li. Majör gamın 7. derecesinde kurulur.",
+    dim7:"Eksik yedili akor: eksik üçlü + eksik 7'li; üç küçük 3'lünün üst üste gelmesiyle oluşur. Armonik minör gamın 7. derecesinde kurulur.",
+    mmaj7:"Minör-majör yedili akor: minör üçlü + büyük 7'li. Armonik ve melodik minör gamın 1. derecesinde kurulur."
+  };
+  var THIRD = {2:"eksik 3'lü", 3:"küçük 3'lü", 4:"büyük 3'lü", 5:"artık 3'lü"};
+  function isSev(t){ return T.CH[t].iv.length === 3; }
+  function rootName(){ return root.l + root.a; }
+  function structure(t){
+    var iv = [0].concat(T.CH[t].iv), out = [];
+    for(var i=1;i<iv.length;i++) out.push(THIRD[iv[i] - iv[i-1]] || (iv[i]-iv[i-1]) + ' yarım ses');
+    return out.join(' + ');
+  }
+  function chordTitle(r, t){ return T.nameOf(r) + ' ' + T.CH[t].short + ' akor'; }
+
+  /* ---- Akor kur ---- */
+  function render(){
+    var maxInv = isSev(type) ? 3 : 2;
+    if(inv > maxInv) inv = 0;
+    invChips.rebuild((isSev(type) ? T.INV_SEV : T.INV_TRIAD).map(function(n,i){ return {id:i, label:n.split(' (')[0], sub:(n.match(/\((.*)\)/) || [])[1]}; }), inv);
+    var inTri = T.TRIADS.indexOf(type) >= 0;
+    triChips.set(inTri ? type : null); sevChips.set(inTri ? null : type);
+    rootPicker.set();
+    base = T.placeRoot(App.S.clef, rootName());
+    var notes = T.chordNotes(base, type);
+    var staffEl = $('akor-staff');
+    Au.stopAll();
+    if(!notes){
+      $('akor-title').textContent = chordTitle(rootName(), type); $('akor-meta').textContent = '';
+      staffEl.innerHTML = ''; $('akor-piano').innerHTML = '';
+      $('akor-hint').innerHTML = 'Bu kökten bu akor, üçlü diyez ya da bemol gerektirir ve yazılamaz. Başka bir kök seç.';
+      curNotes = []; return;
+    }
+    curNotes = T.invert(notes, inv);
+    var sym = T.chordSymbol(base, type), lab = T.label;
+    $('akor-title').textContent = chordTitle(rootName(), type);
+    $('akor-meta').innerHTML = '<b>' + sym + '</b> · ' + T.CH[type].name + '<br>Sesler (kök durumda): ' + notes.map(lab).join(' – ') + '<br>Solfej: ' + notes.map(T.solf).join(' – ') +
+      '<br>Yapı: ' + structure(type) + '<br>' + (isSev(type) ? T.INV_SEV : T.INV_TRIAD)[inv] + (inv ? ' · bas ses: ' + lab(curNotes[0]) : '');
+    Staff.mount(staffEl, {clef:App.S.clef, ks:0, cols:[{notes:curNotes, label:sym}], endBar:true, minCol:60}, function(){
+      Au.chord(curNotes, 1.6); Staff.highlight(staffEl, 0); Au.later(function(){ Staff.highlight(staffEl, -1); }, 1400);
+    });
+    App.Piano.show($('akor-piano'), curNotes, base);
+    $('akor-hint').innerHTML = CHORD_HINT[type];
+  }
+  function playBlock(){
+    if(!curNotes.length) return; var el = $('akor-staff'); Au.stopAll(); Au.chord(curNotes, 1.8);
+    Staff.highlight(el, 0); Au.later(function(){ Staff.highlight(el, -1); }, 1600);
+  }
+  function playArp(down){
+    if(!curNotes.length) return;
+    var ns = down ? curNotes.slice().reverse() : curNotes;
+    Au.seq(ns, 0.5, function(i){ App.Piano.cur($('akor-piano'), ns[i]); }, function(){ App.Piano.cur($('akor-piano'), null); });
+  }
+
+  /* ---- Derece akorları ---- */
+  function dgTitle(sc){
+    var nm = T.nameOf(sc.tonic);
+    return sc.type.id === 'major' ? nm + ' Majör' : nm + ' Minör (' + (sc.type.id === 'natural' ? 'doğal' : 'armonik') + ')';
+  }
+  function renderDg(){
+    var minor = dg.type !== 'major', sel = $('dg-key');
+    if(sel.getAttribute('data-minor') !== String(minor)){ App.fillKeySelect(sel, minor); sel.setAttribute('data-minor', String(minor)); }
+    sel.value = dg.idx;
+    var sc = T.scaleFor(dg.type, T.CIRCLE[dg.idx], App.S.clef);
+    dgScale = sc; Au.stopAll();
+    if(!sc){ $('dg-title').textContent = ''; $('dg-staff').innerHTML = ''; $('dg-table').innerHTML = ''; return; }
+    dgChords = T.degreeChords(sc.asc, dg.sev);
+    $('dg-title').textContent = dgTitle(sc);
+    var staffEl = $('dg-staff');
+    Staff.mount(staffEl, {clef:App.S.clef, ks:sc.ks, cols:dgChords.map(function(d){ return {notes:d.notes, label:T.roman(d)}; }), endBar:true, minCol:44}, function(i){
+      playChord(i);
+    });
+    var h = '<tr><th>Derece</th><th>Akor</th><th>Görevi</th></tr>';
+    dgChords.forEach(function(d,i){
+      h += '<tr class="rowbtn" data-i="' + i + '"><td><span class="nm">' + T.roman(d) + '</span></td><td><span class="nm">' + (d.type ? T.chordSymbol(d.root, d.type) : T.label(d.root)) + '</span><br><span class="ab">' + (d.type ? T.solf(d.root) + ' ' + T.CH[d.type].short : '') + '</span></td><td>' + d.info[1] + '</td></tr>';
+    });
+    $('dg-table').innerHTML = h;
+    var trs = $('dg-table').querySelectorAll('tr.rowbtn');
+    for(var k=0;k<trs.length;k++) trs[k].addEventListener('click', function(){ playChord(parseInt(this.getAttribute('data-i'),10)); });
+  }
+  function playChord(i){
+    var d = dgChords[i]; if(!d) return;
+    Au.stopAll(); Au.chord(d.notes, 1.3);
+    var el = $('dg-staff'); Staff.highlight(el, i); Au.later(function(){ Staff.highlight(el, -1); }, 1200);
+  }
+  function playSeq(list){
+    Au.stopAll(); var el = $('dg-staff');
+    list.forEach(function(i,k){
+      Au.later(function(){ var d = dgChords[i]; Au.chord(d.notes, 1.05); Staff.highlight(el, i); }, k*1100);
+    });
+    Au.later(function(){ Staff.highlight(el, -1); }, list.length*1100);
+  }
+
+  /* ---- Test ---- */
+  var QPOOL = {1:['maj','min'], 2:['maj','min','dim','aug'], 3:['maj7','dom7','min7','hdim7','dim7']};
+  function genQ(){
+    var clef = qMode === 'ear' ? 'G' : App.S.clef, pool = QPOOL[qLevel], notes = null, base0 = null, t = null, tries = 0;
+    while(!notes && tries++ < 80){
+      var l = App.pick(T.L), a = qLevel === 1 ? '' : App.pick(['','','#','b']);
+      t = App.pick(pool); base0 = T.placeRoot(clef, l + a);
+      var cand = T.chordNotes(base0, t);
+      if(!cand) continue;
+      var bad = cand.some(function(n){ return n.a === 'x' || n.a === 'bb'; });
+      if(bad) continue;
+      notes = cand;
+    }
+    var q0 = {
+      options: pool.map(function(k){ return {id:k, label:T.CH[k].name}; }), answer: t,
+      explain: T.chordSymbol(base0, t) + ' – ' + T.CH[t].name + ' (' + notes.map(T.label).join(' – ') + ')',
+      prompt: qMode === 'ear' ? 'Çalınan akorun türünü bul. Önce arpej, sonra birlikte çalınır.' : 'Portedeki akorun türünü bul.'
+    };
+    q0.play = function(){ Au.seq(notes, 0.38); Au.later(function(){ Au.chord(notes, 1.5); }, notes.length*380 + 500); };
+    q0.playLabel = qMode === 'ear' ? '🔊 Akoru çal' : '🔊 Dinle';
+    if(qMode === 'staff') q0.staffOpts = function(){ return {clef:App.S.clef, ks:0, cols:[{notes:notes}], endBar:true, minCol:60}; };
+    return q0;
+  }
+  function newQuiz(){ quiz = App.Quiz($('akor-quiz'), 'akor_' + qMode + '_' + qLevel, {next:genQ}); quiz.start(false); }
+
+  function subPanel(p){
+    $('akor-kur').classList.toggle('hidden', p !== 'kur');
+    $('akor-derece').classList.toggle('hidden', p !== 'derece');
+    $('akor-test').classList.toggle('hidden', p !== 'test');
+    Au.stopAll();
+    if(p === 'kur') render(); else if(p === 'derece') renderDg(); else newQuiz();
+  }
+  function curSub(){
+    if(!$('akor-derece').classList.contains('hidden')) return 'derece';
+    if(!$('akor-test').classList.contains('hidden')) return 'test';
+    return 'kur';
+  }
+
+  function init(){
+    rootPicker = App.RootPicker($('akor-root'), root, render);
+    triChips = App.Chips($('akor-tri'), T.TRIADS.map(function(k){ return {id:k, label:T.CH[k].name, sub:T.CH[k].sym || 'M'}; }), type, function(k){ type = k; render(); });
+    sevChips = App.Chips($('akor-sev'), T.SEVENTHS.map(function(k){ return {id:k, label:T.CH[k].name.replace(' akor',''), sub:T.CH[k].sym}; }), null, function(k){ type = k; render(); });
+    invChips = App.Chips($('akor-inv'), [], inv, function(i){ inv = i; render(); });
+    $('akor-block').addEventListener('click', playBlock);
+    $('akor-up').addEventListener('click', function(){ playArp(false); });
+    $('akor-down').addEventListener('click', function(){ playArp(true); });
+    App.Seg($('akor-seg'), subPanel);
+
+    $('dg-type').addEventListener('change', function(){ dg.type = this.value; renderDg(); });
+    $('dg-key').addEventListener('change', function(){ dg.idx = parseInt(this.value,10); renderDg(); });
+    $('dg-sev').addEventListener('change', function(){ dg.sev = this.checked; renderDg(); });
+    $('dg-all').addEventListener('click', function(){ playSeq([0,1,2,3,4,5,6]); });
+    $('dg-cad').addEventListener('click', function(){ playSeq([0,3,4,0]); });
+    $('dg-stop').addEventListener('click', function(){ Au.stopAll(); Staff.highlight($('dg-staff'), -1); });
+
+    App.Seg($('akor-test-mode'), function(m){ qMode = m; newQuiz(); });
+    App.Chips($('akor-level'), [{id:1,label:'Başlangıç (majör, minör)'},{id:2,label:'Temel (+ eksik, artık)'},{id:3,label:'İleri (yedili akorlar)'}], qLevel, function(l){ qLevel = l; newQuiz(); });
+  }
+  App.register('akor', {show:function(){
+    var s = curSub();
+    if(s === 'kur') render(); else if(s === 'derece') renderDg();
+    else if(qMode === 'staff'){ if(quiz) quiz.start(false); } else if(quiz) quiz.redraw();
+  }});
+  return {init:init};
+})();
+
+/* ---- ui_solfej.js ---- */
+/* ===== Solfej sekmesi ===== */
+var Sol = (function(){
+  var $ = App.$;
+  var so = {type:'major', idx:0, bpm:90, dir:'asc', sound:true, hide:false}, soScale = null, soCols = [], playing = false, tempoChips, dirChips;
+  var ok = {range:'in', acc:false, mix:false}, okQuiz = null;
+  var du = {type:'major', idx:0}, duQuiz = null;
+
+  function title(sc){
+    var nm = T.nameOf(sc.tonic), id = sc.type.id;
+    return id === 'major' ? nm + ' Majör' : nm + ' Minör (' + (id === 'natural' ? 'doğal' : id === 'harmonic' ? 'armonik' : 'melodik') + ')';
+  }
+  function isMinor(t){ return t !== 'major'; }
+  function refillKeys(sel, type, idx){
+    var minor = isMinor(type);
+    if(sel.getAttribute('data-minor') !== String(minor)){ App.fillKeySelect(sel, minor); sel.setAttribute('data-minor', String(minor)); }
+    sel.value = idx;
+  }
+
+  /* ---- Solfej söyle ---- */
+  function renderSo(){
+    refillKeys($('so-key'), so.type, so.idx);
+    var sc = T.scaleFor(so.type, T.CIRCLE[so.idx], App.S.clef);
+    soScale = sc; Au.stopAll(); setPlaying(false);
+    $('so-now').innerHTML = '&nbsp;';
+    if(!sc){ $('so-staff').innerHTML = ''; $('so-title').textContent = ''; return; }
+    $('so-title').textContent = title(sc);
+    var cols = sc.asc.map(function(n){ return {notes:[n], label: so.hide ? '' : T.solfShort(n)}; });
+    soCols = sc.asc.slice();
+    if(so.type === 'melodic') sc.desc.slice(1).forEach(function(n){ cols.push({notes:[n], label: so.hide ? '' : T.solfShort(n)}); soCols.push(n); });
+    Staff.mount($('so-staff'), {clef:App.S.clef, ks:sc.ks, cols:cols, endBar:true}, function(i){
+      Au.one(soCols[i], 0.9); Staff.highlight($('so-staff'), i); setTimeout(function(){ Staff.highlight($('so-staff'), -1); }, 700);
+    });
+  }
+  function setPlaying(p){ playing = p; $('so-play').textContent = p ? '■ Durdur' : '▶ Başlat'; }
+  function soList(){
+    var sc = soScale, n = sc.asc.length, melodic = so.type === 'melodic';
+    var up = sc.asc.map(function(x,i){ return {n:x, col:i}; });
+    var down = sc.desc.map(function(x,i){ return {n:x, col: melodic ? (i === 0 ? n-1 : n-1+i) : n-1-i}; });
+    if(so.dir === 'asc') return up;
+    if(so.dir === 'desc') return down;
+    return up.concat(down.slice(1));
+  }
+  function soStart(){
+    if(!soScale) return;
+    if(playing){ Au.stopAll(); Staff.highlight($('so-staff'), -1); $('so-now').innerHTML = '&nbsp;'; setPlaying(false); return; }
+    var list = soList(); setPlaying(true);
+    Au.seq(list.map(function(p){ return p.n; }), 60/so.bpm, function(i){
+      Staff.highlight($('so-staff'), list[i].col);
+      $('so-now').innerHTML = so.hide ? '♪' : T.solfShort(list[i].n) + '<small>' + T.solf(list[i].n) + '</small>';
+    }, function(){
+      Staff.highlight($('so-staff'), -1); $('so-now').innerHTML = '&nbsp;'; setPlaying(false);
+    }, {silent: !so.sound});
+  }
+
+  /* ---- Nota okuma ---- */
+  var NO_SHARP = {E:1, B:1}, NO_FLAT = {C:1, F:1};
+  function genRead(){
+    var cid = ok.mix ? App.pick(T.CLEF_IDS) : App.S.clef;
+    var lo = ok.range === 'in' ? 0 : -4, hi = ok.range === 'in' ? 8 : 12;
+    var p = lo + App.rnd(hi - lo + 1), stp = T.CLEFS[cid].bottom + p;
+    var l = T.L[stp % 7], o = Math.floor(stp / 7), a = '';
+    if(ok.acc && App.rnd(100) < 45){
+      var cand = [];
+      if(!NO_SHARP[l]) cand.push('#'); if(!NO_FLAT[l]) cand.push('b');
+      if(cand.length) a = App.pick(cand);
+    }
+    var n = T.N(l,a,o), opts, ans = l + a;
+    if(!ok.acc) opts = T.L.map(function(x){ return {id:x, label:T.SOLF[x]}; });
+    else {
+      var li = T.L.indexOf(l), set = {}, list = [];
+      function add(ll,aa){ var id = ll + aa; if(!set[id] && !(aa === '#' && NO_SHARP[ll]) && !(aa === 'b' && NO_FLAT[ll])){ set[id] = 1; list.push({id:id, l:ll, a:aa}); } }
+      add(l,a); add(l,''); add(l,'#'); add(l,'b');
+      add(T.L[(li+1)%7],a); add(T.L[(li+6)%7],a); add(T.L[(li+1)%7],''); add(T.L[(li+6)%7],'');
+      var rest = App.shuffle(list.filter(function(x){ return x.id !== ans; })).slice(0,5);
+      var chosen = rest.concat(list.filter(function(x){ return x.id === ans; }));
+      chosen.sort(function(x,y){ return T.L.indexOf(x.l) - T.L.indexOf(y.l) || T.ACC_V[x.a] - T.ACC_V[y.a]; });
+      opts = chosen.map(function(x){ return {id:x.id, label:T.solfShort(T.N(x.l,x.a,4))}; });
+    }
+    return {
+      options:opts, answer:ans, prompt:'Notanın adını söyle: ' + T.CLEFS[cid].name + '.',
+      explain:T.solf(n) + ' (' + T.label(n) + ') — ' + T.CLEFS[cid].name,
+      play:function(){ Au.one(n, 1.0); }, playLabel:'🔊 Notayı dinle',
+      staffOpts:function(){ return {clef:cid, ks:0, cols:[{notes:[n]}], style:'quarter', minCol:70, endBar:true}; }
+    };
+  }
+  function newRead(){ okQuiz = App.Quiz($('ok-quiz'), 'ok_' + ok.range + (ok.acc ? 'a' : ''), {next:genRead}); okQuiz.start(false); }
+
+  /* ---- Duyarak tanı ---- */
+  function genEar(){
+    var sc = T.scaleFor(du.type, T.CIRCLE[du.idx], 'G'), notes = sc.asc.slice(0,7), n = App.pick(notes), tonic = notes[0];
+    return {
+      options:notes.map(function(x){ return {id:T.label(x), label:T.solfShort(x)}; }), answer:T.label(n),
+      prompt:title(sc) + ': önce tonik, sonra soru notası çalınır.',
+      explain:T.solf(n) + ' (' + T.label(n) + ')',
+      play:function(){ Au.seq([tonic, n], 0.85); }, playLabel:'🔊 Çal (tonik, sonra nota)'
+    };
+  }
+  function newEar(){
+    refillKeys($('du-key'), du.type, du.idx);
+    duQuiz = App.Quiz($('du-quiz'), 'du_' + du.type, {next:genEar}); duQuiz.start(false);
+  }
+
+  function subPanel(p){
+    $('sol-soyle').classList.toggle('hidden', p !== 'soyle');
+    $('sol-oku').classList.toggle('hidden', p !== 'oku');
+    $('sol-duy').classList.toggle('hidden', p !== 'duy');
+    Au.stopAll(); setPlaying(false);
+    if(p === 'soyle') renderSo(); else if(p === 'oku') newRead(); else newEar();
+  }
+  function curSub(){
+    if(!$('sol-oku').classList.contains('hidden')) return 'oku';
+    if(!$('sol-duy').classList.contains('hidden')) return 'duy';
+    return 'soyle';
+  }
+
+  function init(){
+    App.Seg($('sol-seg'), subPanel);
+    $('so-type').addEventListener('change', function(){ so.type = this.value; renderSo(); });
+    $('so-key').addEventListener('change', function(){ so.idx = parseInt(this.value,10); renderSo(); });
+    tempoChips = App.Chips($('so-tempo'), [{id:60,label:'Yavaş',sub:'60'},{id:90,label:'Orta',sub:'90'},{id:120,label:'Hızlı',sub:'120'},{id:150,label:'Çok hızlı',sub:'150'}], so.bpm, function(b){ so.bpm = b; });
+    dirChips = App.Chips($('so-dir'), [{id:'asc',label:'Çıkış'},{id:'desc',label:'İniş'},{id:'both',label:'Çıkış ve iniş'}], so.dir, function(d){ so.dir = d; });
+    $('so-sound').addEventListener('change', function(){ so.sound = this.checked; });
+    $('so-hide').addEventListener('change', function(){ so.hide = this.checked; renderSo(); });
+    $('so-play').addEventListener('click', soStart);
+    $('so-stop').addEventListener('click', function(){ if(playing) soStart(); });
+
+    App.Chips($('ok-range'), [{id:'in',label:'Porte içi'},{id:'ext',label:'Ek çizgiler dahil'}], ok.range, function(r){ ok.range = r; newRead(); });
+    $('ok-acc').addEventListener('change', function(){ ok.acc = this.checked; newRead(); });
+    $('ok-mix').addEventListener('change', function(){ ok.mix = this.checked; newRead(); });
+
+    $('du-type').addEventListener('change', function(){ du.type = this.value; newEar(); });
+    $('du-key').addEventListener('change', function(){ du.idx = parseInt(this.value,10); newEar(); });
+  }
+  App.register('solfej', {show:function(){
+    var s = curSub();
+    if(s === 'soyle') renderSo();
+    else if(s === 'oku'){ if(okQuiz) okQuiz.start(false); else newRead(); }
+    else { refillKeys($('du-key'), du.type, du.idx); if(!duQuiz) newEar(); else duQuiz.redraw(); }
+  }});
+  return {init:init};
+})();
+
+/* ---- ui_ritim.js ---- */
+/* ===== Ritim sekmesi ===== */
+var Ritim = (function(){
+  var $ = App.$;
+  var VALUES = [
+    {name:'Birlik', n:'n1', r:'r1', beats:'4 vuruş', seg:1},
+    {name:'İkilik', n:'n2', r:'r2', beats:'2 vuruş', seg:2},
+    {name:'Dörtlük', n:'n4', r:'r4', beats:'1 vuruş', seg:4},
+    {name:'Sekizlik', n:'n8', r:'r8', beats:'½ vuruş', seg:8},
+    {name:'Onaltılık', n:'n16', r:'r16', beats:'¼ vuruş', seg:16},
+    {name:'Otuzikilik', n:'n32', r:'r32', beats:'⅛ vuruş', seg:32}
+  ];
+  var TS = [
+    {t:['2','4'], name:'İkili ölçü (basit)', pat:'Kuvvetli – zayıf', acc:[2,1]},
+    {t:['3','4'], name:'Üçlü ölçü (basit)', pat:'Kuvvetli – zayıf – zayıf', acc:[2,1,1]},
+    {t:['4','4'], name:'Dörtlü ölçü (basit)', pat:'Kuvvetli – zayıf – yarı kuvvetli – zayıf', acc:[2,1,1.5,1]},
+    {t:['2','2'], name:'İkilik ölçü (basit)', pat:'Kuvvetli – zayıf; vuruş birimi ikilik', acc:[2,1]},
+    {t:['3','8'], name:'Üç sekizlik ölçü (basit)', pat:'Kuvvetli – zayıf – zayıf', acc:[2,1,1]},
+    {t:['6','8'], name:'Bileşik ikili ölçü', pat:'2 vuruş; her vuruş 3 sekizlik (1 2 3 – 4 5 6)', acc:[2,1,1,1.5,1,1]},
+    {t:['9','8'], name:'Bileşik üçlü ölçü', pat:'3 vuruş; her vuruş 3 sekizlik', acc:[2,1,1,1.5,1,1,1.5,1,1]},
+    {t:['12','8'], name:'Bileşik dörtlü ölçü', pat:'4 vuruş; her vuruş 3 sekizlik', acc:[2,1,1,1.5,1,1,1.5,1,1,1.5,1,1]},
+    {t:['5','8'], name:'Aksak ölçü 5/8 (2+3)', pat:'1 2 – 3 4 5', acc:[2,1,1.5,1,1]},
+    {t:['7','8'], name:'Aksak ölçü 7/8 (3+2+2)', pat:'1 2 3 – 4 5 – 6 7', acc:[2,1,1,1.5,1,1.5,1]},
+    {t:['9','8'], name:'Aksak ölçü 9/8 (2+2+2+3)', pat:'1 2 – 3 4 – 5 6 – 7 8 9', acc:[2,1,1.5,1,1.5,1,1.5,1,1]}
+  ];
+  var mt = {bpm:80, ts:2, running:false, iv:null, next:0, beat:0};
+
+  function tempoName(b){
+    return b < 60 ? 'Largo' : b < 66 ? 'Larghetto' : b < 76 ? 'Adagio' : b < 108 ? 'Andante' : b < 120 ? 'Moderato' : b < 156 ? 'Allegro' : b < 168 ? 'Vivace' : 'Presto';
+  }
+  function tsBox(t){ return '<div class="ts"><span>' + t[0] + '</span><span>' + t[1] + '</span></div>'; }
+
+  function renderValues(){
+    var h = '';
+    VALUES.forEach(function(v){
+      var segs = ''; for(var i=0;i<v.seg;i++) segs += '<i></i>';
+      h += '<div class="rv-row"><div>' + Staff.icon(v.n, 34, 44) + '</div><div><div class="rv-name">' + v.name + ' nota</div><div class="rv-sub">' + v.beats + ' · ' + v.name + ' sus</div></div><div class="rv-rest">' + Staff.icon(v.r, 28, 40) + '</div><div class="rv-bar" title="Bir birlik içine sığan sayı: ' + v.seg + '">' + segs + '</div></div>';
+    });
+    $('rv-list').innerHTML = h;
+  }
+  function dotIcon(kind, dots){ return Staff.icon(kind, 44, 44, dots); }
+  function renderDots(){
+    var rows = [
+      ['n2',1,'Noktalı ikilik','2 + 1 = 3 vuruş'],
+      ['n4',1,'Noktalı dörtlük','1 + ½ = 1½ vuruş'],
+      ['n8',1,'Noktalı sekizlik','½ + ¼ = ¾ vuruş'],
+      ['n4',2,'Çift noktalı dörtlük','1 + ½ + ¼ = 1¾ vuruş']
+    ], h = '';
+    rows.forEach(function(r){
+      h += '<div class="rv-row" style="grid-template-columns:56px 1fr"><div>' + dotIcon(r[0], r[1]) + '</div><div><div class="rv-name">' + r[2] + '</div><div class="rv-sub">' + r[3] + '</div></div></div>';
+    });
+    h += '<div class="hint"><b>Bağ:</b> aynı perdedeki iki notayı birleştiren yay, iki notanın sürelerini toplar. <b>Nefes (fermata)</b> işareti ise notayı icracının isteğine göre uzatır.</div>';
+    $('dot-list').innerHTML = h;
+  }
+  function renderTs(){
+    var h = '';
+    TS.forEach(function(x){
+      h += '<div class="rv-row" style="grid-template-columns:70px 1fr"><div>' + tsBox(x.t) + '</div><div><div class="rv-name">' + x.name + '</div><div class="rv-sub">' + x.pat + '</div></div></div>';
+    });
+    $('ts-list').innerHTML = h;
+  }
+
+  /* ---- metronom ---- */
+  function drawBeats(){
+    var acc = TS[mt.ts].acc, h = '';
+    acc.forEach(function(a,i){ h += '<div class="beat' + (a >= 1.5 ? ' strong' : '') + '" data-i="' + i + '">' + (i+1) + '</div>'; });
+    $('mt-beats').innerHTML = h;
+    var bot = TS[mt.ts].t[1];
+    $('mt-info').textContent = 'Her tık bir ' + (bot === '8' ? 'sekizlik' : bot === '2' ? 'ikilik' : 'dörtlük') + ' nota değerindedir. Birinci vuruş en güçlü, ardından yarı kuvvetli vuruşlar gelir.';
+  }
+  function showBpm(){
+    $('mt-val').innerHTML = mt.bpm + '<br><small>' + tempoName(mt.bpm) + '</small>';
+    $('mt-bpm').value = mt.bpm;
+  }
+  function flashBeat(i){
+    var bs = $('mt-beats').children;
+    for(var k=0;k<bs.length;k++) bs[k].classList.toggle('on', k === i);
+  }
+  function tick(){
+    var ctx = Au.ctx(); if(!ctx) return;
+    var acc = TS[mt.ts].acc;
+    while(mt.next < ctx.currentTime + 0.12){
+      var rel = Math.max(0, mt.next - ctx.currentTime), i = mt.beat;
+      Au.click(rel, acc[i]);
+      (function(i){ setTimeout(function(){ if(mt.running) flashBeat(i); }, rel*1000); })(i);
+      mt.next += 60 / mt.bpm; mt.beat = (mt.beat + 1) % acc.length;
+    }
+  }
+  function mtStop(){
+    mt.running = false; clearInterval(mt.iv); mt.iv = null; flashBeat(-1); $('mt-go').textContent = '▶ Başlat';
+  }
+  function mtStart(){
+    if(mt.running){ mtStop(); return; }
+    Au.stopAll();
+    if(!Au.ensure()) return;
+    mt.running = true; mt.beat = 0; mt.next = Au.ctx().currentTime + 0.08;
+    $('mt-go').textContent = '■ Durdur';
+    tick(); mt.iv = setInterval(tick, 25);
+  }
+  function setBpm(b){ mt.bpm = Math.max(40, Math.min(208, b)); showBpm(); }
+
+  function init(){
+    renderValues(); renderDots(); renderTs();
+    var sel = $('mt-ts');
+    TS.forEach(function(x,i){ var o = document.createElement('option'); o.value = i; o.textContent = x.t[0] + '/' + x.t[1] + ' – ' + x.name; sel.appendChild(o); });
+    sel.value = mt.ts;
+    sel.addEventListener('change', function(){ mt.ts = parseInt(this.value,10); mt.beat = 0; drawBeats(); });
+    $('mt-bpm').addEventListener('input', function(){ setBpm(parseInt(this.value,10)); });
+    $('mt-minus').addEventListener('click', function(){ setBpm(mt.bpm - 4); });
+    $('mt-plus').addEventListener('click', function(){ setBpm(mt.bpm + 4); });
+    $('mt-go').addEventListener('click', mtStart);
+    drawBeats(); showBpm();
+  }
+  App.register('ritim', {show:function(){ if(mt.running) mtStop(); }});
+  return {init:init, stop:function(){ if(mt.running) mtStop(); }};
+})();
+
+/* ---- ui_terim.js ---- */
+/* ===== Terimler sekmesi ===== */
+var Terim = (function(){
+  var $ = App.$;
+  var CATS = {tempo:'Tempo', dinamik:'Dinamik', ifade:'İfade', artik:'Artikülasyon', susleme:'Süsleme', ritim:'Ölçü ve ritim', yapi:'Yapı ve işaretler', aralik:'Aralık, akor, armoni', ses:'Ses ve çalgı', temel:'Temel kavramlar'};
+  var TERMS = [
+    /* ---- Tempo ---- */
+    ['tempo',"Grave","Çok ağır, ağırbaşlı bir tempo."],
+    ['tempo',"Largo","Geniş ve yavaş (yaklaşık dakikada 40–60 vuruş)."],
+    ['tempo',"Lento","Yavaş."],
+    ['tempo',"Larghetto","Largo’dan biraz daha canlı."],
+    ['tempo',"Adagio","Rahat ve ağırca; sakin, ezgili bir yavaşlık."],
+    ['tempo',"Adagietto","Adagio’dan biraz daha hızlı."],
+    ['tempo',"Andante","Yürüyüş hızında, ağırca akan tempo."],
+    ['tempo',"Andantino","Andante’ye yakın; genellikle ondan biraz daha canlı."],
+    ['tempo',"Moderato","Orta hızda."],
+    ['tempo',"Allegretto","Allegro’dan biraz daha yavaş, hafif canlı."],
+    ['tempo',"Allegro moderato","Ölçülü bir hızlılık; Allegro ile Moderato arası."],
+    ['tempo',"Allegro","Hızlı ve canlı."],
+    ['tempo',"Vivace","Çok canlı ve hızlı."],
+    ['tempo',"Presto","Çok hızlı."],
+    ['tempo',"Prestissimo","Olabildiğince hızlı."],
+    ['tempo',"Molto","Çok (örn. molto allegro: çok hızlı)."],
+    ['tempo',"Assai","Oldukça, çok (örn. allegro assai)."],
+    ['tempo',"Poco","Biraz (örn. poco più mosso: biraz daha hareketli)."],
+    ['tempo',"Poco a poco","Azar azar, yavaş yavaş."],
+    ['tempo',"Non troppo / ma non troppo","Fazla değil / ama aşırıya kaçmadan (örn. allegro ma non troppo)."],
+    ['tempo',"Più mosso","Daha hareketli, daha hızlı."],
+    ['tempo',"Meno mosso","Daha az hareketli, daha yavaş."],
+    ['tempo',"Ritardando (rit.)","Tempoyu giderek yavaşlatarak."],
+    ['tempo',"Rallentando (rall.)","Giderek yavaşlayarak; ritardando’ya çok yakın anlamda kullanılır."],
+    ['tempo',"Ritenuto (riten.)","Tempoyu hemen, belirgin biçimde tutarak (yavaşlatarak)."],
+    ['tempo',"Allargando","Genişleyerek; yavaşlayıp güçlenerek."],
+    ['tempo',"Accelerando (accel.)","Tempoyu giderek hızlandırarak."],
+    ['tempo',"Stringendo (string.)","Sıkıştırarak, hızlanarak ve gerilimi artırarak."],
+    ['tempo',"Affrettando","Acele ederek, hızlanarak."],
+    ['tempo',"A tempo","Asıl tempoya dönerek."],
+    ['tempo',"Tempo primo (Tempo I)","İlk tempoya dönerek."],
+    ['tempo',"Tempo giusto","Uygun, doğru tempoda; parçanın doğal hızında."],
+    ['tempo',"L’istesso tempo","Aynı tempoda; ölçü değişse bile vuruş hızı aynı kalır."],
+    ['tempo',"Rubato","Serbest tempo; ifade için süreleri hafifçe uzatıp kısaltarak."],
+    ['tempo',"Ad libitum (ad lib.)","İstenildiği gibi, icracının isteğine göre serbestçe."],
+    ['tempo',"Colla parte","Solisti (ana partiyi) izleyerek, onun tempo değişimlerine uyarak."],
+    ['tempo',"Tempo di valse","Vals temposunda."],
+    ['tempo',"Tempo di marcia","Marş temposunda."],
+    ['tempo',"Metronom","Dakikadaki vuruş sayısını ayarlayıp düzenli vuruş sesi veren alet. M.M. ♩ = 60, dakikada 60 dörtlük vuruş demektir."],
+
+    /* ---- Dinamik ---- */
+    ['dinamik',"Pianississimo (ppp)","En hafif, çok çok kısık ses."],
+    ['dinamik',"Pianissimo (pp)","Çok hafif, çok kısık ses."],
+    ['dinamik',"Piano (p)","Hafif, kısık ses."],
+    ['dinamik',"Mezzo piano (mp)","Orta derecede hafif."],
+    ['dinamik',"Mezzo forte (mf)","Orta derecede kuvvetli."],
+    ['dinamik',"Forte (f)","Kuvvetli ses."],
+    ['dinamik',"Fortissimo (ff)","Çok kuvvetli ses."],
+    ['dinamik',"Fortississimo (fff)","En kuvvetli, çok çok gür ses."],
+    ['dinamik',"Più forte / più piano","Daha kuvvetli / daha hafif."],
+    ['dinamik',"Crescendo (cresc.)","Sesi giderek kuvvetlendirerek."],
+    ['dinamik',"Decrescendo (decresc.)","Sesi giderek hafifleterek."],
+    ['dinamik',"Diminuendo (dim.)","Sesi giderek azaltarak; decrescendo ile aynı anlamda."],
+    ['dinamik',"Sforzando (sfz, sf)","Notayı ani ve güçlü bir vurguyla çalarak."],
+    ['dinamik',"Rinforzando (rf, rfz)","Notayı ya da küçük bir bölümü ani bir vurguyla pekiştirerek."],
+    ['dinamik',"Fortepiano (fp)","Kuvvetli başlayıp hemen hafifleyerek."],
+    ['dinamik',"Subito (sub.)","Aniden (örn. subito piano: birdenbire hafif)."],
+    ['dinamik',"Morendo","Sönerek, giderek hem hafifleyip hem yavaşlayarak ölürcesine."],
+    ['dinamik',"Calando","Hafifleyerek ve yavaşlayarak."],
+    ['dinamik',"Smorzando","Sesi sönümleyerek, söndürerek."],
+    ['dinamik',"Perdendosi","Kaybolarak, silinerek."],
+    ['dinamik',"Sotto voce","Alçak sesle, fısıltıyla."],
+    ['dinamik',"Mezza voce","Yarım sesle; ölçülü, kısılmış ses gücüyle."],
+
+    /* ---- İfade ---- */
+    ['ifade',"Cantabile","Şarkı söyler gibi, akıcı ve ezgili."],
+    ['ifade',"Cantando","Şarkı söyleyerek."],
+    ['ifade',"Dolce","Tatlı, yumuşak bir ifadeyle."],
+    ['ifade',"Soave","Yumuşak, tatlı ve nazik."],
+    ['ifade',"Espressivo (espr.)","Anlamlı, duygulu bir ifadeyle."],
+    ['ifade',"Con sentimento","Duyguyla."],
+    ['ifade',"Con amore","Sevgiyle."],
+    ['ifade',"Con anima","Ruhla, canlılıkla."],
+    ['ifade',"Con spirito","Canlı, neşeli bir ruhla."],
+    ['ifade',"Con brio","Parlak, canlı ve coşkulu."],
+    ['ifade',"Con moto","Hareketli bir biçimde."],
+    ['ifade',"Con fuoco","Ateşli, tutkuyla."],
+    ['ifade',"Con forza","Güçle."],
+    ['ifade',"Con grazia","Zarafetle."],
+    ['ifade',"Grazioso","Zarif, ince bir üslupla."],
+    ['ifade',"Maestoso","Görkemli, ağırbaşlı."],
+    ['ifade',"Agitato","Heyecanlı, çalkantılı."],
+    ['ifade',"Appassionato","Tutkulu, ateşli."],
+    ['ifade',"Animato","Canlandırarak, canlı bir ruhla."],
+    ['ifade',"Giocoso","Şakacı, neşeli."],
+    ['ifade',"Scherzando","Oyunbaz, şakacı bir üslupla."],
+    ['ifade',"Leggiero","Hafif, uçarı, kolay."],
+    ['ifade',"Pesante","Ağır, baskılı, ağırlık vererek."],
+    ['ifade',"Semplice","Sade, yalın."],
+    ['ifade',"Sostenuto","Sesleri tutarak, uzatarak, destekleyerek."],
+    ['ifade',"Tranquillo","Sakin, huzurlu."],
+    ['ifade',"Vivo","Canlı, diri."],
+    ['ifade',"Risoluto","Kararlı, kesin."],
+    ['ifade',"Mesto","Hüzünlü, kederli."],
+    ['ifade',"Lamentoso","Yakınarak, ağıt söyler gibi."],
+    ['ifade',"Dolente","Acılı, ızdıraplı."],
+    ['ifade',"Lacrimoso","Gözyaşı döker gibi, ağlamaklı."],
+    ['ifade',"Religioso","Dinsel bir ağırbaşlılıkla."],
+    ['ifade',"Brillante","Parlak, göz alıcı."],
+    ['ifade',"Capriccioso","Kaprisli, değişken, hevesli."],
+    ['ifade',"Delicato","İnce, narin."],
+    ['ifade',"Energico","Enerjik, güçlü."],
+    ['ifade',"Furioso","Öfkeli, hiddetli."],
+    ['ifade',"Marziale","Marş gibi, askerî bir sertlikle."],
+    ['ifade',"Pomposo","Gösterişli, debdebeli."],
+    ['ifade',"Vigoroso","Kuvvetli, dinç."],
+    ['ifade',"Sempre","Her zaman, sürekli (örn. sempre piano)."],
+    ['ifade',"Simile (sim.)","Aynı biçimde sürdür."],
+
+    /* ---- Artikülasyon ---- */
+    ['artik',"Legato","Notaları birbirine bağlayarak, kesintisiz. Notaların üstündeki yayla gösterilir."],
+    ['artik',"Staccato","Notaları kısa ve kesik çalarak. Notanın üstüne ya da altına konan nokta ile gösterilir."],
+    ['artik',"Staccatissimo","Staccato’dan da kısa, çok kesik. Küçük bir üçgen (kama) işaretiyle gösterilir."],
+    ['artik',"Portato (mezzo staccato)","Notaları birbirinden hafifçe ayırarak; legato ile staccato arası."],
+    ['artik',"Marcato (marc.)","Her notayı belirgin biçimde vurgulayarak (^ işareti)."],
+    ['artik',"Tenuto (ten.)","Notayı tam süresince, hafif bir vurguyla tutarak."],
+    ['artik',"Aksan (>)","Notayı vurgulayan işaret."],
+    ['artik',"Slur (bağ yayı)","Farklı perdedeki notaları legato çalmayı gösteren yay. Aynı perdedeki notaları birleştiren yay ise bağdır (tie)."],
+    ['artik',"Glissando (gliss.)","İki nota arasındaki bütün sesleri kaydırarak geçmek."],
+    ['artik',"Portamento","Bir sesten diğerine yumuşak bir kayışla geçmek (özellikle ses ve yaylı çalgılarda)."],
+    ['artik',"Vibrato","Sesin perdesinde küçük ve düzenli bir titreşim."],
+    ['artik',"Tremolo","Aynı notanın ya da iki notanın çok hızlı yinelenmesi."],
+    ['artik',"Pizzicato (pizz.)","Yaylı çalgılarda teli yayla değil parmakla çekerek çalmak."],
+    ['artik',"Arco","Yayla çalmak; pizzicato’dan sonra yaya dönüşü gösterir."],
+    ['artik',"Con sordino","Sordinle (sesi kısan aparatla) çalarak."],
+    ['artik',"Senza sordino","Sordinsiz, aparatı çıkararak."],
+    ['artik',"Col legno","Yayın tahta kısmıyla teli vurarak."],
+    ['artik',"Sul ponticello","Yayı köprüye yakın çekerek (ince, metalik ses)."],
+    ['artik',"Sul tasto","Yayı klavyenin (sap) üstünde çekerek (yumuşak, flüt gibi ses)."],
+    ['artik',"Spiccato","Yayı telin üzerinde hafifçe sıçratarak çalmak."],
+    ['artik',"Détaché","Her notayı ayrı bir yay hareketiyle, birbirinden ayırarak çalmak."],
+    ['artik',"Divisi (div.)","Bölünmüş: bir grup çalgıcı, yazılı seslerin her birini ayrı ayrı çalar."],
+    ['artik',"Una corda (u.c.)","Piyanoda sol pedala basarak, sesi yumuşatarak."],
+    ['artik',"Tre corde (t.c.)","Sol pedali bırakarak, normal çalışa dönmek."],
+    ['artik',"Pedal (Ped.)","Piyanoda sağ pedala (sustain) basmak; sesleri uzatır."],
+
+    /* ---- Süsleme ---- */
+    ['susleme',"Süs notası (grace note)","Küçük puntoyla yazılan, süresi ölçüye sayılmayan süs notası."],
+    ['susleme',"Appoggiatura (uzun ön vuruş)","Ana notadan önce gelen küçük süs notası; vurguyla çalınır, ana notanın süresinden bir parça alır ve çözülür."],
+    ['susleme',"Acciaccatura (kısa ön vuruş)","Üstü çizgili, çok kısa süreli süs notası; ana notadan hemen önce ya da onunla birlikte çok hızlı çalınır."],
+    ['susleme',"Trill (tr)","Bir nota ile üstündeki komşu notanın hızlı ve düzenli biçimde art arda çalınması."],
+    ['susleme',"Mordent","Ana notadan komşusuna kısa bir gidiş ve geri dönüşle oluşan, hızlı süsleme."],
+    ['susleme',"Gruppetto (turn)","Ana notanın üstünden ve altından dolanıp ona dönen dört notalık süsleme: üst – ana – alt – ana."],
+    ['susleme',"Arpej (arpeggio)","Akor seslerinin aynı anda değil, alttan üste (ya da üstten alta) art arda çalınması."],
+    ['susleme',"Arpeggiato","Akoru, dalgalı bir çizgiyle gösterilen biçimde, alttan üste hızlıca yayarak çalmak."],
+    ['susleme',"Cadenza (kadans)","Eserin sonlarına doğru solistin serbestçe, virtüözlük göstererek çaldığı bölüm."],
+    ['susleme',"Tremolo","Aynı notanın ya da iki notanın çok hızlı yinelenmesi (süsleme ve artikülasyon olarak kullanılır)."],
+
+    /* ---- Ölçü ve ritim ---- */
+    ['ritim',"Ölçü","Müziği eşit zaman parçalarına bölen birim; iki ölçü çizgisi arasında kalan bölüm."],
+    ['ritim',"Ölçü çizgisi","Portede ölçüleri birbirinden ayıran dikey çizgi."],
+    ['ritim',"Vuruş (zaman)","Müziğin düzenli nabzı; ölçüyü oluşturan eşit zaman birimi."],
+    ['ritim',"Kuvvetli zaman","Ölçüde vurgusu güçlü olan vuruş; genellikle ölçünün ilk vuruşudur."],
+    ['ritim',"Zayıf zaman","Ölçüde vurgusu hafif olan vuruş."],
+    ['ritim',"Ölçü kesri (ölçü sayısı)","Ölçünün başında yazılan iki sayı: üstteki vuruş sayısını, alttaki vuruşun hangi nota değeriyle sayıldığını gösterir."],
+    ['ritim',"Basit ölçü","Her vuruşun ikiye bölündüğü ölçü: 2/4, 3/4, 4/4 gibi."],
+    ['ritim',"Bileşik ölçü","Her vuruşun üçe bölündüğü ölçü: 6/8, 9/8, 12/8 gibi."],
+    ['ritim',"Aksak ölçü","Vuruşları eşit olmayan, 2’li ve 3’lü gruplardan oluşan ölçü: 5/8 (2+3), 7/8 (3+2+2), 9/8 (2+2+2+3). Türk halk müziğinde sık görülür."],
+    ['ritim',"Alla breve (¢)","2/2’lik ölçü; vuruş birimi ikilik nota olur."],
+    ['ritim',"Anakruz","Parçanın tam ölçüyle değil, ölçünün zayıf (eksik) vuruşuyla başlaması."],
+    ['ritim',"Senkop","Vurgunun zayıf zamana kaydırılması; zayıf zamanda başlayan ve kuvvetli zamana uzanan nota."],
+    ['ritim',"Triyol (üçleme)","Bir nota değerinin üç eşit parçaya bölünmesi; örneğin bir dörtlük yerine üç sekizlik."],
+    ['ritim',"Duyol (ikileme)","Bileşik ölçüde, üçe bölünen bir değerin iki eşit parçaya bölünmesi."],
+    ['ritim',"Kuintol","Bir nota değerinin beş eşit parçaya bölünmesi."],
+    ['ritim',"Nokta","Notanın yanına konup süresinin yarısını ekleyen işaret."],
+    ['ritim',"Bağ (tie)","Aynı perdedeki iki notanın sürelerini birleştiren yay."],
+    ['ritim',"Hemiola","İki ölçüde (örneğin 3/4’lük) vurguların 3+3 yerine 2+2+2 gibi gruplanmış duyulması."],
+    ['ritim',"Polirtim","İki ya da daha fazla farklı ritmin aynı anda sürmesi."],
+    ['ritim',"Ostinato","Bir ritim ya da ezgi kalıbının sürekli yinelenmesi."],
+    ['ritim',"Sus","Sesin kesildiği, ama sürenin devam ettiği an; her nota değerinin bir de susu vardır."],
+    ['ritim',"Tempo","Müziğin hızı; dakikadaki vuruş sayısıyla ya da İtalyanca terimlerle belirtilir."],
+
+    /* ---- Yapı ve işaretler ---- */
+    ['yapi',"Da capo (D.C.)","Başa dönmek."],
+    ['yapi',"Dal segno (D.S.)","Segno işaretine dönmek."],
+    ['yapi',"Segno","Dal segno’da dönülecek yeri gösteren işaret."],
+    ['yapi',"Fine","Eserin bittiği yer (örn. D.C. al fine: başa dön, Fine’de bitir)."],
+    ['yapi',"Coda","Eserin sonundaki kapanış bölümü; ⊕ işaretiyle gösterilir."],
+    ['yapi',"Al coda","Coda’ya geç: işaretli yerden coda bölümüne atla."],
+    ['yapi',"Tekrar işareti","İki tekrar işareti (nokta çizgileri) arasındaki bölümü yinelemek."],
+    ['yapi',"Volta (1. ve 2. ev)","Tekrarlarda farklı bitişleri gösteren köşeli parantezler: birinci seferde 1. ev, ikinci seferde 2. ev çalınır."],
+    ['yapi',"Çift çizgi","Bölüm ya da kısım sonunu gösteren iki ince çizgi."],
+    ['yapi',"Final çizgisi","Eserin sonunu gösteren ince ve kalın çift çizgi."],
+    ['yapi',"Fermata","Notanın ya da susun süresini icracının isteğine göre uzatan işaret."],
+    ['yapi',"Attacca","Duraksamadan bir sonraki bölüme hemen geçmek."],
+    ['yapi',"Segue","Aynı biçimde, ara vermeden devam et."],
+    ['yapi',"Tacet","Bir çalgının ya da sesin o bölümde susması."],
+    ['yapi',"Tutti","Bütün icracıların birlikte çalması."],
+    ['yapi',"Solo","Tek bir icracının çalması."],
+    ['yapi',"Soli","Bir grubun (örneğin kemanların) yalnız başına çalması."],
+    ['yapi',"Unisono (all’unisono)","Aynı sesin birden çok çalgı ya da ses tarafından birlikte icrası."],
+    ['yapi',"A cappella","Çalgı eşliği olmadan, yalnızca seslerle söylemek."],
+    ['yapi',"Ossia","Alternatif (genellikle daha kolay ya da farklı) bir bölüm."],
+    ['yapi',"Bis","İki kez; bir bölümün tekrar edileceğini gösterir (ya da bir parçanın yeniden istenmesi)."],
+    ['yapi',"V.S. (volti subito)","Sayfayı hemen çevir."],
+    ['yapi',"8va (ottava alta)","Nota yazıldığından bir oktav yukarıda çalınır."],
+    ['yapi',"8vb (ottava bassa)","Nota yazıldığından bir oktav aşağıda çalınır."],
+    ['yapi',"Loco","Notaları yazıldıkları yerde çal; 8va işaretinin bittiğini gösterir."],
+    ['yapi',"Senza","…sız, …siz (örn. senza sordino: sordinsiz)."],
+    ['yapi',"Cue notası","Başka bir çalgının partisinden küçük puntoyla yazılan, giriş kolaylığı için konan nota."],
+
+    /* ---- Aralık, akor, armoni ---- */
+    ['aralik',"Aralık (interval)","İki nota arasındaki uzaklık. Sayısı harf adlarına, niteliği yarım ses sayısına göre belirlenir."],
+    ['aralik',"Birli (prim)","Aynı sesin iki kez; aralık sayısı 1."],
+    ['aralik',"İkili (sekond)","İki nota arasında 2 harf adı geçen aralık (Do–Re gibi). Küçük ikili ½ ses, büyük ikili 1 ses."],
+    ['aralik',"Üçlü (terz)","Üç harf adı geçen aralık (Do–Mi gibi). Küçük üçlü 1½ ses, büyük üçlü 2 ses."],
+    ['aralik',"Dörtlü (kuart)","Dört harf adı geçen aralık. Tam dörtlü 2½ ses."],
+    ['aralik',"Beşli (kuint)","Beş harf adı geçen aralık. Tam beşli 3½ ses."],
+    ['aralik',"Altılı (sekst)","Altı harf adı geçen aralık. Küçük altılı 4 ses, büyük altılı 4½ ses."],
+    ['aralik',"Yedili (septim)","Yedi harf adı geçen aralık. Küçük yedili 5 ses, büyük yedili 5½ ses."],
+    ['aralik',"Sekizli (oktav)","Sekiz harf adı geçen, aynı adlı iki nota arasındaki aralık; 6 ses (12 yarım ses)."],
+    ['aralik',"Majör (büyük) aralık","İkili, üçlü, altılı ve yedili aralıkların büyük olanı."],
+    ['aralik',"Minör (küçük) aralık","Majör aralığın yarım ses daraltılmış hâli."],
+    ['aralik',"Tam aralık","Birli, dörtlü, beşli ve sekizli aralıkların standart hâli."],
+    ['aralik',"Artık aralık","Tam ya da majör aralığın yarım ses genişletilmiş hâli."],
+    ['aralik',"Eksik aralık","Tam ya da minör aralığın yarım ses daraltılmış hâli."],
+    ['aralik',"Triton","Üç tam sesten oluşan artık dörtlü (eksik beşli ile aynı ses uzaklığı)."],
+    ['aralik',"Aralıkların çevrilmesi","Alt notayı bir oktav yukarı almak: sayıların toplamı 9 olur (2’li↔7’li, 3’lü↔6’lı, 4’lü↔5’li); majör↔minör, artık↔eksik olur, tam, tam kalır."],
+    ['aralik',"Konsonans (uyum)","Kararlı, durağan duyulan aralık ya da akor (üçlüler, altılılar, tam beşli, oktav)."],
+    ['aralik',"Disonans (uyumsuzluk)","Gerginlik yaratan, çözüm isteyen aralık ya da akor (ikililer, yedililer, triton)."],
+    ['aralik',"Akor","Üç ya da daha fazla sesin aynı anda duyulması; genellikle üçlülerin üst üste dizilmesiyle kurulur."],
+    ['aralik',"Üçlü akor","Kök, üçlü ve beşli seslerinden oluşan üç sesli akor."],
+    ['aralik',"Majör üçlü","Büyük 3’lü + küçük 3’lü: kök, büyük 3’lü, tam 5’li."],
+    ['aralik',"Minör üçlü","Küçük 3’lü + büyük 3’lü: kök, küçük 3’lü, tam 5’li."],
+    ['aralik',"Eksik üçlü","İki küçük 3’lü: kök, küçük 3’lü, eksik 5’li."],
+    ['aralik',"Artık üçlü","İki büyük 3’lü: kök, büyük 3’lü, artık 5’li."],
+    ['aralik',"Yedili akor (septim akoru)","Üçlü akorun üzerine bir üçlü daha eklenerek elde edilen dört sesli akor."],
+    ['aralik',"Dominant yedili akor","Majör üçlü + küçük 7’li; gamın 5. derecesi üzerinde kurulur ve tonik akora çözülmek ister."],
+    ['aralik',"Kök","Akorun üzerine kurulduğu, ona adını veren ses."],
+    ['aralik',"Çevrim (inversion)","Akorun kökünün dışındaki bir sesin bas sesi olması. 1. çevrim: 6/3 (sekst akoru); 2. çevrim: 6/4 (kuartsekst akoru)."],
+    ['aralik',"Derece","Gamın seslerinin, tonikten başlayarak aldığı sıra numarası (I, II, III …)."],
+    ['aralik',"Tonik (I. derece)","Gamın ve tonalitenin ilk, ana sesi; en kararlı ses."],
+    ['aralik',"Süpertonik (II. derece)","Toniğin bir üstündeki derece."],
+    ['aralik',"Medyan (III. derece)","Tonik ile dominant arasında, orta yerdeki derece; akorun majör ya da minör olduğunu belirler."],
+    ['aralik',"Subdominant (IV. derece)","Toniğin bir tam dörtlü üstü (dominantın bir tam beşli altı) olan derece; alt baskın."],
+    ['aralik',"Dominant (V. derece)","Toniğin bir tam beşli üstü; baskın. Tonik’e çözülmek ister."],
+    ['aralik',"Submedyan (VI. derece)","Toniğin bir büyük ya da küçük altılı üstü olan derece; üst medyan."],
+    ['aralik',"Hassas (duyucu) (VII. derece)","Toniğe yarım ses uzaklıktaki yedinci derece; toniğe çözülmek ister. Doğal minörde tonik ile arası tam sestir ve subtonik denir."],
+    ['aralik',"Armür (donanım)","Parçanın başında, anahtardan sonra yazılan diyez ya da bemoller; tonalitenin gerektirdiği değiştirme işaretlerini bildirir."],
+    ['aralik',"Tonalite (ton)","Bir parçanın ana sesi (tonik) ve gam üzerine kurulu düzeni; örneğin Re majör."],
+    ['aralik',"Modülasyon","Bir tonaliteden başka bir tonaliteye geçmek."],
+    ['aralik',"Relatif tonalite","Aynı armüre sahip majör ve minör çifti (Do majör – La minör). Minör tonik, majör toniğin altıncı derecesidir."],
+    ['aralik',"Paralel tonalite","Aynı toniğe sahip majör ve minör çifti (Do majör – Do minör)."],
+    ['aralik',"Kadans","Bir müzik cümlesini kapatan akor bağlantısı."],
+    ['aralik',"Tam kadans","V. dereceden I. dereceye (dominant – tonik) çözülme; kesin bir bitiş duygusu verir."],
+    ['aralik',"Yarım kadans","Cümlenin dominant akorunda (V) durması; soru gibi, açık bırakır."],
+    ['aralik',"Plagal (yan) kadans","IV. dereceden I. dereceye gidiş; “Âmin” kadansı olarak da bilinir."],
+    ['aralik',"Aldatmaca kadans","V. derecenin beklenen I. yerine genellikle VI. dereceye gitmesi."],
+    ['aralik',"Armoni","Akorların kuruluşunu ve birbirini izleyişini inceleyen bilim dalı."],
+    ['aralik',"Melodi (ezgi)","Art arda gelen seslerin ritimle birleşip bir anlam oluşturması."],
+    ['aralik',"Monofoni","Tek sesli müzik; yalnız bir ezgi."],
+    ['aralik',"Homofoni","Bir ezginin akorlarla desteklendiği çok seslilik biçimi."],
+    ['aralik',"Polifoni","Birden çok bağımsız ezginin aynı anda ilerlediği çok seslilik biçimi."],
+    ['aralik',"Kontrpuan","Birbirinden bağımsız ezgileri, uyum kurallarına göre bir araya getirme sanatı."],
+
+    /* ---- Ses ve çalgı ---- */
+    ['ses',"Soprano","Kadın seslerinin en tizi."],
+    ['ses',"Mezzosoprano","Soprano ile alto arasındaki kadın sesi."],
+    ['ses',"Alto (kontralto)","Kadın seslerinin en peşi; çocuk seslerinde de orta ses."],
+    ['ses',"Tenor","Erkek seslerinin tizi."],
+    ['ses',"Bariton","Tenor ile bas arasındaki erkek sesi."],
+    ['ses',"Bas","Erkek seslerinin en peşi."],
+    ['ses',"Koro","Birlikte şarkı söyleyen topluluk; genellikle soprano, alto, tenor ve bas partilerinden oluşur."],
+    ['ses',"Orkestra","Çok sayıda çalgıcının yönetici (şef) eşliğinde birlikte çaldığı topluluk."],
+    ['ses',"Oda müziği","Küçük topluluklarla (düo, trio, kuartet…) çalınan, her partiyi tek çalgıcının üstlendiği müzik."],
+    ['ses',"Düet / trio / kuartet / kuintet","İki / üç / dört / beş icracının birlikte yaptığı çalış."],
+    ['ses',"Solist","Eserde ön plana çıkan, tek başına çalan ya da söyleyen icracı."],
+    ['ses',"Eşlik","Ana ezgiyi destekleyen ses ya da çalgı partisi."],
+    ['ses',"Ses alanı (ambitüs)","Bir sesin ya da çalgının çıkabildiği en pes ve en tiz sesler arasındaki bölge."],
+    ['ses',"Transpozisyon","Bir parçayı başka bir tonaliteye aktarmak."],
+    ['ses',"Yaylı çalgılar","Keman, viyola, viyolonsel, kontrbas gibi yayla çalınan telli çalgılar."],
+    ['ses',"Üflemeli çalgılar","Ağızla üflenerek çalınan çalgılar: flüt, obua, klarnet, fagot (tahta); trompet, korno, trombon, tuba (bakır)."],
+    ['ses',"Vurmalı çalgılar","Vurularak ya da sallanarak ses çıkaran çalgılar: timpani, davul, zil, ksilofon…"],
+    ['ses',"Tuşlu çalgılar","Piyano, org, klavsen gibi tuşlarla çalınan çalgılar."],
+
+    /* ---- Temel kavramlar ---- */
+    ['temel',"Nota","Müzik seslerini yazıya geçirmek için kullanılan işaret."],
+    ['temel',"Porte (beş çizgi)","Notaların yazıldığı, beş çizgi ve dört aralıktan oluşan düzen. Çizgiler aşağıdan yukarı sayılır."],
+    ['temel',"Ek çizgi","Notaların porte dışına taşan kısmında kullanılan kısa yardımcı çizgiler."],
+    ['temel',"Sol anahtarı","İkinci çizgiyi Sol (G4) olarak belirleyen anahtar; tiz sesler için kullanılır."],
+    ['temel',"Fa anahtarı","Dördüncü çizgiyi Fa (F3) olarak belirleyen anahtar; pes sesler için kullanılır."],
+    ['temel',"Do anahtarı","İşaretlendiği çizgiyi orta Do (C4) olarak belirleyen anahtar. 3. çizgide alto (viyola), 4. çizgide tenor anahtarı olarak kullanılır."],
+    ['temel',"Sabit-do","Do notası her tonalitede C sesini gösterir; notalar kendi harfine göre okunur (F♯ → “Fa diyez”)."],
+    ['temel',"Hareketli (oynak) do","Do, her gamın toniğine verilen addır; sesler gam derecesine göre okunur."],
+    ['temel',"Solfej","Notaları adlarıyla (Do, Re, Mi…) ve doğru ritimle okuyup söyleme çalışması."],
+    ['temel',"Diyez (♯)","Notayı yarım ses tizleştiren değiştirme işareti."],
+    ['temel',"Bemol (♭)","Notayı yarım ses pesleştiren değiştirme işareti."],
+    ['temel',"Bekar (♮)","Önceki diyez ya da bemolü iptal edip notayı doğal hâline döndürür."],
+    ['temel',"Çift diyez (𝄪)","Notayı iki yarım ses (bir tam ses) tizleştirir."],
+    ['temel',"Çift bemol (𝄫)","Notayı iki yarım ses (bir tam ses) pesleştirir."],
+    ['temel',"Enharmonik","Aynı sesin farklı adlarla yazılması (örn. Re♯ = Mi♭)."],
+    ['temel',"Tam ses ve yarım ses","Batı müziğinin ölçü birimleri. İki yarım ses bir tam sese eşittir. Doğal notalarda yarım ses yalnızca Mi–Fa ve Si–Do arasındadır."],
+    ['temel',"Oktav","Aynı adlı iki nota arasındaki uzaklık; üstteki sesin frekansı alttakinin iki katıdır."],
+    ['temel',"Gam (dizi)","Belirli bir düzende sıralanmış sesler dizisi; tonalitenin temelidir."],
+    ['temel',"Majör gam","Tam–tam–yarım–tam–tam–tam–yarım ses dizilimine sahip gam."],
+    ['temel',"Doğal minör gam","Tam–yarım–tam–tam–yarım–tam–tam ses dizilimine sahip gam."],
+    ['temel',"Armonik minör gam","Doğal minörün 7. derecesi yarım ses yükseltilmiş hâli; 6. ve 7. derece arası artık ikilidir."],
+    ['temel',"Melodik minör gam","Çıkışta 6. ve 7. dereceleri yükseltilmiş, inişte doğal minör olan gam."],
+    ['temel',"Kromatik","Yarım ses aralıklarla ilerleyen dizi ya da hareket."],
+    ['temel',"Diyatonik","Bir tonalitenin kendi gam seslerinden oluşan yapı."],
+    ['temel',"Pentatonik gam","Beş sesli gam; majör ve minör olarak iki ana türü vardır."],
+    ['temel',"Bütün sesler gamı","Bütün aralıkları tam ses olan, altı sesli gam."],
+    ['temel',"Mod (kilise modları)","Majör ve minör gamların dışındaki diyatonik gam türleri: Dor, Frig, Lidyen, Miksolidyen, Lokriyen."],
+    ['temel',"Ses özellikleri","Sesin dört özelliği: yükseklik (perde), süre, şiddet ve tını."],
+    ['temel',"Tını (renk)","Aynı perdedeki sesin, çalgıdan çalgıya değişen rengi."],
+    ['temel',"Frekans (Hertz)","Sesin saniyedeki titreşim sayısı. Standart akort sesi La4 = 440 Hz’dir."],
+    ['temel',"Akort","Çalgıların seslerini doğru perdeye ayarlama işlemi."],
+    ['temel',"Diyapazon","La (440 Hz) sesini veren çatal; akort için referans."]
+  ];
+
+  var activeCat = 'all', chips;
+  function norm(s){ return s.toLocaleLowerCase('tr'); }
+  function render(){
+    var q = norm($('term-search').value.trim());
+    var list = TERMS.filter(function(t){
+      return (activeCat === 'all' || t[0] === activeCat) && (!q || norm(t[1]).indexOf(q) >= 0 || norm(t[2]).indexOf(q) >= 0);
+    });
+    $('term-count').textContent = list.length + ' terim';
+    $('term-empty').classList.toggle('hidden', list.length > 0);
+    var h = '';
+    list.forEach(function(t){
+      h += '<div class="term-item"><span class="tt">' + t[1] + '</span>' + (activeCat === 'all' ? '<span class="tc">' + CATS[t[0]] + '</span>' : '') + '<div class="td">' + t[2] + '</div></div>';
+    });
+    $('term-list').innerHTML = h;
+  }
+  function init(){
+    var items = [{id:'all', label:'Tümü'}];
+    Object.keys(CATS).forEach(function(k){ items.push({id:k, label:CATS[k]}); });
+    chips = App.Chips($('term-chips'), items, 'all', function(c){ activeCat = c; render(); });
+    $('term-search').addEventListener('input', render);
+    render();
+  }
+  App.register('terim', {show:function(){}});
+  return {init:init, count:function(){ return TERMS.length; }};
+})();
+
+/* ---- main.js ---- */
+/* ===== Başlatma ===== */
+(function(){
+  var $ = App.$;
+  if(!T.CLEFS[App.S.clef]) App.S.clef = 'G';
+  App.initClef();
+  [Gam, Ara, Akor, Sol, Ritim, Terim].forEach(function(m){ m.init(); });
+  var bs = document.querySelectorAll('#tabs button');
+  for(var i=0;i<bs.length;i++){
+    (function(b){ b.addEventListener('click', function(){ App.showTab(b.getAttribute('data-tab')); }); })(bs[i]);
+  }
+  $('info-open').addEventListener('click', function(){ $('info-modal').classList.remove('hidden'); });
+  $('info-close').addEventListener('click', function(){ $('info-modal').classList.add('hidden'); });
+  $('info-modal').addEventListener('click', function(e){ if(e.target === this) this.classList.add('hidden'); });
+  /* ses bağlamı iOS'ta ilk dokunuşta açılır */
+  document.addEventListener('touchend', function(){ Au.ensure(); }, {once:true, passive:true});
+  App.showTab('gam');
+  if('serviceWorker' in navigator && /^https?:/.test(location.protocol)){
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
+})();
+
 
 })();
 </script>
