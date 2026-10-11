@@ -1,5 +1,5 @@
 // Solfej ve Gam Rehberi: ilk açılıştan sonra internet olmadan da çalışır.
-var CACHE = "solfej-gam-v2";
+var CACHE = "solfej-gam-v3";
 var FILES = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-512.png"];
 
 self.addEventListener("install", function (e) {
