@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Çarpım">
+<meta name="theme-color" content="#1f3c88">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>:root{height:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Çarpım Defteri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap">
+<style>
+/* Layout: kareli okul defteri sayfası; üstte sekmeler, altta büyük dokunmatik rakam tuşları */
+:root{
+  --paper:#fbfcf8; --grid:#dfe7ef; --ink:#1f3c88; --ink-soft:#5a6fa8;
+  --red:#d6362f; --green:#1f8a4c; --sun:#f5b82e; --card:#ffffff; --line:#c9d4e3;
+  --fg:#1d2433; --muted:#667085;
+  --display:"Baloo 2", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --body:"Nunito", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141a26; --grid:#1f2838; --ink:#8fb0ff; --ink-soft:#7d8fbf;
+  --red:#ff6b61; --green:#4cc987; --sun:#f7c75a; --card:#1b2231; --line:#2d384d;
+  --fg:#e7ebf3; --muted:#9aa4b8; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --paper:#141a26; --grid:#1f2838; --ink:#8fb0ff; --ink-soft:#7d8fbf;
+  --red:#ff6b61; --green:#4cc987; --sun:#f7c75a; --card:#1b2231; --line:#2d384d;
+  --fg:#e7ebf3; --muted:#9aa4b8; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  color:var(--fg); font-family:var(--body); font-size:17px;
+  -webkit-tap-highlight-color:transparent;
+}
+button{font:inherit;color:inherit;touch-action:manipulation;cursor:pointer}
+button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:16px 32px;display:flex;flex-direction:column;gap:16px}
+
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1;margin:0;color:var(--ink)}
+h1 span{color:var(--red)}
+.stars{font-family:var(--display);font-weight:800;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 14px;font-variant-numeric:tabular-nums}
+.stars b{color:var(--sun)}
+
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:6px}
+.tab{border:0;background:transparent;border-radius:13px;padding:12px;font-weight:800;font-size:1.05rem;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+
+.label{font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+.picker{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.num{border:2px solid var(--line);background:var(--card);border-radius:14px;padding:10px 0;font-family:var(--display);font-weight:800;font-size:1.5rem;color:var(--ink)}
+.num[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+.sheet{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.rows{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:420px){.rows{grid-template-columns:1fr}}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;border:2px dashed var(--line);border-radius:14px;padding:8px 12px;background:transparent;text-align:left;width:100%}
+.row .q{font-family:var(--display);font-weight:600;font-size:1.45rem;color:var(--fg);font-variant-numeric:tabular-nums}
+.row .a{font-family:var(--display);font-weight:800;font-size:1.6rem;min-width:2.6em;text-align:center;border-radius:10px;color:var(--red);font-variant-numeric:tabular-nums}
+.row .a.hidden{color:var(--muted);background:var(--grid)}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.ghost{border:2px solid var(--line);background:var(--card);border-radius:12px;padding:8px 14px;font-weight:800;color:var(--ink)}
+.hint{color:var(--muted);margin:0;font-size:.95rem}
+
+/* Alıştırma */
+.progress{height:12px;background:var(--grid);border-radius:999px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--green);border-radius:999px;transition:width .3s}
+.meta{display:flex;justify-content:space-between;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.question{font-family:var(--display);font-weight:800;text-align:center;font-size:clamp(2.8rem,13vw,4.8rem);line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums;margin:4px 0}
+.answer{display:inline-block;min-width:2.2em;border-bottom:5px solid var(--ink);color:var(--fg)}
+.answer.ok{color:var(--green);border-color:var(--green)}
+.answer.bad{color:var(--red);border-color:var(--red);animation:shake .35s}
+.feedback{text-align:center;font-weight:800;font-size:1.15rem;min-height:1.6em;margin:0}
+.feedback.ok{color:var(--green)} .feedback.bad{color:var(--red)}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.key{border:2px solid var(--line);background:var(--card);border-radius:16px;padding:14px 0;font-family:var(--display);font-weight:800;font-size:1.8rem;color:var(--fg);box-shadow:0 3px 0 var(--line)}
+.key:active{transform:translateY(3px);box-shadow:none}
+.key.go{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 3px 0 color-mix(in srgb,var(--green) 60%,#000)}
+.key.del{color:var(--red);font-size:1.3rem}
+.start{border:0;background:var(--ink);color:var(--paper);border-radius:16px;padding:16px;font-family:var(--display);font-weight:800;font-size:1.4rem}
+.chk{display:flex;gap:8px;align-items:center;font-weight:700;color:var(--muted)}
+
+.result{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.big{font-family:var(--display);font-weight:800;font-size:3.4rem;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.medal{font-size:2.4rem;letter-spacing:.1em;color:var(--sun)}
+.stamp{font-family:var(--display);font-weight:800;color:var(--red);border:3px solid var(--red);border-radius:10px;padding:2px 12px;transform:rotate(-4deg);font-size:1.3rem}
+.mistakes{width:100%;display:flex;flex-direction:column;gap:6px;text-align:left}
+.mistakes div{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:4px 0;font-weight:700;font-variant-numeric:tabular-nums}
+.mistakes s{color:var(--red)} .mistakes b{color:var(--green)}
+
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Çarpım <span>Defteri</span></h1>
+    <div class="stars" aria-live="polite">★ <b id="starCount">0</b> yıldız</div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tabLearn" aria-selected="true">📖 Öğren</button>
+    <button class="tab" role="tab" id="tabPractice" aria-selected="false">✏️ Alıştırma</button>
+  </div>
+
+  <!-- ÖĞREN -->
+  <section id="learn" style="display:flex;flex-direction:column;gap:12px">
+    <p class="label">Hangi sayının tablosu?</p>
+    <div class="picker" id="learnPicker"></div>
+    <div class="sheet">
+      <div class="tools">
+        <button class="ghost" id="hideAll">Cevapları gizle</button>
+        <button class="ghost" id="showAll">Hepsini göster</button>
+      </div>
+      <p class="hint">Gizli bir cevaba dokun, aklından söyle, sonra kontrol et.</p>
+      <div class="rows" id="rows"></div>
+    </div>
+  </section>
+
+  <!-- ALIŞTIRMA -->
+  <section id="practice" hidden>
+    <div class="sheet" id="setup">
+      <p class="label">Hangi tablolardan soru gelsin?</p>
+      <div class="picker" id="pracPicker"></div>
+      <div class="tools">
+        <button class="ghost" id="selAll">Hepsini seç</button>
+        <button class="ghost" id="selNone">Temizle</button>
+      </div>
+      <button class="start" id="startBtn">Başla · 10 soru</button>
+      <p class="hint" id="bestLine"></p>
+    </div>
+
+    <div class="sheet" id="game" hidden>
+      <div class="meta"><span id="qNo">Soru 1/10</span><span id="score">✔ 0</span></div>
+      <div class="progress"><i id="bar"></i></div>
+      <div class="question"><span id="qText">7 × 8</span> = <span class="answer" id="ans">&nbsp;</span></div>
+      <p class="feedback" id="fb" aria-live="polite"></p>
+      <div class="pad" id="pad"></div>
+    </div>
+
+    <div class="sheet result" id="result" hidden>
+      <div class="stamp" id="stamp">Aferin!</div>
+      <div class="medal" id="medal">★★★</div>
+      <div class="big" id="final">9 / 10</div>
+      <div class="mistakes" id="mistakes"></div>
+      <button class="start" id="againBtn" style="width:100%">Tekrar oyna</button>
+      <button class="ghost" id="backBtn">Tabloları değiştir</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const store = {
+    get(k,d){ try{ const v = localStorage.getItem(k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
+    set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  };
+  let stars = store.get('cd_stars',0);
+  let best = store.get('cd_best',null);
+  const updStars = () => { $('starCount').textContent = stars; };
+  updStars();
+
+  /* Sekmeler */
+  function showTab(which){
+    const learn = which==='learn';
+    $('tabLearn').setAttribute('aria-selected',learn);
+    $('tabPractice').setAttribute('aria-selected',!learn);
+    $('learn').style.display = learn ? 'flex' : 'none';
+    $('practice').hidden = learn;
+  }
+  $('tabLearn').onclick = () => showTab('learn');
+  $('tabPractice').onclick = () => showTab('practice');
+
+  /* ÖĞREN */
+  let learnN = 7;
+  const lp = $('learnPicker');
+  for(let n=1;n<=10;n++){
+    const b=document.createElement('button');
+    b.className='num'; b.textContent=n; b.setAttribute('aria-pressed',n===learnN);
+    b.onclick=()=>{ learnN=n; [...lp.children].forEach(c=>c.setAttribute('aria-pressed',c===b)); drawRows(false); };
+    lp.appendChild(b);
+  }
+  function drawRows(hide){
+    const r=$('rows'); r.innerHTML='';
+    for(let i=1;i<=10;i++){
+      const row=document.createElement('button'); row.className='row';
+      const a=document.createElement('span'); a.className='a';
+      const setA=h=>{ a.classList.toggle('hidden',h); a.textContent = h ? '?' : learnN*i; row.setAttribute('aria-label', `${learnN} çarpı ${i}` + (h?'':` eşittir ${learnN*i}`)); };
+      setA(hide);
+      row.innerHTML=`<span class="q">${learnN} × ${i}</span>`; row.appendChild(a);
+      row.onclick=()=>setA(!a.classList.contains('hidden'));
+      r.appendChild(row);
+    }
+  }
+  $('hideAll').onclick=()=>drawRows(true);
+  $('showAll').onclick=()=>drawRows(false);
+  drawRows(false);
+
+  /* ALIŞTIRMA kurulum */
+  let chosen = new Set(store.get('cd_sel',[2,3,4,5,6,7,8,9]));
+  const pp=$('pracPicker');
+  function drawPicker(){
+    pp.innerHTML='';
+    for(let n=1;n<=10;n++){
+      const b=document.createElement('button'); b.className='num'; b.textContent=n;
+      b.setAttribute('aria-pressed',chosen.has(n));
+      b.onclick=()=>{ chosen.has(n)?chosen.delete(n):chosen.add(n); drawPicker(); };
+      pp.appendChild(b);
+    }
+    $('startBtn').disabled = chosen.size===0;
+    $('startBtn').style.opacity = chosen.size ? 1 : .45;
+    $('startBtn').textContent = chosen.size ? 'Başla · 10 soru' : 'Önce bir tablo seç';
+    store.set('cd_sel',[...chosen]);
+  }
+  $('selAll').onclick=()=>{ chosen=new Set([1,2,3,4,5,6,7,8,9,10]); drawPicker(); };
+  $('selNone').onclick=()=>{ chosen=new Set(); drawPicker(); };
+  drawPicker();
+  const bestText=()=>{ $('bestLine').textContent = best!==null ? `En iyi sonucun: ${best} / 10` : 'İlk testini çöz, en iyi sonucun burada yazsın.'; };
+  bestText();
+
+  /* Rakam tuşları */
+  const pad=$('pad');
+  ['1','2','3','4','5','6','7','8','9','⌫','0','✓'].forEach(k=>{
+    const b=document.createElement('button'); b.className='key'; b.textContent=k;
+    if(k==='⌫'){ b.classList.add('del'); b.setAttribute('aria-label','Sil'); }
+    if(k==='✓'){ b.classList.add('go'); b.setAttribute('aria-label','Kontrol et'); }
+    b.onclick=()=>press(k); pad.appendChild(b);
+  });
+  document.addEventListener('keydown',e=>{
+    if($('game').hidden) return;
+    if(/^[0-9]$/.test(e.key)) press(e.key);
+    else if(e.key==='Backspace') press('⌫');
+    else if(e.key==='Enter') press('✓');
+  });
+
+  /* Oyun */
+  let qs=[], idx=0, correct=0, typed='', locked=false, wrongs=[], triedWrong=false;
+  const praise=['Harika!','Süpersin!','Doğru!','Çok iyi!','Bravo!'];
+  function start(){
+    const pool=[...chosen];
+    qs=[]; let last='';
+    while(qs.length<10){
+      const a=pool[Math.floor(Math.random()*pool.length)], b=1+Math.floor(Math.random()*10);
+      const [x,y]=Math.random()<.5?[a,b]:[b,a];
+      if(`${x}x${y}`===last) continue; last=`${x}x${y}`; qs.push([x,y]);
+    }
+    idx=0; correct=0; wrongs=[];
+    $('setup').hidden=true; $('result').hidden=true; $('game').hidden=false;
+    ask();
+  }
+  function ask(){
+    typed=''; locked=false; triedWrong=false;
+    const [x,y]=qs[idx];
+    $('qText').textContent=`${x} × ${y}`;
+    $('qNo').textContent=`Soru ${idx+1}/10`;
+    $('score').textContent=`✔ ${correct}`;
+    $('bar').style.width=(idx*10)+'%';
+    $('fb').textContent=''; $('fb').className='feedback';
+    setAns();
+  }
+  function setAns(cls){ const a=$('ans'); a.className='answer'+(cls?' '+cls:''); a.innerHTML = typed || '&nbsp;'; }
+  function press(k){
+    if(locked) return;
+    if(k==='⌫'){ typed=typed.slice(0,-1); setAns(); return; }
+    if(k==='✓'){ if(typed) check(); return; }
+    if(typed.length<3){ typed+=k; setAns(); }
+  }
+  function check(){
+    const [x,y]=qs[idx], right=x*y;
+    if(+typed===right){
+      locked=true;
+      if(!triedWrong){ correct++; stars++; store.set('cd_stars',stars); updStars(); }
+      setAns('ok');
+      $('fb').textContent = triedWrong ? 'Şimdi oldu 👍' : praise[Math.floor(Math.random()*praise.length)] + ' ⭐';
+      $('fb').className='feedback ok';
+      $('score').textContent=`✔ ${correct}`;
+      setTimeout(next, 900);
+    } else if(!triedWrong){
+      triedWrong=true; wrongs.push([x,y,typed]);
+      setAns('bad');
+      $('fb').textContent='Olmadı, bir daha dene!'; $('fb').className='feedback bad';
+      setTimeout(()=>{ typed=''; setAns(); },700);
+    } else {
+      locked=true; setAns('bad');
+      $('fb').textContent=`Doğrusu: ${x} × ${y} = ${right}`; $('fb').className='feedback bad';
+      setTimeout(next, 1800);
+    }
+  }
+  function next(){ idx++; if(idx<10) ask(); else finish(); }
+  function finish(){
+    $('bar').style.width='100%';
+    $('game').hidden=true; $('result').hidden=false;
+    $('final').textContent=`${correct} / 10`;
+    const m = correct===10?3: correct>=7?2: correct>=4?1:0;
+    $('medal').textContent='★'.repeat(m)+'☆'.repeat(3-m);
+    $('stamp').textContent = correct===10?'Mükemmel!': correct>=7?'Aferin!': correct>=4?'İyi gidiyor':'Çalışmaya devam';
+    const ml=$('mistakes'); ml.innerHTML='';
+    if(wrongs.length){
+      const h=document.createElement('p'); h.className='label'; h.textContent='Bunları tekrar edelim'; ml.appendChild(h);
+      wrongs.forEach(([x,y,t])=>{ const d=document.createElement('div'); d.innerHTML=`<span>${x} × ${y}</span><span><s>${t}</s> → <b>${x*y}</b></span>`; ml.appendChild(d); });
+    }
+    if(best===null || correct>best){ best=correct; store.set('cd_best',best); }
+    bestText();
+  }
+  $('startBtn').onclick=()=>{ if(chosen.size) start(); };
+  $('againBtn').onclick=start;
+  $('backBtn').onclick=()=>{ $('result').hidden=true; $('setup').hidden=false; };
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); }); }
+</script>
+</body>
+</html>
