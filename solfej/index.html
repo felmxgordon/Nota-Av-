@@ -1175,6 +1175,7 @@ var App = (function(){
   }
   function showTab(id){
     Au.stopAll();
+    var prev = modules[S.tab]; if(prev && prev.hide && S.tab !== id) prev.hide();
     S.tab = id;
     var bs = document.querySelectorAll('#tabs button');
     for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-tab') === id);
@@ -1975,7 +1976,8 @@ var Ritim = (function(){
     $('mt-go').addEventListener('click', mtStart);
     drawBeats(); showBpm();
   }
-  App.register('ritim', {show:function(){ if(mt.running) mtStop(); }});
+  App.register('ritim', {show:function(){ if(mt.running) mtStop(); }, hide:function(){ if(mt.running) mtStop(); }});
+  document.addEventListener('visibilitychange', function(){ if(document.hidden && mt.running) mtStop(); });
   return {init:init, stop:function(){ if(mt.running) mtStop(); }};
 })();
 
