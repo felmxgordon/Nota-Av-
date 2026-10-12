@@ -1,6 +1,6 @@
 # İş İngilizcesi
 
-Kurumsal hayatta en sık kullanılan 500 İngilizce terim, deyim ve phrasal verb için iPhone'da çalışan çalışma uygulaması.
+Kurumsal hayatta en sık kullanılan 1500 İngilizce terim, deyim, kalıp ifade ve phrasal verb (500 kurumsal + Cambridge iş İngilizcesi konularında 1000 ek) için iPhone'da çalışan çalışma uygulaması.
 
 **Aç:** https://felmxgordon.github.io/Nota-Av-/is-ingilizcesi/ → Safari'de Paylaş → Ana Ekrana Ekle.
 

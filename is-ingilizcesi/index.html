@@ -208,10 +208,13 @@ const CATS = {
   ops:"Satın Alma & Tedarik", neg:"Müzakere & Sözleşme", fin:"Finans & Muhasebe",
   mtg:"Toplantı & E-posta", rep:"Sunum & Raporlama", idiom:"İş Deyimleri",
   mgmt:"Yönetim & Liderlik", strat:"Strateji & Planlama", sales:"Satış & Pazarlama",
-  hr:"İK & İşe Alım", legal:"Hukuk & Uyumluluk", pv:"Phrasal Verbs"
+  hr:"İK & İşe Alım", legal:"Hukuk & Uyumluluk", pv:"Phrasal Verbs",
+  gen:"Temel İş Kelimeleri", colloc:"Kalıp İfadeler", econ:"Ekonomi & Bankacılık",
+  tech:"Teknoloji & Dijital", prod:"Üretim & Kalite", cust:"Müşteri Hizmetleri", travel:"İş Seyahati & Fuar"
 };
-const CAT_ORDER = ["ops","neg","fin","mtg","rep","idiom","pv","mgmt","strat","sales","hr","legal"];
-const WORDS = RAW.map(r=>({key:r[0].toLowerCase(), term:r[0], tr:r[1], def:r[2], ex:r[3], cat:r[4], type:r[5]}));
+const CAT_ORDER = ["ops","neg","fin","mtg","pv","gen","colloc","rep","idiom","econ","mgmt","strat","sales","cust","prod","tech","hr","legal","travel"];
+const WORDS = RAW.map(r=>({key:r[0].toLowerCase(), term:r[0], tr:r[1], def:r[2], ex:r[3], cat:r[4], type:r[5], set:r[6]||"biz"}));
+const SETS = {mix:"Tüm terimler (karışık)", biz:"Önce ilk 500 kurumsal terim", cam:"Önce Cambridge ek 1000"};
 const BY_KEY = Object.fromEntries(WORDS.map(w=>[w.key,w]));
 // Learning order: interleave categories so new words don't come in one block
 const NEW_ORDER = (()=>{
@@ -227,7 +230,7 @@ const DEFAULT = {
   cards:{},            // key -> {b:box, d:due 'YYYY-MM-DD', r:right, w:wrong, s:firstSeen}
   favs:{},
   log:{},              // date -> {rev, nw}
-  set:{newPerDay:10, goal:30, rate:0.9, accent:"en-GB", auto:true, dir:"en"},
+  set:{newPerDay:10, goal:30, rate:0.9, accent:"en-GB", auto:true, dir:"en", src:"mix"},
   tipOff:false
 };
 function load(){
@@ -275,7 +278,9 @@ function dueKeys(cat){
 }
 function newLeftToday(){ return Math.max(0, S.set.newPerDay - (S.log[today()]?.nw||0)); }
 function newKeys(cat, n){
-  return NEW_ORDER.filter(w=>!S.cards[w.key] && (!cat||w.cat===cat)).slice(0,n).map(w=>w.key);
+  let pool = NEW_ORDER.filter(w=>!S.cards[w.key] && (!cat||w.cat===cat));
+  if(S.set.src!=="mix") pool = [...pool.filter(w=>w.set===S.set.src), ...pool.filter(w=>w.set!==S.set.src)];
+  return pool.slice(0,n).map(w=>w.key);
 }
 function streak(){
   let n=0; const d=new Date();
@@ -653,6 +658,8 @@ function setView(){
   <div class="set-group">
     <div class="set-row"><div>Günlük yeni kelime<small>Her gün eklenecek yeni kart sayısı</small></div>${step("newPerDay",s.newPerDay)}</div>
     <div class="set-row"><div>Günlük hedef<small>Halkayı dolduran kart sayısı</small></div>${step("goal",s.goal)}</div>
+    <div class="set-row"><div>Yeni kelime sırası</div>
+      <select data-act="setSel" data-k="src">${Object.entries(SETS).map(([k,l])=>`<option value="${k}" ${s.src===k?"selected":""}>${l}</option>`).join("")}</select></div>
     <div class="set-row"><div>Kart yönü</div>
       <select data-act="setSel" data-k="dir"><option value="en" ${s.dir==="en"?"selected":""}>İngilizce → Türkçe</option><option value="tr" ${s.dir==="tr"?"selected":""}>Türkçe → İngilizce</option><option value="mix" ${s.dir==="mix"?"selected":""}>Karışık</option></select></div>
   </div>
