@@ -1,0 +1,15 @@
+{
+  "name": "İş İngilizcesi",
+  "short_name": "İş İngilizcesi",
+  "description": "Kurumsal İngilizce: 500 terim ve phrasal verb, aralıklı tekrar, telaffuz ve testler",
+  "lang": "tr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F6F4EE",
+  "theme_color": "#14213D",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
