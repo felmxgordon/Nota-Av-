@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Fuar Rotası">
+<meta name="theme-color" content="#17212b">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}*,*::before,*::after{box-sizing:inherit}</style>
+<title>Fuar Rotası</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a hangar-board list — sticky filter strip, then one row per stand grouped by hall, read on a phone while walking the fair */
+:root{
+  --bg:#f3f5f7; --surface:#ffffff; --ink:#17212b; --muted:#5b6876; --line:#d9dfe5;
+  --accent:#d9480f; --accent-soft:#fde8de; --p1:#0b6e4f; --p1-soft:#dcf1e8; --p2:#5b6876; --p2-soft:#e8ecf0; --warn:#9a6700; --warn-soft:#fbf0d4;
+  --f-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#11161c; --surface:#1a2129; --ink:#e7edf3; --muted:#9aa7b4; --line:#2c3640;
+  --accent:#ff7a3d; --accent-soft:#3a2219; --p1:#4fd1a1; --p1-soft:#14322a; --p2:#9aa7b4; --p2-soft:#232c35; --warn:#f2c14e; --warn-soft:#3a3016; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161c; --surface:#1a2129; --ink:#e7edf3; --muted:#9aa7b4; --line:#2c3640;
+  --accent:#ff7a3d; --accent-soft:#3a2219; --p1:#4fd1a1; --p1-soft:#14322a; --p2:#9aa7b4; --p2-soft:#232c35; --warn:#f2c14e; --warn-soft:#3a3016; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
+header h1{font-family:var(--f-display);font-weight:700;font-size:1.9rem;line-height:1.1;margin:0;text-wrap:balance}
+header p{margin:.35rem 0 0;color:var(--muted);max-width:65ch}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:.6rem;font-size:.85rem;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:600}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px;border-bottom:1px solid var(--line);margin-top:14px;display:grid;gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:600 .82rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.count{font-size:.82rem;color:var(--muted)}
+.hall{margin-top:22px}
+.hall h2{font-family:var(--f-display);font-weight:600;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;display:flex;align-items:baseline;gap:8px}
+.hall h2 span{font-family:var(--f-mono);font-size:.95rem;color:var(--accent);letter-spacing:0}
+.rows{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.row.done{opacity:.55}
+.row input{width:20px;height:20px;margin-top:3px;accent-color:var(--p1)}
+.main{min-width:0}
+.top{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.name{font-weight:600;font-size:1rem}
+.stand{font-family:var(--f-mono);font-size:.82rem;background:var(--accent-soft);color:var(--accent);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.why{margin:.3rem 0 0;color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:.45rem}
+.tag{font-size:.75rem;font-weight:600;letter-spacing:.03em;padding:2px 8px;border-radius:4px}
+.t-p1{background:var(--p1-soft);color:var(--p1)}
+.t-p2{background:var(--p2-soft);color:var(--p2)}
+.t-cat{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.t-chk{background:var(--warn-soft);color:var(--warn)}
+.ask{font-size:.88rem;color:var(--muted);margin:.35rem 0 0}
+.ask b{color:var(--ink);font-weight:600}
+a{color:var(--accent)}
+.memo{margin-top:.5rem;width:100%;min-height:2.4em;font:inherit;font-size:.9rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px;resize:vertical}
+.memo::placeholder{color:var(--muted)}
+.note{margin-top:28px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;max-width:70ch}
+@media (prefers-reduced-motion:no-preference){.row{transition:opacity .2s}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <h1>Avrasya Ambalaj 2026 · Ziyaret Rotası</h1>
+  <p>Havacılık üretimi ve endirekt satın alma için seçilmiş firmalar, salon sırasına göre. Ziyaret ettiklerinizi işaretleyin, standda not alın. İşaret ve notlar bu telefonda saklanır, internet olmadan da açılır.</p>
+  <div class="meta"><span><b>13–16 Ekim 2026</b> · Tüyap Büyükçekmece</span><span>Taranan: ~1.180 katılımcı / 99 sayfa</span><span>Seçilen: <b id="total"></b></span></div>
+</header>
+
+<div class="bar" role="region" aria-label="Filtreler">
+  <div class="chips" id="pri"></div>
+  <div class="chips" id="cat"></div>
+  <div class="count" id="count"></div>
+</div>
+
+<main id="list"></main>
+
+<p class="note">Kaynak: packagingfair.com katılımcı listesi ve firma profil sayfaları (12 Ekim 2026). Liste sayfası 2 (A harfi, ADAGÜN ile AKBAYSAN arası yaklaşık 12 firma) sitede yüklenmediği için taranamadı. “Teyit et” etiketli firmaların fuar profilinde ürün bilgisi yok; seçim firma adı ve temsil ettiği markalara dayanıyor. Fuarın ağırlığı gıda ve ambalaj makineleri olduğu için doğrudan uçuş parçası tedarikçisi beklenmemeli; değer, sevkiyat ambalajı, izlenebilirlik, sarf ve tesis tarafında.</p>
+</div>
+
+<script>
+const D=[
+// [id, name, hall, stand, priority, category, why, ask, check, url]
+["aksun","AKSUN AĞAÇ AMBALAJ","6","617B",1,"Koruyucu ambalaj","Parçaya özel ahşap sandık ve palet; 3D veriden veya tersine mühendislikle tasarım, yerinde paketleme hizmeti.","ISPM-15 ısıl işlem belgesi, büyük/ağır parça sandık referansları, çerçeve fiyat","",""],
+["izopek","İZO-PEK İZOLASYON AMBALAJ","6","614","1","Koruyucu ambalaj","Endüstriyel taşıma kasaları, iç ayırıcılar, PE köpük/keçe kesim parçalar, kanban etiket cepleri. İç lojistik ve hat beslemesi için uygun.","Parçaya özel köpük yuvalı ayırıcı, numune süresi, iade edilebilir kasa çözümü","",""],
+["dinamik","DİNAMİK ISI (DYNAFOAM)","3","335A",1,"Koruyucu ambalaj","Çapraz bağlı PE köpük (XPE), köpük profil ve ayırıcılar; hassas yüzeyli parçalar için iç dolgu.","Antistatik köpük seçeneği, CNC kesim kapasitesi, levha bazlı fiyat","",""],
+["anpak","AN-PAK (Sealed Air Instapak)","3","306A",1,"Koruyucu ambalaj","Yerinde köpük ambalaj makinesi distribütörü; düzensiz geometrili parça sevkiyatında sandık içi sabitleme.","Makine kiralama/satın alma modeli, kimyasal sarf maliyeti, servis","",""],
+["mutlu","MUTLU PAKETLER (Packsmile)","6","605B",2,"Koruyucu ambalaj","Hava yastığı makinesi ve rulolar, köpük, petek kağıt, kenar koruyucu ve palet sabitleme ürünleri.","Hava yastığı makinesi bedelsiz yerleştirme, sarf fiyatı","",""],
+["starvek","STARVEK (Tyvek)","8","807",2,"Koruyucu ambalaj","Tyvek markasıyla listelenmiş; nefes alan toz ve nem koruma örtüleri, parça ve kalıp örtüleri için.","Ürün yelpazesi ve ebat esnekliği","1",""],
+["incir","İNCİR PALET","9","911A1",2,"Koruyucu ambalaj","Ahşap palet ve ahşap ambalaj üreticisi; standart palet ihtiyacında ikinci kaynak.","ISPM-15, kapasite, Eskişehir teslim","",""],
+["uckardes","ÜÇ KARDEŞLER (Wodiza)","3","326B",2,"Koruyucu ambalaj","Sökülebilir, klipsli ahşap kutu ve ambalaj; tekrar kullanılabilir sandık için aday.","Tekrar kullanım döngüsü, montaj süresi","",""],
+["haspek","YALOVA HASPEK PALET","6","618",2,"Koruyucu ambalaj","Palet ve ambalaj firması; profilde ürün bilgisi yok.","Palet tipleri, ısıl işlem","1",""],
+["lazer","LAZERMARKET","11A","1154C",1,"İşaretleme ve etiket","Lazer markalama ve kodlama makineleri; metal parça üzerine kalıcı seri no ve DataMatrix işaretleme için.","Metal yüzeyde DMC okunabilirlik testi, servis ve yedek parça","",""],
+["hgtech","WUHAN HUAGONG (HGTECH)","12","1236A-2",2,"İşaretleme ve etiket","UV lazer markalama makinesi üreticisi; fiyat kıyası için üretici kaynağı.","Türkiye servis ağı, CE belgeleri","",""],
+["genmak","GENMAK","11","1137",1,"İşaretleme ve etiket","Zebra ve Epson barkod yazıcı, okuyucu, el terminali; etiket ve ribon üretimi. Depo ve izlenebilirlik sarfı tek kaynaktan.","Ribon/etiket yıllık anlaşma, cihaz bakım sözleşmesi","",""],
+["karma","KARMA KODLAMA (SATO)","11A","1179B",2,"İşaretleme ve etiket","SATO endüstriyel yazıcılar ve kodlama sistemleri temsilcisi; Zebra'ya alternatif teklif için.","SATO cihaz + sarf paket fiyatı","",""],
+["akon","AKON RULO KAĞIT","8","806A",2,"İşaretleme ve etiket","Termal etiket kağıdı ve etiket üreticisi; etiket sarfında yerli kaynak.","Termal transfer etiket kalite seçenekleri","",""],
+["otte","OTTE YAPIŞKAN BANT","5","526C",1,"Bant ve yapıştırıcı","Maskeleme, alüminyum folyo ve yüzey koruma bantları, köpük ve kesim parçalar. Havacılık sektörüne tedarik ettiğini belirtiyor.","Havacılık referansları, boya maskeleme bantlarının sıcaklık dayanımı, kesim parça","",""],
+["lohmann","LOHMANN TURKEY","3","306B",1,"Bant ve yapıştırıcı","Teknik çift taraflı bantlar; otomotiv ve elektronikte kullanılan ürün grubu.","Teknik bant portföyü, numune ve teknik veri föyü","",""],
+["vege","VE-GE YAPIŞTIRICI BANT","4","420A",2,"Bant ve yapıştırıcı","Kağıt maskeleme bandı ve ambalaj bantları; boyahane ve genel sarf için yerli üretici.","Maskeleme bandı sıcaklık sınıfları, yıllık hacim fiyatı","",""],
+["teknova","TEKNOVA (tesa)","2","206",2,"Bant ve yapıştırıcı","tesa ve HB Fuller temsilcisi; marka ürün için kanal fiyatı.","tesa teknik bant listesi ve bayi iskontosu","",""],
+["henkel","TÜRK HENKEL","8","813D",2,"Bant ve yapıştırıcı","Henkel standı ambalaj yapıştırıcılarına odaklı; mevcut Loctite/teknik yapıştırıcı ilişkisi için görüşme fırsatı.","Endüstriyel yapıştırıcı çerçeve anlaşma kontağı","1",""],
+["schmalz","SCHMALZ VAKUM","10","1007",1,"Elleçleme ve depolama","Vakumlu kaldırıcı ve vinç sistemleri, vakum tutucular, exoskeleton. Sac, levha ve kalıp elleçlemede ergonomi ve İSG.","Yerinde uygulama demosu, exoskeleton pilot","",""],
+["akdeniz","AKDENİZ DEPO (Akdenizrack)","10","1010B",1,"Elleçleme ve depolama","Endüstriyel raf, otomatik depo ve shuttle sistemleri; anahtar teslim proje.","Kantilever raf, yük hesabı, bakım ve raf denetimi hizmeti","",""],
+["erkan","ERKAN RAF","12A","1256A",2,"Elleçleme ve depolama","Raf sistemleri; profilde ürün bilgisi yok. Raf alımında ikinci teklif için.","Ürün yelpazesi, referanslar","1",""],
+["onare","ONARE ENDÜSTRİYEL AMBALAJLAMA","11","1115A",2,"Elleçleme ve depolama","Çemberleme sistemleri, ErgoPack mobil palet çemberleme cihazı.","Sevkiyat alanı için mobil çemberleme, PET çember sarfı","",""],
+["smc","SMC TURKEY","12","1226B",1,"MRO ve makine elemanları","Pnömatik ve otomasyon bileşenleri; 700 binden fazla ürün çeşidi. MRO harcamasında ana kalem.","Konsinye stok, yıllık iskonto anlaşması, teknik eğitim","",""],
+["elesa","ELESA+GANTER","12","1225B",1,"MRO ve makine elemanları","Standart makine elemanları: indeksleme pimleri, kollar, menteşeler, pozisyon göstergeleri. Fikstür ve jig imalatında kullanılır.","Katalog bazlı yıllık fiyat, CAD kütüphanesi erişimi","",""],
+["kahve","KAHVECİOĞLU PLASTİK","12A","1260C",1,"MRO ve makine elemanları","Mühendislik plastikleri yarı mamul stoku; Röchling, Mitsubishi Chemical Advanced Materials, Guarniflon temsilcisi. Fikstür, koruma pedi ve kalıp parçaları için.","PEEK/POM/PTFE levha-çubuk fiyatı, ölçüye kesim, malzeme sertifikası","",""],
+["neumo","NEUMO MÜHENDİSLİK","11A","1167B",2,"MRO ve makine elemanları","Parker ve Hy-Lok bağlantı elemanları, vana ve filtrasyon markaları.","Parker/Hy-Lok bayi fiyatı ve teslim süresi","",""],
+["rotaseal","ROTASEAL (Garlock)","11A","1171B",2,"MRO ve makine elemanları","Garlock sızdırmazlık elemanları temsilcisi; conta ve salmastra sarfı.","Conta standart listesi, stok tutma","",""],
+["nilfisk","NİLFİSK","11A","1169B",1,"Tesis ve kalite","Profesyonel temizlik ekipmanları; üretim alanı zemin temizliği ve FOD önleme.","Makine kiralama + bakım paketi, endüstriyel süpürücüler","",""],
+["tse","TÜRK STANDARDLARI ENSTİTÜSÜ","F (Fuaye)","108",1,"Tesis ve kalite","Kalibrasyon ve metroloji, NDT ve kaynakçı personel belgelendirme, ISO eğitimleri.","Kalibrasyon çerçeve fiyatı, NDT personel sertifikasyon takvimi","",""],
+["alpha","ALPHASONICS (UZE Ambalaj standı)","1","107",2,"Tesis ve kalite","İngiliz ultrasonik temizleme sistemleri üreticisi; parça yıkama ihtiyacı için. Standda baskı odaklı ürünler olabilir.","Endüstriyel parça yıkama modelleri, Türkiye servisi","1",""]
+];
+const CATS=["Tümü",...new Set(D.map(d=>d[5]))];
+const HALL_ORDER=["F (Fuaye)","1","1A","2","3","4","5","6","7","8","9","10","10A","11","11A","12","12A"];
+let fPri="all", fCat="Tümü", done={};
+try{done=JSON.parse(localStorage.getItem("amb26-done")||"{}")}catch(e){done={}}
+let notes={};try{notes=JSON.parse(localStorage.getItem("amb26-notes")||"{}")}catch(e){notes={}}
+function saveNotes(){try{localStorage.setItem("amb26-notes",JSON.stringify(notes))}catch(e){}}
+function save(){try{localStorage.setItem("amb26-done",JSON.stringify(done))}catch(e){}}
+try{const s=JSON.parse(localStorage.getItem("amb26-f")||"{}");if(s.p)fPri=s.p;if(s.c&&CATS.includes(s.c))fCat=s.c}catch(e){}
+function saveF(){try{localStorage.setItem("amb26-f",JSON.stringify({p:fPri,c:fCat}))}catch(e){}}
+function chips(el,items,cur,set){el.innerHTML="";items.forEach(([v,l])=>{const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=l;b.setAttribute("aria-pressed",v===cur);b.onclick=()=>{set(v);saveF();render()};el.appendChild(b)})}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function render(){
+  document.getElementById("total").textContent=D.length+" firma ("+D.filter(d=>+d[4]===1).length+" öncelikli)";
+  chips(document.getElementById("pri"),[["all","Tüm öncelikler"],["1","Öncelik 1"],["2","Öncelik 2"],["todo","Gidilmedi"]],fPri,v=>fPri=v);
+  chips(document.getElementById("cat"),CATS.map(c=>[c,c]),fCat,v=>fCat=v);
+  const rows=D.filter(d=>(fCat==="Tümü"||d[5]===fCat)&&(fPri==="all"||(fPri==="todo"?!done[d[0]]:String(d[4])===fPri)));
+  document.getElementById("count").textContent=rows.length+" firma gösteriliyor · "+Object.values(done).filter(Boolean).length+" ziyaret edildi";
+  const by={};rows.forEach(d=>(by[d[2]]=by[d[2]]||[]).push(d));
+  const halls=Object.keys(by).sort((a,b)=>HALL_ORDER.indexOf(a)-HALL_ORDER.indexOf(b));
+  const list=document.getElementById("list");
+  list.innerHTML=halls.length?"":'<p class="count" style="margin-top:20px">Bu filtrede firma yok.</p>';
+  halls.forEach(h=>{
+    const sec=document.createElement("section");sec.className="hall";
+    sec.innerHTML='<h2>Salon <span>'+esc(h)+'</span></h2><div class="rows"></div>';
+    const wrap=sec.querySelector(".rows");
+    by[h].sort((a,b)=>a[4]-b[4]||a[3].localeCompare(b[3])).forEach(d=>{
+      const r=document.createElement("div");r.className="row"+(done[d[0]]?" done":"");
+      r.innerHTML='<input type="checkbox" id="c-'+d[0]+'" aria-label="'+esc(d[1])+' ziyaret edildi"'+(done[d[0]]?" checked":"")+'>'+
+      '<div class="main"><div class="top"><label class="name" for="c-'+d[0]+'">'+esc(d[1])+'</label><span class="stand">'+esc(h)+' · '+esc(d[3])+'</span></div>'+
+      '<p class="why">'+esc(d[6])+'</p><p class="ask"><b>Sor:</b> '+esc(d[7])+'</p>'+
+      '<div class="tags"><span class="tag '+(+d[4]===1?"t-p1":"t-p2")+'">Öncelik '+d[4]+'</span><span class="tag t-cat">'+esc(d[5])+'</span>'+(d[8]?'<span class="tag t-chk">Teyit et</span>':'')+'</div><textarea class="memo" id="n-'+d[0]+'" rows="1" placeholder="Not: kişi, fiyat, numune…"></textarea></div>';
+      const ta=r.querySelector("textarea");ta.value=notes[d[0]]||"";ta.oninput=()=>{notes[d[0]]=ta.value;saveNotes()};
+      r.querySelector("input").onchange=e=>{done[d[0]]=e.target.checked;save();render()};
+      wrap.appendChild(r)});
+    list.appendChild(sec)});
+}
+render();
+if("serviceWorker" in navigator && /^https?:/.test(location.protocol)){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}
+</script>
+</body>
+</html>
