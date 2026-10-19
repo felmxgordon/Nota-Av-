@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kısaltma Sözlüğü</title>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kısaltmalar">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f3f5f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10151c" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;-webkit-text-size-adjust:100%}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: sticky search + category filter rail, then a dense scannable list of abbreviation rows */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --fg:#17202c; --muted:#5b6778; --line:#dde3ea;
+  --accent:#c77a12; --accent-soft:#fbf0de; --chip:#e7ecf2; --warn:#a3361f; --warn-soft:#fbe9e4;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10151c; --surface:#171e27; --fg:#e6ebf1; --muted:#97a3b3; --line:#28323f;
+  --accent:#f0a63a; --accent-soft:#2c2214; --chip:#202a36; --warn:#f08a70; --warn-soft:#2e1a15; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151c; --surface:#171e27; --fg:#e6ebf1; --muted:#97a3b3; --line:#28323f;
+  --accent:#f0a63a; --accent-soft:#2c2214; --chip:#202a36; --warn:#f08a70; --warn-soft:#2e1a15; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:960px;margin:0 auto;padding-block:28px 48px}
+header h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,6vw,44px);line-height:1.05;margin:0;letter-spacing:.01em;text-wrap:balance}
+header p{color:var(--muted);margin:8px 0 0;max-width:62ch}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:16px 12px;display:grid;gap:12px;border-bottom:1px solid var(--line)}
+.search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0 14px}
+.search:focus-within{border-color:var(--accent)}
+.search input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);font:inherit;font-size:17px;padding:12px 0;outline:none}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:600 13px/1 var(--body);border:1px solid transparent;background:var(--chip);color:var(--fg);padding:8px 11px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);color:#1a1205;border-color:var(--accent)}
+.chip:focus-visible,.search input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section{margin-top:28px}
+section h2{font-family:var(--display);font-weight:600;font-size:22px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;color:var(--muted);display:flex;gap:10px;align-items:baseline}
+section h2 span{font-family:var(--mono);font-size:13px;letter-spacing:0}
+.row{display:grid;grid-template-columns:132px minmax(0,1fr);gap:4px 18px;padding:12px 0;border-top:1px solid var(--line)}
+.abbr{font-family:var(--mono);font-weight:600;font-size:16px;color:var(--accent);word-break:break-word}
+.full{font-weight:600}
+.tr{color:var(--muted)}
+.note{margin-top:6px;font-size:14px;background:var(--accent-soft);padding:6px 10px;border-radius:6px}
+.note.warn{background:var(--warn-soft);color:var(--warn)}
+.empty{color:var(--muted);padding:32px 0}
+mark{background:var(--accent-soft);color:inherit;padding:0 1px}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Havacılık Satın Alma Sözlüğü</h1>
+    <p>Havacılık sektöründe ve satın alma süreçlerinde sık geçen kısaltmalar. Turuncu notlar bağlam bilgisi, kırmızı notlar sektörde iki farklı anlama gelen kısaltmalar.</p>
+  </header>
+  <div class="bar">
+    <label class="search" for="q">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="color:var(--muted)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Ara: RFQ, uçuşa elverişlilik, AOG…" autocomplete="off">
+      <span class="count" id="count"></span>
+    </label>
+    <div class="chips" id="chips" role="group" aria-label="Kategori"></div>
+  </div>
+  <main id="list"></main>
+</div>
+
+<script>
+const CATS = {
+  reg:"Otorite & Regülasyon",
+  cert:"Kalite & Sertifikasyon",
+  tech:"Bakım & Teknik Doküman",
+  part:"Parça, Lojistik & Operasyon",
+  proc:"Satın Alma & Sözleşme",
+  fin:"Finans & Maliyet",
+  trade:"Dış Ticaret, Gümrük & Incoterms",
+  tr:"Türkiye'ye Özgü"
+};
+// [kısaltma, açılım, Türkçe açıklama, kategori, not, uyarı?]
+const D = [
+["ICAO","International Civil Aviation Organization","Uluslararası Sivil Havacılık Örgütü; BM'ye bağlı, küresel standartları belirler.","reg"],
+["IATA","International Air Transport Association","Uluslararası Hava Taşımacılığı Birliği; havayolu ticari standartları, DGR ve havalimanı kodları.","reg"],
+["EASA","European Union Aviation Safety Agency","Avrupa Birliği Havacılık Emniyeti Ajansı. Türkiye mevzuatı büyük ölçüde EASA kurallarıyla uyumludur.","reg"],
+["FAA","Federal Aviation Administration","ABD Federal Havacılık İdaresi.","reg"],
+["CAA","Civil Aviation Authority","Ülke sivil havacılık otoritesi için genel terim (ör. UK CAA).","reg"],
+["Part-21","EASA Part-21","Tasarım ve üretim kuruluşu onayları (DOA / POA).","reg"],
+["DOA / POA","Design / Production Organisation Approval","Tasarım / Üretim Kuruluşu Onayı.","reg"],
+["Part-145","EASA Part-145","Bakım kuruluşu onayı. Bakım hizmeti tedarikçilerinde aranan temel yetki.","reg","Bakım hizmeti alırken tedarikçinin Part-145 kapsamını (rating, uçak/komponent tipi) mutlaka kontrol edin."],
+["Part-CAMO","Continuing Airworthiness Management Organisation","Sürekli uçuşa elverişlilik yönetim kuruluşu (eski Part-M Subpart G).","reg"],
+["Part-66 / 147","EASA Part-66 / Part-147","Part-66: bakım personeli lisansı (B1, B2, C). Part-147: bakım eğitim kuruluşu.","reg"],
+["AOC","Air Operator Certificate","Hava İşletme Ruhsatı; havayolu işletmeciliği yetkisi.","reg"],
+["AD","Airworthiness Directive","Uçuşa Elverişlilik Direktifi; otoritenin zorunlu kıldığı düzeltici işlem.","reg"],
+["TC / STC","(Supplemental) Type Certificate","Tip Sertifikası / Ek Tip Sertifikası (modifikasyonlar için).","reg"],
+["TCDS","Type Certificate Data Sheet","Tip sertifikası veri sayfası.","reg"],
+["CofA","Certificate of Airworthiness","Uçuşa Elverişlilik Sertifikası.","reg"],
+["ARC","Airworthiness Review Certificate","Uçuşa Elverişlilik Gözden Geçirme Sertifikası; yıllık yenilenir.","reg"],
+["ETOPS","Extended-range Twin-engine Operations","Çift motorlu uçakların alternatif meydandan uzak uzun menzilli operasyonları.","reg"],
+["SMS","Safety Management System","Emniyet Yönetim Sistemi.","reg"],
+["PMA","Parts Manufacturer Approval","FAA onaylı OEM dışı (alternatif) parça üretimi. Maliyet düşürme fırsatı.","reg","PMA parça kullanımı için müşteri/kiralayan (lessor) onayı gerekebilir."],
+["DER","Designated Engineering Representative","FAA adına mühendislik onayı veren yetkili; DER onaylı tamirler.","reg"],
+
+["AS9100","Aerospace Quality Management System","Havacılık kalite yönetim sistemi standardı (ISO 9001 + havacılık ekleri).","cert","Tedarikçi değerlendirmede temel eşik kriter."],
+["AS9110","Quality Management – Aviation Maintenance","Bakım kuruluşları için kalite standardı.","cert"],
+["AS9120","Quality Management – Distributors","Havacılık distribütörleri / stokistler için kalite standardı.","cert","Parça distribütörlerinde AS9120 ve izlenebilirlik zinciri (back-to-birth) aranır."],
+["AS9102","First Article Inspection Requirement","İlk ürün muayenesi raporlama standardı.","cert"],
+["FAI","First Article Inspection","İlk Ürün Muayenesi; yeni parça/tedarikçi için ilk partinin tam doğrulaması.","cert"],
+["Nadcap","National Aerospace and Defense Contractors Accreditation Program","Özel prosesler (kaplama, ısıl işlem, NDT, kaynak) için sektör akreditasyonu.","cert"],
+["EASA Form 1","Authorized Release Certificate","Parçanın uçuşa elverişli olduğunu gösteren EASA serbest bırakma belgesi.","cert","Parça satın alımında olmazsa olmaz belge."],
+["8130-3","FAA Form 8130-3","FAA'nın Form 1 karşılığı; uçuşa elverişlilik onay etiketi.","cert"],
+["CoC","Certificate of Conformity","Uygunluk Belgesi; ürünün sipariş/şartnameye uyduğunu beyan.","cert"],
+["CRS","Certificate of Release to Service","Hizmete Verme Belgesi; bakım sonrası imzalanır.","cert"],
+["NCR","Non-Conformance Report","Uygunsuzluk Raporu.","cert"],
+["CAPA","Corrective and Preventive Action","Düzeltici ve Önleyici Faaliyet.","cert"],
+["8D","Eight Disciplines","8 adımlı problem çözme metodu; tedarikçi uygunsuzluklarında istenir.","cert"],
+["RCA","Root Cause Analysis","Kök Neden Analizi.","cert"],
+["NDT","Non-Destructive Testing","Tahribatsız Muayene (ultrason, eddy current, penetrant vb.).","cert"],
+["FOD","Foreign Object Debris / Damage","Yabancı Madde (Hasarı); motor ve hangar emniyeti.","cert"],
+["ESD","Electrostatic Discharge","Elektrostatik Boşalma; hassas elektronik parçaların paketleme şartı.","cert"],
+["QMS","Quality Management System","Kalite Yönetim Sistemi.","cert"],
+
+["MRO","Maintenance, Repair and Overhaul","Bakım, Onarım ve Revizyon (havacılık anlamı).","tech","Genel satın almada MRO = Maintenance, Repair & Operations, yani sarf/endirekt malzeme. Havacılıkta ise bakım kuruluşu demektir.",1],
+["OEM","Original Equipment Manufacturer","Orijinal Ekipman Üreticisi (Airbus, Boeing, CFM, Collins vb.).","tech"],
+["ATA 100 / iSpec 2200","ATA Chapters","Uçak sistemlerinin numaralı bölümleri (ör. ATA 32 iniş takımı, ATA 72 motor).","tech"],
+["AMM","Aircraft Maintenance Manual","Uçak Bakım El Kitabı.","tech"],
+["IPC / IPD","Illustrated Parts Catalog / Data","Resimli Parça Kataloğu; parça numarası ve değişebilirlik kaynağı.","tech"],
+["CMM","Component Maintenance Manual","Komponent Bakım El Kitabı.","tech"],
+["SRM","Structural Repair Manual","Yapısal Tamir El Kitabı.","tech","Satın almada SRM = Supplier Relationship Management (Tedarikçi İlişkileri Yönetimi). Bağlama dikkat.",1],
+["SB","Service Bulletin","Servis Bülteni; üreticinin önerdiği değişiklik/muayene.","tech"],
+["MEL / MMEL","(Master) Minimum Equipment List","Arızalıyken uçuşa izin verilen ekipman listesi.","tech"],
+["MPD","Maintenance Planning Document","Bakım Planlama Dokümanı.","tech"],
+["A / C-check","Maintenance Checks","Periyodik bakım seviyeleri; C-check ağır bakımdır.","tech"],
+["OH","Overhaul","Revizyon; parçanın sıfır saat durumuna getirilmesi.","tech"],
+["TSN / CSN","Time / Cycles Since New","Yeniden itibaren geçen saat / çevrim.","tech"],
+["TSO / CSO","Time / Cycles Since Overhaul","Revizyondan itibaren geçen saat / çevrim.","tech","FAA'da TSO ayrıca Technical Standard Order (teknik standart emri) anlamına gelir.",1],
+["TBO","Time Between Overhauls","Revizyonlar arası süre.","tech"],
+["HT / OC / CM","Hard Time / On Condition / Condition Monitoring","Bakım prensipleri: kesin ömürlü / duruma bağlı / izlemeye dayalı.","tech"],
+["LLP","Life Limited Part","Ömür Sınırlı Parça (motor diskleri vb.); tam geçmiş kaydı gerekir.","tech"],
+["MTBF / MTBUR","Mean Time Between (Unscheduled) Failures / Removals","Arızalar / plansız sökümler arası ortalama süre; güvenilirlik ve kontrat KPI'ı.","tech"],
+["NFF","No Fault Found","Arıza Bulunamadı; tamir faturalarında sık itiraz konusu.","tech"],
+["BER","Beyond Economical Repair","Ekonomik Tamir Sınırı Aşıldı; tamir yerine değişim.","tech"],
+["APU","Auxiliary Power Unit","Yardımcı Güç Ünitesi.","tech"],
+["LRU / SRU","Line / Shop Replaceable Unit","Hatta / atölyede değiştirilebilir ünite.","tech"],
+["MSN / ESN","Manufacturer / Engine Serial Number","Uçak / motor seri numarası.","tech"],
+
+["AOG","Aircraft on Ground","Uçak yerde, uçamıyor; en acil sipariş önceliği.","part","Öncelik sırası genelde: AOG > Critical > Routine. AOG fiyatlandırmasını kontratta önceden sabitleyin."],
+["P/N, S/N","Part Number, Serial Number","Parça numarası, seri numarası.","part"],
+["CAGE","Commercial and Government Entity Code","Tedarikçi tanımlama kodu (NATO NCAGE).","part"],
+["NSN","NATO Stock Number","NATO stok numarası (savunma tarafı).","part"],
+["Rotable","Rotable Part","Tamir edilip tekrar kullanılan döner parça.","part"],
+["Exchange","Exchange Unit","Arızalı parçayı verip servis edilebilir parça alma modeli (+ exchange fee).","part"],
+["PBH","Power by the Hour","Uçuş saati başına ödemeli bakım/destek kontratı.","part"],
+["ACMI","Aircraft, Crew, Maintenance, Insurance","Uçak + mürettebat + bakım + sigorta dahil (wet) kiralama.","part"],
+["Wet / Dry lease","Wet / Dry Lease","Mürettebatlı / mürettebatsız uçak kiralama.","part"],
+["MTOW","Maximum Take-Off Weight","Azami Kalkış Ağırlığı; havalimanı ve navigasyon ücretlerinin bazı.","part"],
+["ULD","Unit Load Device","Kargo konteyner/paleti.","part"],
+["GSE","Ground Support Equipment","Yer Destek Ekipmanı; tipik endirekt satın alma kalemi.","part"],
+["FBO","Fixed-Base Operator","Genel havacılık yer hizmetleri işletmesi.","part"],
+["DGR","Dangerous Goods Regulations","IATA Tehlikeli Madde Kuralları; kimyasal, batarya sevkiyatı.","part"],
+["SDS / MSDS","(Material) Safety Data Sheet","Güvenlik Bilgi Formu.","part"],
+["VMI","Vendor Managed Inventory","Tedarikçi Yönetimli Stok.","part"],
+["Consignment","Consignment Stock","Konsinye stok; kullanıldıkça faturalanır.","part"],
+["MOQ","Minimum Order Quantity","Asgari Sipariş Miktarı.","part"],
+["EOQ","Economic Order Quantity","Ekonomik Sipariş Miktarı.","part"],
+["OTD / OTIF","On-Time Delivery / On Time In Full","Zamanında (ve eksiksiz) teslimat oranı; tedarikçi KPI'ı.","part"],
+["TAT","Turnaround Time","Tamir/hizmet geri dönüş süresi. Havalimanında ise uçağın yerde kalış süresi.","part"],
+["ETA / ETD","Estimated Time of Arrival / Departure","Tahmini varış / kalkış zamanı.","part"],
+
+["RFI","Request for Information","Bilgi Talebi; pazarı tanıma ve ön eleme.","proc"],
+["RFP","Request for Proposal","Teklif Talebi (çözüm odaklı, kapsamlı).","proc"],
+["RFQ","Request for Quotation","Fiyat Teklifi Talebi (şartname net, fiyat odaklı).","proc"],
+["RFx","Request for x","RFI/RFP/RFQ süreçlerinin genel adı.","proc"],
+["BAFO","Best and Final Offer","Nihai ve En İyi Teklif turu.","proc"],
+["PR / PO","Purchase Requisition / Order","Satın Alma Talebi / Siparişi.","proc"],
+["SOW","Statement of Work","İş Tanımı / kapsam dokümanı.","proc"],
+["SLA","Service Level Agreement","Hizmet Seviyesi Sözleşmesi.","proc"],
+["KPI","Key Performance Indicator","Anahtar Performans Göstergesi.","proc"],
+["MSA","Master Service Agreement","Çerçeve Hizmet Sözleşmesi.","proc"],
+["GTA","General Terms Agreement","Genel Şartlar Sözleşmesi; OEM'lerle yapılan havacılık çerçeve sözleşmesi.","proc"],
+["LTA","Long Term Agreement","Uzun Vadeli Anlaşma.","proc"],
+["NDA","Non-Disclosure Agreement","Gizlilik Sözleşmesi.","proc"],
+["T&C","Terms and Conditions","Genel Hüküm ve Koşullar.","proc"],
+["LoI / MoU","Letter of Intent / Memorandum of Understanding","Niyet Mektubu / Mutabakat Zaptı.","proc"],
+["SRM","Supplier Relationship Management","Tedarikçi İlişkileri Yönetimi.","proc","Teknik tarafta SRM = Structural Repair Manual.",1],
+["CLM","Contract Lifecycle Management","Sözleşme Yaşam Döngüsü Yönetimi.","proc"],
+["P2P / S2P","Procure-to-Pay / Source-to-Pay","Talepten ödemeye / kaynaktan ödemeye süreç zinciri.","proc"],
+["ERP","Enterprise Resource Planning","Kurumsal Kaynak Planlama (ör. SAP MM, Ariba).","proc"],
+["UNSPSC","United Nations Standard Products and Services Code","Harcama kategorizasyonu için standart sınıflandırma.","proc"],
+["BOM","Bill of Materials","Malzeme Listesi.","proc"],
+["SPOF","Single Point of Failure","Tek kaynak bağımlılığı; tedarik riski.","proc"],
+["ESG","Environmental, Social, Governance","Çevresel, Sosyal ve Yönetişim kriterleri; tedarikçi değerlendirmede artan ağırlık.","proc"],
+["SAF","Sustainable Aviation Fuel","Sürdürülebilir Havacılık Yakıtı.","proc"],
+["CORSIA","Carbon Offsetting and Reduction Scheme for International Aviation","ICAO karbon denkleştirme programı.","proc"],
+["ITAR","International Traffic in Arms Regulations","ABD savunma ihracat kontrolü; teknik veri paylaşımını kısıtlar.","proc","ITAR/EAR kapsamlı ürünlerde EUC (son kullanıcı sertifikası) istenir."],
+["EAR / ECCN","Export Administration Regulations / Export Control Classification Number","ABD çift kullanımlı ürün ihracat kontrolü ve sınıflandırma numarası.","proc"],
+["EUC","End User Certificate","Son Kullanıcı Sertifikası.","proc"],
+
+["TCO","Total Cost of Ownership","Toplam Sahip Olma Maliyeti.","fin"],
+["LCC","Life Cycle Cost","Yaşam Döngüsü Maliyeti.","fin","Havacılıkta LCC ayrıca Low-Cost Carrier (düşük maliyetli havayolu) demektir.",1],
+["CAPEX / OPEX","Capital / Operating Expenditure","Yatırım / İşletme harcaması.","fin"],
+["ROI","Return on Investment","Yatırım Getirisi.","fin"],
+["NPV","Net Present Value","Net Bugünkü Değer.","fin"],
+["PPV","Purchase Price Variance","Satın Alma Fiyat Sapması (gerçekleşen vs standart fiyat).","fin"],
+["Should-cost","Should-Cost Analysis","Olması gereken maliyet modeli; pazarlık dayanağı.","fin"],
+["CASK / RASK","Cost / Revenue per Available Seat Kilometer","Arz edilen koltuk-km başına maliyet / gelir; havayolu verimlilik ölçüsü.","fin"],
+["DOC","Direct Operating Cost","Doğrudan İşletme Maliyeti.","fin"],
+["FX","Foreign Exchange","Döviz; kur riski ve endeksleme maddeleri.","fin"],
+["EBITDA","Earnings Before Interest, Taxes, Depreciation and Amortization","Faiz, vergi ve amortisman öncesi kâr.","fin"],
+
+["Incoterms 2020","International Commercial Terms","Teslim şekilleri: riskin ve masrafın el değiştirdiği nokta.","trade"],
+["EXW","Ex Works","İşyerinde teslim; tüm risk ve masraf alıcıda.","trade"],
+["FCA","Free Carrier","Taşıyıcıya teslim; havayolu kargoda en uygun terim.","trade"],
+["CPT / CIP","Carriage (and Insurance) Paid To","Taşıma (ve sigorta) ödenmiş olarak teslim.","trade"],
+["DAP / DPU","Delivered at Place / Place Unloaded","Belirlenen yerde (boşaltılmış) teslim.","trade"],
+["DDP","Delivered Duty Paid","Gümrük vergisi ödenmiş teslim; tüm yük satıcıda.","trade"],
+["FOB / CIF","Free on Board / Cost, Insurance and Freight","Deniz taşımacılığı terimleri; hava kargoda FCA/CIP tercih edilmeli.","trade","Hava kargoda FOB kullanımı yaygın bir hatadır."],
+["AWB","Air Waybill","Hava Konşimentosu.","trade"],
+["HS","Harmonized System Code","Uluslararası gümrük tarife kodu (Türkiye'de GTİP).","trade"],
+["REACH / RoHS","EU chemical / hazardous substance regulations","AB kimyasal ve tehlikeli madde düzenlemeleri.","trade"],
+
+["SHGM","Sivil Havacılık Genel Müdürlüğü","Türkiye sivil havacılık otoritesi.","tr"],
+["SHT","Sivil Havacılık Talimatı","SHGM talimatları (ör. SHT-145, SHT-M); EASA Part'larının karşılığı.","tr"],
+["DHMİ","Devlet Hava Meydanları İşletmesi","Havalimanı ve hava seyrüsefer hizmetleri işletmecisi.","tr"],
+["SSB","Savunma Sanayii Başkanlığı","Savunma projeleri ve tedarik otoritesi.","tr"],
+["SİP","Sanayi İşbirliği Programı","Eski adıyla offset; yabancı tedarikçiden yerli iş payı yükümlülüğü.","tr"],
+["KİK","Kamu İhale Kanunu (4734)","Kamu alımları mevzuatı; kamu bağlantılı projelerde gündeme gelir.","tr"],
+["GTİP","Gümrük Tarife İstatistik Pozisyonu","HS kodunun Türkiye'deki 12 haneli karşılığı.","tr"],
+["DİR","Dahilde İşleme Rejimi","İhracat amaçlı ithalatta vergi muafiyeti/teminat rejimi.","tr"],
+["ATR / EUR.1","Dolaşım Belgeleri","AB ile tercihli ticaret için menşe/dolaşım belgeleri.","tr"],
+["TSE / TÜRKAK","Türk Standardları Enstitüsü / Türk Akreditasyon Kurumu","Standart ve akreditasyon kurumları.","tr"],
+["KDV / ÖTV","Katma Değer / Özel Tüketim Vergisi","Havacılık bakım ve parça teslimlerinde KDV istisnası koşullarına dikkat.","tr"],
+["KVKK","Kişisel Verilerin Korunması Kanunu","Veri işleyen tedarikçi sözleşmelerinde veri işleme ekleri gerekir.","tr"]
+];
+
+const chips=document.getElementById('chips'),list=document.getElementById('list'),q=document.getElementById('q'),count=document.getElementById('count');
+let active='all';
+const norm=s=>s.toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ı/g,'i');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function hl(text,term){
+  if(!term) return esc(text);
+  const n=norm(text); const i=n.indexOf(term);
+  if(i<0) return esc(text);
+  return esc(text.slice(0,i))+'<mark>'+esc(text.slice(i,i+term.length))+'</mark>'+esc(text.slice(i+term.length));
+}
+function mkChip(key,label){
+  const b=document.createElement('button');b.className='chip';b.type='button';b.id='chip-'+key;b.textContent=label;
+  b.setAttribute('aria-pressed',key===active);b.onclick=()=>{active=key;
+    try{localStorage.setItem('cat',key)}catch(e){}
+    [...chips.children].forEach(c=>c.setAttribute('aria-pressed',c===b));render();};
+  chips.appendChild(b);
+}
+try{const s=localStorage.getItem('cat'); if(s&&(s==='all'||CATS[s])) active=s;}catch(e){}
+mkChip('all','Tümü');Object.entries(CATS).forEach(([k,v])=>mkChip(k,v));
+function render(){
+  const t=norm(q.value.trim());
+  const rows=D.filter(r=>(active==='all'||r[3]===active)&&(!t||norm(r[0]+' '+r[1]+' '+r[2]+' '+(r[4]||'')).includes(t)));
+  count.textContent=rows.length+' / '+D.length;
+  if(!rows.length){list.innerHTML='<p class="empty">Eşleşen kısaltma yok. Farklı bir yazım veya Türkçe açıklamadan bir kelime deneyin.</p>';return}
+  let html='';
+  for(const [k,label] of Object.entries(CATS)){
+    const g=rows.filter(r=>r[3]===k); if(!g.length) continue;
+    html+=`<section><h2>${label}<span>${g.length}</span></h2>`;
+    for(const r of g){
+      html+=`<div class="row"><div class="abbr">${hl(r[0],t)}</div><div><div class="full">${hl(r[1],t)}</div><div class="tr">${hl(r[2],t)}</div>${r[4]?`<div class="note${r[5]?' warn':''}">${r[5]?'Çift anlam: ':''}${esc(r[4])}</div>`:''}</div></div>`;
+    }
+    html+='</section>';
+  }
+  list.innerHTML=html;
+}
+q.addEventListener('input',render);render();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));}
+</script>
+</body>
+</html>
