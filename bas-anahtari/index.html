@@ -117,6 +117,16 @@ svg text{font-family:var(--body)}
 .s-mut{fill:var(--muted);font-size:11.5px}
 .s-acc{fill:var(--brass);font-size:13px;font-weight:600}
 .s-stl{fill:var(--steel);font-size:13px;font-weight:600}
+
+.pickbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding-block:8px;border-bottom:1px solid var(--line);margin-block:-14px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
+.pickbar .picker{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.pickbar .picker button{padding:7px 8px;border-radius:9px}
+.pickbar .picker button b{font-size:1.1rem}
+.pickbar .picker button span{font-size:.68rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.step{scroll-margin-top:84px}
+#spec{transition:background-color .4s}
+#spec.flash{background:var(--brass-soft)}
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
@@ -132,10 +142,10 @@ svg text{font-family:var(--body)}
     </nav>
   </header>
 
+  <div class="pickbar" role="region" aria-label="Bas seçimi"><div class="picker" id="picker"></div></div>
+
   <section style="display:flex;flex-direction:column;gap:12px" aria-label="Bas seçimi">
-    <h3>Hangi bası ayarlıyorsun?</h3>
-    <div class="picker" id="picker"></div>
-    <div class="spec" id="spec"></div>
+        <div class="spec" id="spec"></div>
   </section>
 
   
@@ -543,7 +553,7 @@ try{const s=localStorage.getItem("basSel");if(B[s])cur=s;}catch(e){}
 const picker=document.getElementById("picker");
 keys.forEach(k=>{const b=document.createElement("button");b.type="button";b.id="pick-"+k;b.dataset.k=k;
   b.innerHTML=`<b>${B[k].tab}</b><span>${B[k].short}</span>`;b.addEventListener("click",()=>sel(k));picker.appendChild(b);});
-function sel(k){cur=k;try{localStorage.setItem("basSel",k);}catch(e){}render();}
+function sel(k){cur=k;const sp=document.getElementById("spec");if(sp){sp.classList.add("flash");setTimeout(()=>sp.classList.remove("flash"),450);}try{localStorage.setItem("basSel",k);}catch(e){}render();}
 function render(){
   const d=B[cur];
   picker.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===cur?"true":"false"));
