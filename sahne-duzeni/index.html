@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sahne Düzeni</title>
+<meta name="description" content="Dört bas için Tone Hammer ve KZ ZAS kulak içi mix ayarları.">
+<meta name="theme-color" content="#1B2127">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Sahne Düzeni">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-64.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: tezgah üstü kılavuz — tek sütun, numaralı adımlar, her adımda seçili basın değer kartı */
+:root{
+  --bg:#F2F3F1; --panel:#FFFFFF; --ink:#1B2127; --muted:#5B6670; --line:#D5D9DC;
+  --brass:#A8741C; --brass-soft:#F4E7CF; --steel:#3E6680; --steel-soft:#DDE8EF;
+  --warn:#B4442E; --ok:#2F7A55; --fret:#8A8F93; --wood:#C9CDD0;
+  --display:"Big Shoulders Display","Arial Narrow",sans-serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#13171B; --panel:#1C2228; --ink:#E7EAEC; --muted:#9AA5AE; --line:#2E363D;
+  --brass:#E0A84A; --brass-soft:#3A2E18; --steel:#8DB6D1; --steel-soft:#1F2F3A;
+  --warn:#EE7A62; --ok:#6CC596; --fret:#8E959A; --wood:#3A434B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#13171B; --panel:#1C2228; --ink:#E7EAEC; --muted:#9AA5AE; --line:#2E363D;
+  --brass:#E0A84A; --brass-soft:#3A2E18; --steel:#8DB6D1; --steel-soft:#1F2F3A;
+  --warn:#EE7A62; --ok:#6CC596; --fret:#8E959A; --wood:#3A434B; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2{font-family:var(--display);font-weight:800;letter-spacing:.01em;line-height:1.05;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.6rem,9vw,4rem);text-transform:uppercase}
+h2{font-size:1.9rem;text-transform:uppercase}
+h3{font-size:1rem;font-weight:600;margin:0}
+p{margin:0}
+.lede{color:var(--muted);max-width:62ch}
+.eyebrow{font:500 .75rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--brass)}
+.order{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.order a{font:500 .8rem var(--mono);color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--panel)}
+.order a:focus-visible,.picker button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.picker{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.picker button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:10px 8px;text-align:left;display:flex;flex-direction:column;gap:2px;min-width:0}
+.picker button b{font:800 1.3rem var(--display);text-transform:uppercase}
+.picker button span{font-size:.75rem;color:var(--muted);line-height:1.3}
+.picker button[aria-pressed="true"]{border-color:var(--brass);background:var(--brass-soft)}
+@media (max-width:520px){.picker{grid-template-columns:repeat(2,1fr)}}
+.spec{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px 18px}
+.spec .k{font:500 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spec .v{font-weight:500;line-height:1.35}
+.spec .full{grid-column:1/-1}
+.step{display:flex;flex-direction:column;gap:14px;scroll-margin-top:16px}
+.step-head{display:flex;align-items:baseline;gap:12px;border-top:2px solid var(--ink);padding-top:10px}
+.num{font:800 2.4rem var(--display);color:var(--brass);line-height:1}
+figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:300px}
+figcaption{font-size:.82rem;color:var(--muted);margin-top:6px}
+.mine{border-left:4px solid var(--brass);background:var(--brass-soft);padding:12px 14px;border-radius:0;display:flex;flex-direction:column;gap:4px}
+.mine .who{font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
+.mine .val{font:500 1.05rem var(--mono);font-variant-numeric:tabular-nums}
+.mine .note{font-size:.9rem}
+ul.do{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.warn{color:var(--warn);font-weight:500}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td.fix{font-weight:500}
+.tag{display:inline-block;font:500 .72rem var(--mono);padding:2px 7px;border-radius:999px;white-space:nowrap}
+.t-sik{background:var(--steel-soft);color:var(--steel)}
+.t-gev{background:var(--brass-soft);color:var(--brass)}
+.t-lut{background:var(--line);color:var(--ink)}
+td.on,th.on{background:var(--brass-soft)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+figure.wide svg{min-width:620px}
+.dev{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px 18px}
+.dev .k{font:500 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
+.dev .v{font-size:.95rem;line-height:1.45}
+.dev .full{grid-column:1/-1}
+td.lvl{white-space:nowrap;font-weight:500}
+#eqsvg{min-width:300px}
+table.mix{min-width:0}
+
+.knobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.knob{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.knob svg{width:64px;height:64px}
+.knob b{font-size:.85rem;font-weight:600}
+.knob span{font-size:.8rem;color:var(--muted)}
+.knob.sw{justify-content:center;border:1px dashed var(--line);border-radius:10px;padding:6px}
+.hwgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 18px;border-top:1px solid var(--line);padding-top:12px}
+ul.hw{margin:4px 0 0;padding-left:1.1em;display:flex;flex-direction:column;gap:3px;font-size:.92rem}
+ul.hw li::marker{color:var(--brass)}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.links a{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.links a:hover{border-color:var(--brass)}
+.links a:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.links a b{color:var(--steel)}
+.links a span{font-size:.82rem;color:var(--muted)}
+ol.parts{margin:0;padding-left:1.8em;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 20px}
+ol.parts li::marker{font:600 .85rem var(--mono);color:var(--brass)}
+ol.parts span{color:var(--muted);font-size:.85rem}
+dl.gloss{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+dl.gloss>div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+dl.gloss dt{font-weight:600}
+dl.gloss dt span{display:block;font:500 .75rem var(--mono);letter-spacing:.06em;color:var(--brass);text-transform:uppercase}
+dl.gloss dd{margin:6px 0 0;font-size:.92rem;color:var(--ink)}
+svg text{font-family:var(--body)}
+.s-txt{fill:var(--ink);font-size:13px}
+.s-mut{fill:var(--muted);font-size:11.5px}
+.s-acc{fill:var(--brass);font-size:13px;font-weight:600}
+.s-stl{fill:var(--steel);font-size:13px;font-weight:600}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:10px">
+    <div class="eyebrow">Sahne Düzeni · bas, pedal, kulak içi</div>
+    <h1>Sahne düzeni</h1>
+    <p class="lede">Seçtiğin basa göre Tone Hammer başlangıç ayarı ve KZ ZAS kulak içi mix ayarı; Behringer P2 kablolu ve Sennheiser kablosuz sistem için. Sap ve tel ayarları ayrı uygulamada: <a href="../bas-anahtari/" style="color:var(--brass)">Bas Anahtarı</a>.</p>
+    <nav class="order" aria-label="Bölümler"><a href="#pedal">Tone Hammer</a><a href="#iem">Kulak içi mix</a><a href="#p2">Behringer P2</a><a href="#senn">Sennheiser</a><a href="#bas-siniri">Son seviye bas</a></nav>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:12px" aria-label="Bas seçimi">
+    <h3>Bu sahnede hangi bas?</h3>
+    <div class="picker" id="picker"></div>
+    <div class="spec" id="spec"></div>
+  </section>
+
+  <section class="step" id="pedal">
+    <div class="step-head"><span class="num">P1</span><h2>Aguilar Tone Hammer V2 · başlangıç ayarı</h2></div>
+    <p>Seçili bas için sahneye çıkmadan önceki sıfır noktası. Saat 12 = düz (ne artırır ne keser). İnce ayarı sahnede, sistemi duyarak yapıyorsun.</p>
+    <div class="knobs" id="knobs"></div>
+    <div class="mine"><span class="who" data-f="who"></span><span class="note" id="thNote"></span></div>
+    <ul class="do">
+      <li><b>Sıra:</b> Basın üzerindeki EQ'yu düz al (aktif baslarda), pedalın EQ'sunu saat 12'ye getir, önce Gain'i ayarla, sonra EQ, en son Volume.</li>
+      <li><b>Gain:</b> En sert vuruşunda ses dağılmıyorsa doğru yerdesin; dağılıyorsa biraz geri al. Aktif baslar daha yüksek çıkışlı olduğu için daha düşükte başlar.</li>
+      <li><b>Volume:</b> Pedal açıkken ve bypass'tayken ses seviyesi aynı duyulacak şekilde eşitle.</li>
+      <li><b>DI Pre/Post:</b> Ses masasına senin EQ'lu tonunun gitmesini istiyorsan Post; ses teknisyeni ham sinyal isterse Pre.</li>
+      <li><b>Ground lift:</b> Sadece DI'da uğultu varsa bas.</li>
+      <li><b>Drive:</b> Başlangıçta kapalı; açınca Gain ile birlikte çalışır.</li>
+      <li>Pedal 18V adaptörle çalışır. EQ düğmelerinin aralığı geniş (Bass ve Treble ±18 dB, Mid ±17 dB, Mid Freq 180 Hz–1 kHz); saat 12'den bir saatlik dönüş bile duyulur bir fark yaratır.</li>
+    </ul>
+  </section>
+
+  <section class="step" id="iem">
+    <div class="step-head"><span class="num">IEM</span><h2>Kulak içi mix · KZ ZAS</h2></div>
+    <p>Hedef: Dream Theater dinler gibi. Basın önde ve dolgun, ama davul, gitar, klavye ve vokal her an net. KZ ZAS'ın kendi EQ'su yok; P2'de de yok. Bu yüzden "EQ ayarı" iki yerde yapılır: ses masasındaki kulak içi gönderimin (aux) seviyeleri ve o gönderimin EQ'su, artı kullandığın alıcının birkaç ayarı.</p>
+
+    <h3>1 · Mix tarifi · sesçiye vereceğin oranlar</h3>
+    <p style="font-size:.9rem;color:var(--muted)">Senin basın 0 dB referans. Diğerleri ona göre ne kadar kısık olmalı. Benim önerdiğim başlangıç oranları; sahnede kulağınla düzelt.</p>
+    <div class="tbl"><table class="mix">
+      <thead><tr><th>Kaynak</th><th>Seviye</th><th>Neden</th></tr></thead>
+      <tbody>
+        <tr><td><b>Senin basın</b> (Tone Hammer DI, Post)</td><td class="mono lvl">0 dB</td><td>Mix'in omurgası; en önde.</td></tr>
+        <tr><td>Kick</td><td class="mono lvl">−2 dB</td><td>Bas ile kilitlendiğin şey; bastan hemen sonra gelir.</td></tr>
+        <tr><td>Solist vokal</td><td class="mono lvl">−3 dB</td><td>Giriş ve dönüşleri kaçırmamak için.</td></tr>
+        <tr><td>Snare</td><td class="mono lvl">−4 dB</td><td>Zaman hissi.</td></tr>
+        <tr><td>Elektro gitar(lar)</td><td class="mono lvl">−5 dB</td><td>Riff'lerle birlikte basmak için net ama arkada.</td></tr>
+        <tr><td>Klavye / synth</td><td class="mono lvl">−6 dB</td><td>Akor geçişlerini duymak için.</td></tr>
+        <tr><td>Click / sequence (varsa)</td><td class="mono lvl">−6 dB</td><td>Sadece senin kulağına.</td></tr>
+        <tr><td>Tomlar</td><td class="mono lvl">−7 dB</td><td>Dolguları takip etmeye yeter.</td></tr>
+        <tr><td>Back vokaller</td><td class="mono lvl">−9 dB</td><td>Arka planda.</td></tr>
+        <tr><td>Overhead / ziller</td><td class="mono lvl">−10 dB</td><td>ZAS'ın tizi yüksek seste sertleşir; düşük tut.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>2 · Kulak içi gönderimin EQ'su · dijital masada</h3>
+    <p style="font-size:.9rem;color:var(--muted)">Masada aux/IEM çıkışına EQ koyulabiliyorsa bu eğriyi iste. Alçak frekansları kesen filtre (HPF) seçili basa göre değişir.</p>
+    <figure>
+      <svg id="eqsvg" viewBox="0 0 360 200" role="img" aria-label="KZ ZAS için önerilen kulak içi EQ eğrisi"></svg>
+    </figure>
+    <div class="tbl"><table>
+      <thead><tr><th>Bant</th><th>Frekans</th><th>Ayar</th><th>Neden</th></tr></thead>
+      <tbody>
+        <tr><td>HPF (alçak kesme)</td><td class="mono" id="hpfCell">—</td><td class="mono">12 dB/okt</td><td id="hpfWhy">—</td></tr>
+        <tr><td>Low shelf</td><td class="mono">70 Hz</td><td class="mono">+2 dB</td><td>Son seviye bas: göğüste hissedilen alt; daha fazlası çatırdatır.</td></tr>
+        <tr><td>Peak</td><td class="mono">250 Hz</td><td class="mono">−2 dB · Q 1,2</td><td>ZAS'ın orta-bas şişkinliği; bas ile kick birbirine karışmasın.</td></tr>
+        <tr><td>Peak</td><td class="mono">3,5 kHz</td><td class="mono">−1,5 dB · Q 2</td><td>Uzun sette kulak yorgunluğunu azaltır.</td></tr>
+        <tr><td>High shelf</td><td class="mono">8 kHz</td><td class="mono">−2 dB</td><td>ZAS'ın parlak tizi ve zil sertliği.</td></tr>
+        <tr><td>Limiter</td><td class="mono">çıkış</td><td class="mono">açık</td><td>Ani tepeleri keser; hem kulağını hem sürücüleri korur.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="mine"><span class="who" data-f="who"></span><span class="note" id="iemNote"></span></div>
+  </section>
+
+  <section class="step" id="p2">
+    <div class="step-head"><span class="num">P2</span><h2>Behringer P2 · kablolu</h2></div>
+    <div class="dev">
+      <div><div class="k">Mod anahtarı</div><div class="v">Cihazın içinde. Masa tek kanal aux gönderiyorsa <b>MONO</b>, stereo mix gönderiyorsa <b>STEREO</b>.</div></div>
+      <div><div class="k">Volume</div><div class="v">En kısıkta başla, saat 11–1 arasında çalış. Yetmiyorsa düğmeyi sonuna açma; sesçiden gönderimi artırmasını iste.</div></div>
+      <div><div class="k">EQ / limiter</div><div class="v">P2'de yok. Bu yüzden 2. adımdaki EQ ve limiter masada yapılmalı.</div></div>
+      <div><div class="k">Pil</div><div class="v">2 × AAA, yaklaşık 12 saat. Her sahneye yeni pille çık.</div></div>
+      <div class="full"><div class="k">ZAS ile not</div><div class="v">ZAS çok hassas (≈112 dB). P2'nin küçük bir volüm hareketi bile büyük fark yapar; bası volümle değil mix oranıyla öne çıkar.</div></div>
+    </div>
+  </section>
+
+  <section class="step" id="senn">
+    <div class="step-head"><span class="num">EK</span><h2>Sennheiser kablosuz · ew IEM G4</h2></div>
+    <p style="font-size:.9rem;color:var(--muted)">Sahnelerde en sık denk gelinen Sennheiser alıcısı EK IEM G4. Farklı bir model çıkarsa menü adları çoğunlukla benzer.</p>
+    <div class="dev">
+      <div class="full"><div class="k">Mode · önerilen: Focus</div><div class="v">Sesçiden <b>sol kanala yalnızca kendi basını</b>, <b>sağ kanala grup mix'ini</b> göndermesini iste. Sonra alıcıdaki <b>Balance</b> ile basını istediğin kadar öne çekersin; sesçiye her seferinde seslenmen gerekmez. Masa tek stereo mix gönderiyorsa Mode: Stereo, Balance ortada.</div></div>
+      <div><div class="k">High Boost</div><div class="v"><b>0</b>. ZAS'ın tizi zaten parlak; boost sertleştirir.</div></div>
+      <div><div class="k">Limiter</div><div class="v"><b>Açık</b> (Advanced menü). Sert vuruşlarda tepe kırpar.</div></div>
+      <div><div class="k">Volume boost</div><div class="v"><b>Kapalı</b> ya da en düşük. ZAS hassas; gerek yok.</div></div>
+      <div><div class="k">Squelch</div><div class="v">Varsayılan. Sinyal kopup cızırtı yaparsa bir kademe artır.</div></div>
+    </div>
+  </section>
+
+  <section class="step" id="bas-siniri">
+    <div class="step-head"><span class="num">!</span><h2>Patlatmadan son seviye bas</h2></div>
+    <ul class="do">
+      <li><b>Önce oturuş.</b> ZAS'ta kulağına en sıkı oturan ucu kullan; köpük uçlar bası ve izolasyonu belirgin artırır. Bas eksik geliyorsa ilk bakılacak yer burası.</li>
+      <li><b>Bası mix'le öne çıkar, EQ ile değil.</b> 70 Hz'de +2 dB'den fazlası sürücüyü zorlar; çatırtı ve "pır pır" titreme yapar.</li>
+      <li><b>HPF'yi basa göre koy.</b> <span id="hpfRule">—</span></li>
+      <li><b>Çatırtı duyarsan</b> önce 60–70 Hz'yi geri al, sonra volümü. Volümü kısmak tek başına bası da götürür.</li>
+      <li><b>Limiter hep açık.</b> P2'de yoksa masada iste.</li>
+      <li class="warn">Kulakların enstrümanın. ZAS sızdırmaz olduğu için bas yoğun mix'i düşük genel seviyede kurabilirsin; uzun setlerde volümü yüksekte tutma.</li>
+    </ul>
+  </section>
+
+</div>
+
+<script>
+const IEM={
+ b1:{hpf:28,str:"B",note:"6 telli: B teli 31 Hz. Piezo açıkken kulak içinde tiz artar; piezo volümünü yükselttiğinde sesçiden 8 kHz'i bir kademe daha kısmasını iste."},
+ b2:{hpf:28,str:"B",note:"5 telli: B teli 31 Hz. 5J-Hot'un yüksek çıkışı kulak içinde ilk öne çıkan şey olur; gönderimi diğer baslardan 1–2 dB düşük başlat."},
+ b3:{hpf:38,str:"E",note:"4 telli J: E teli 41 Hz. AV '74'lerin orta-üst karakteri mix'te kendini zaten duyurur; 250 Hz kesmesini −1 dB'ye indirebilirsin."},
+ b4:{hpf:38,str:"E",note:"4 telli P: E teli 41 Hz. P bas'ın alt-ortası güçlü; 250 Hz kesmesi en çok bu basta işe yarar. Kick ile ayrışması için kick'i −3 dB'ye çekmeyi dene."}
+};
+function afterRender(d,k){
+  const m=IEM[k]; if(!m) return;
+  const why=m.str==="B"?"B teli 31 Hz'te titrer; filtre bunun altında kalmalı ki temel ses kesilmesin.":"E teli 41 Hz; altındaki uğultu ve sahne gürültüsü atılır, sürücü rahatlar.";
+  const set=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=t;};
+  set("hpfCell",m.hpf+" Hz"); set("hpfWhy",why); set("iemNote",m.note);
+  set("hpfRule","Seçili bas için "+m.hpf+" Hz. "+why+" B telli baslarda 28 Hz, 4 tellilerde 38 Hz.");
+  const svg=document.getElementById("eqsvg"); if(!svg) return;
+  const X=f=>36+(Math.log10(f)-Math.log10(20))/3*314, Y=g=>100-Math.max(-9,Math.min(9,g))*8;
+  const pk=(f,f0,g,bw)=>g*Math.exp(-Math.pow(Math.log2(f/f0)/bw,2));
+  const G=f=>-10*Math.log10(1+Math.pow(m.hpf/f,4))+2/(1+Math.pow(f/70,2))+pk(f,250,-2,0.6)+pk(f,3500,-1.5,0.4)-2/(1+Math.pow(8000/f,2));
+  let p="";for(let i=0;i<=160;i++){const f=20*Math.pow(1000,i/160);p+=(i?"L":"M")+X(f).toFixed(1)+" "+Y(G(f)).toFixed(1);}
+  const ticks=[[50,"50"],[100,"100"],[250,"250"],[1000,"1k"],[3500,"3,5k"],[8000,"8k"]];
+  svg.innerHTML=`<line x1="36" y1="100" x2="350" y2="100" stroke="var(--line)" stroke-width="1"/>
+   <line x1="36" y1="52" x2="350" y2="52" stroke="var(--line)" stroke-dasharray="2 4"/><line x1="36" y1="148" x2="350" y2="148" stroke="var(--line)" stroke-dasharray="2 4"/>
+   <text class="s-mut" x="30" y="56" text-anchor="end">+6</text><text class="s-mut" x="30" y="104" text-anchor="end">0</text><text class="s-mut" x="30" y="152" text-anchor="end">−6</text>
+   ${ticks.map(([f,l])=>`<line x1="${X(f)}" y1="28" x2="${X(f)}" y2="172" stroke="var(--line)" stroke-width=".6"/><text class="s-mut" x="${X(f)}" y="190" text-anchor="middle">${l}</text>`).join("")}
+   <line x1="${X(m.hpf)}" y1="28" x2="${X(m.hpf)}" y2="172" stroke="var(--warn)" stroke-dasharray="3 3"/>
+   <text class="s-acc" x="${X(m.hpf)+5}" y="40" style="fill:var(--warn)">HPF ${m.hpf} Hz</text>
+   <path d="${p}" fill="none" stroke="var(--brass)" stroke-width="2.5" stroke-linejoin="round"/>`;
+}
+</script>
+
+<script>
+const B={
+ b1:{tab:"Bas 1",short:"Yamaha TRB-6PII",
+  th:{g:9.5,b:12,ml:11.5,mf:12,t:11.5,v:12,note:"Aktif, piezolu ve 35\" ölçekli; çıkışı yüksek, B teli dolgun. Gain düşükte, bas düz. Piezo parlaklığını dengelemek için tiz ve ortada hafif kesme. Piezo volümünü artırdıkça tizi biraz daha kesmen gerekebilir."},
+  hw:["Yamaha BPZ-7 köprü (her tele ayrı parça, piezolu)","Altın burgular","Gövdeden geçme 5 parça sap, çift truss rod","Abanoz klavye, 24 perde","Kemik üst eşik"],
+  el:["2 × Alnico V çift bobinli manyetik","Piezo manyetik (köprüde)","Aktif 3 bant EQ: bas · orta · tiz","Master volüm · balans · piezo volüm","9V pil (Varta Industrial Pro)"],who:"Bas 1 · Yamaha TRB-6PII",
+  meta:"6 tel · 35\" ölçek · gövdeden geçme sap · abanoz klavye",radius:"40\" (1000 mm) · neredeyse düz",
+  rod:"Çift truss rod: biri kalın tel (B), biri ince tel (C) tarafında",bridge0:"Yamaha BPZ-7 · her tele ayrı köprü, piezolu",
+  relief:"Relief: 0,20 – 0,25 mm (B ve C tarafında ayrı ölç)",
+  rodNote:"6 telli geniş sapta iki taraf farklı çıkabilir. B tarafı fazlaysa sadece B rod'unu, C tarafı fazlaysa C rod'unu çevir; ikisini birden aynı miktarda çevirmek boşluğu her iki tarafta değiştirir. İki taraf farklı yöne gidiyorsa sapta burulma var demektir, rod'larla düzeltilir.",
+  action:"B ≈ 2,4 – 2,6 mm · C ≈ 2,0 mm (17. perde)",
+  bridge:"Her tel kendi köprü parçasında: yükseklik o parçanın vidalarıyla. 40\" yarıçap düz olduğu için altı tel neredeyse aynı çizgide durur. Yükseklik değişince piezo sesinde tel dengesini de dinle.",
+  nut:"Kemik eşik; 6 telde B oluğu en kritik olanıdır, açık B telinde vızıltıya dikkat.",
+  pickup:"Kalın tel ≈ 3,2 mm · ince tel ≈ 2,4 mm",
+  pickupNote:"Aktif bas: ölçmeden önce 9V pili yenile, EQ düğmelerini ortaya (düz) al. Balans düğmesi ortada iki manyetiği eşit dinle.",
+  intonation:"Her tel parçası kendi oktav vidasıyla ayrı ileri-geri gider. 35\" ölçekte B teli genelde en geride durur.",
+  rad:"40\"",rel:"0,20–0,25",act:"B 2,4–2,6 · C 2,0",pu:"3,2 / 2,4"},
+ b2:{tab:"Bas 2",short:"Squier VM Jazz V",
+  th:{g:9,b:12,ml:12.5,mf:11,t:12,v:12,note:"Aguilar 5J-Hot ve aktif preamp: çıkış en yüksek bu basta, Gain en düşükte başlar. J-Retro'yu düz al, Bright kapalı. Alt-ortada küçük bir artış B telini mikste net tutar."},
+  hw:["Fender HiMass köprü","Squier VM Jazz V sap ve gövde, 9,5\" klavye"],
+  el:["2 × Aguilar 5J-Hot manyetik","John East Retro Deluxe aktif preamp: blend · bas · orta + frekans · tiz/bright","Aktif/pasif anahtarı ve pasif ton","9V pil (Varta Industrial Pro)"],who:"Bas 2 · Squier Vintage Modified Jazz Bass V",
+  meta:"5 tel · 34\" ölçek · vidalı sap · Aguilar 5J-Hot · John East preamp",radius:"9,5\" (241 mm) · fabrika değeri",
+  rod:"Tek rod; somun kafada ya da sap dibinde — yerine bakıp uygun alyanı seç",bridge0:"Fender HiMass",
+  relief:"Relief: 0,30 – 0,35 mm",
+  rodNote:"5 telli olduğu için Fender'ın 0,30 mm değerinin biraz üstü (B teli daha geniş titrer). Somun sap dibindeyse ölçüp çevirirken teli gevşetmek gerekebilir.",
+  action:"B ≈ 2,6 – 2,8 mm · G ≈ 2,0 mm (17. perde)",
+  bridge:"HiMass: her eşikte iki küçük alyan vida (yükseklik), arkada yıldız vida (oktav). İki vidayı eşit çevir.",
+  nut:"Fender sentetik/kemik eşik; açık B telinde vızıltı varsa oluk derin olabilir.",
+  pickup:"B tarafı ≈ 3,2 – 3,6 mm · G tarafı ≈ 2,4 – 2,8 mm",
+  pickupNote:"Aguilar 5J-Hot yüksek çıkışlı; standart değerlerin biraz altında (daha uzakta) başla. John East preamp'ı düz konuma al, pili yenile.",
+  intonation:"HiMass eşiklerinde arkadaki vida saat yönünde sıkılınca eşik geri gelir. B teli en geride olur.",
+  rad:"9,5\"",rel:"0,30–0,35",act:"B 2,6–2,8 · G 2,0",pu:"3,2–3,6 / 2,4–2,8"},
+ b3:{tab:"Bas 3",short:"SX SJB75C",
+  th:{g:11.5,b:12.5,ml:12.5,mf:13.5,t:12.5,v:12,note:"Pasif J bas: Gain daha yukarıda. AV '74 manyetiklerin orta-üst karakterini öne çıkarmak için orta frekans biraz sağda, hafif artışla. Basın üzerindeki iki volümü tam aç, tonu tam aç (No-Load) konumunda başla."},
+  hw:["Schaller Bass 2000 köprü","Schaller vintage tip nikel burgular","SX SJB75C alder gövde ve sap, 12\" klavye"],
+  el:["Fender American Vintage '74 Jazz manyetikler","2 × Fender Pure Vintage 250K pot (0990831000) · volümler","1 × Fender No-Load pot (0990832000) · ton","Fender jak (0021956049)","Pasif · pil yok"],who:"Bas 3 · SX SJB75C (pasif)",
+  meta:"4 tel · 34\" (864 mm) ölçek · 38 mm üst eşik · medium perde · vidalı sap · AV '74 manyetikler",radius:"12\" (305 mm) · üretici değeri",
+  rod:"Fender tipi tek rod",bridge0:"Schaller Bass 2000",
+  relief:"Relief: 0,25 – 0,30 mm",
+  rodNote:"12\" klavye 9,5\" sapa göre daha düz; Fender tablosunun 0,30 mm değerinden başla, vızıltı yoksa 0,25 mm'ye kadar inebilirsin.",
+  action:"E ≈ 2,4 mm · G ≈ 2,0 mm (17. perde)",
+  bridge:"Schaller 2000: yükseklik eşikteki alyan vidalarla, oktav arkadaki vidayla. 12\" yarıçapta eşik kavisi 9,5\" baslardan biraz daha yumuşak olur.",
+  nut:"Eşik orijinal ise oluk yüksekliğini kontrol et; yeni sap/eşik kombinasyonlarında sık sorun çıkar.",
+  pickup:"E tarafı ≈ 3,2 mm · G tarafı ≈ 2,4 mm",
+  pickupNote:"American Vintage '74 alnico manyetikler teli kolay çeker; fazla yaklaştırma. Köprü ve sap manyetiğini iki volüm tam açıkken dengeli duyacak şekilde ayarla.",
+  intonation:"Arkadaki vida saat yönünde = eşik geri. 4 telde eşikler genelde E'den G'ye hafif öne doğru bir sıra oluşturur.",
+  rad:"12\"",rel:"0,25–0,30",act:"E 2,4 · G 2,0",pu:"3,2 / 2,4"},
+ b4:{tab:"Bas 4",short:"Squier P (modlu)",
+  th:{g:12,b:12.5,ml:13,mf:10.5,t:11.5,v:12,note:"Pasif P bas, hafif teller: Gain en yüksekte başlar. Custom Shop '62'nin vintage gövde sesini taşımak için orta frekans sola (alt-orta), hafif artış. Tiz biraz kesik, P bas karakterine uygun."},
+  hw:["Gotoh 203B-4C köprü","Gotoh GB10N burgular","Graph Tech Black TUSQ XL üst eşik","D'Addario EXL190 40–100 teller","Gövde RAL 5024, gomalak kaplama · koyulaştırılmış tuşe"],
+  el:["Fender Custom Shop '62 Precision manyetik (0992214000)","Fender Pure Vintage 250K potlar: volüm + ton","Fender jak yuvası","Pasif · pil yok"],who:"Bas 4 · Squier Debut Precision (modlu)",
+  meta:"4 tel · 34\" ölçek · vidalı sap · EXL190 40–100",radius:"9,5\" (241 mm)",
+  rod:"Kafadan ayar, 4 mm alyan",bridge0:"Gotoh 203B-4C",
+  relief:"Relief: 0,25 – 0,30 mm",
+  rodNote:"EXL190 40–100 hafif setin gerilimi düşük; sap daha az öne çekilir. Tel değiştirdiysen ilk iş relief'i yeniden ölç. Gomalak kaplama hassas: alyanı gövdeye sürtme, alkol bazlı temizleyiciden uzak dur.",
+  action:"E ≈ 2,4 mm · G ≈ 2,0 mm (17. perde)",
+  bridge:"Gotoh 203B-4C: her eşikte iki küçük alyan (yükseklik), arkada vida (oktav). İnce teller geniş titrediği için çok alçaltma.",
+  nut:"Graph Tech TUSQ XL: kendinden yağlı, tel takılmaz. Sadece oluk yüksekliğini kontrol et.",
+  pickup:"E–A yarısı ≈ 3,2 mm · D–G yarısı ≈ 2,4 mm",
+  pickupNote:"Custom Shop '62 split-coil iki ayrı yarıdan oluşur; her yarı kendi iki vidasıyla ayrı ayarlanır. Alnico mıknatıs teli çekebilir, fazla yaklaştırma.",
+  intonation:"Arkadaki vida saat yönünde = eşik geri. Hafif tellerde basınç değişimi daha belirgin, oktavı akortlu ve çalma pozisyonunda ayarla.",
+  rad:"9,5\"",rel:"0,25–0,30",act:"E 2,4 · G 2,0",pu:"3,2 / 2,4"}
+};
+const keys=Object.keys(B);
+let cur="b1";
+try{const s=localStorage.getItem("basSel");if(B[s])cur=s;}catch(e){}
+const picker=document.getElementById("picker");
+keys.forEach(k=>{const b=document.createElement("button");b.type="button";b.id="pick-"+k;b.dataset.k=k;
+  b.innerHTML=`<b>${B[k].tab}</b><span>${B[k].short}</span>`;b.addEventListener("click",()=>sel(k));picker.appendChild(b);});
+function sel(k){cur=k;try{localStorage.setItem("basSel",k);}catch(e){}render();}
+function render(){
+  const d=B[cur];
+  picker.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===cur?"true":"false"));
+  document.getElementById("spec").innerHTML=
+   `<div class="full"><div class="k">Seçili bas</div><div class="v">${d.who}</div><div style="color:var(--muted);font-size:.9rem">${d.meta}</div></div>
+    <div><div class="k">Klavye yarıçapı</div><div class="v">${d.radius}</div></div>
+    <div><div class="k">Truss rod</div><div class="v">${d.rod}</div></div>
+    <div><div class="k">Köprü</div><div class="v">${d.bridge0}</div></div>
+    <div class="full hwgrid"><div><div class="k">Donanım</div><ul class="hw">${d.hw.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><div class="k">Elektronik</div><ul class="hw">${d.el.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>`;
+  const th=d.th;const KN=document.getElementById("knobs");if(KN){const kn=[["Gain",th.g],["Bass",th.b],["Mid Level",th.ml],["Mid Freq",th.mf],["Treble",th.t],["Volume",th.v]];
+  KN.innerHTML=kn.map(([n,h])=>{const a=(h-12)*30;const r=a*Math.PI/180;const x=40+24*Math.sin(r),y=40-24*Math.cos(r);const hh=Math.floor(h),mm=h%1?":30":"";
+    return `<div class="knob"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M ${40-34*Math.sin(150*Math.PI/180)} ${40+34*Math.cos(150*Math.PI/180)*-1} A34 34 0 1 1 ${40+34*Math.sin(150*Math.PI/180)} ${40-34*Math.cos(150*Math.PI/180)}" fill="none" stroke="var(--line)" stroke-width="3"/><circle cx="40" cy="40" r="28" fill="var(--ink)"/><line x1="40" y1="40" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--brass)" stroke-width="4" stroke-linecap="round"/></svg><b>${n}</b><span class="mono">saat ${hh}${mm}</span></div>`;}).join("")+`<div class="knob sw"><b>Drive</b><span>Kapalı</span><b>DI</b><span>Post</span></div>`;
+  document.getElementById("thNote").textContent=th.note;}
+  document.querySelectorAll("[data-f]").forEach(el=>{el.textContent=d[el.dataset.f]||"";});
+  const rows=[["Yarıçap","rad"],["Relief (mm)","rel"],["Tel yüksekliği (mm)","act"],["Manyetik kalın / ince (mm)","pu"]];
+  let h="<thead><tr><th></th>"+keys.map(k=>`<th class="${k===cur?"on":""}">${B[k].tab}<br><span style="text-transform:none;letter-spacing:0">${B[k].short}</span></th>`).join("")+"</tr></thead><tbody>";
+  rows.forEach(r=>{h+=`<tr><td style="font-weight:500">${r[0]}</td>`+keys.map(k=>`<td class="mono ${k===cur?"on":""}">${B[k][r[1]]}</td>`).join("")+"</tr>";});
+  const CM=document.getElementById("cmp");if(CM)CM.innerHTML=h+"</tbody>";
+  if(window.afterRender)afterRender(d,cur);
+}
+render();
+</script>
+
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
+</script>
+</body>
+</html>

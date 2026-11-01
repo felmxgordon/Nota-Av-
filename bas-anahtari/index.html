@@ -82,6 +82,13 @@ td.fix{font-weight:500}
 td.on,th.on{background:var(--brass-soft)}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 figure.wide svg{min-width:620px}
+.dev{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px 18px}
+.dev .k{font:500 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
+.dev .v{font-size:.95rem;line-height:1.45}
+.dev .full{grid-column:1/-1}
+td.lvl{white-space:nowrap;font-weight:500}
+#eqsvg{min-width:300px}
+
 .knobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .knob{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
 .knob svg{width:64px;height:64px}
@@ -119,9 +126,9 @@ svg text{font-family:var(--body)}
   <header style="display:flex;flex-direction:column;gap:10px">
     <div class="eyebrow">Bas Anahtarı · kurulum kılavuzu</div>
     <h1>Bas sap ayarı</h1>
-    <p class="lede">Sırayla gidilir; her adım bir sonrakini etkiler. Yeni ya da her zaman kullandığın teller takılı, akort yapılmış, bas çalma pozisyonunda olsun. Ölçümlerin hepsi Fender'ın bas fabrika değerleri ve basların kendi teknik özellikleri üzerine kurulu; bunlar başlangıç noktasıdır, son karar parmaklarının.</p>
+    <p class="lede">Sahne ayarları (Tone Hammer, kulak içi mix) ayrı uygulamada: <a href="../sahne-duzeni/" style="color:var(--brass)">Sahne Düzeni</a>. Sap ayarında sırayla gidilir; her adım bir sonrakini etkiler. Yeni ya da her zaman kullandığın teller takılı, akort yapılmış, bas çalma pozisyonunda olsun. Ölçümlerin hepsi Fender'ın bas fabrika değerleri ve basların kendi teknik özellikleri üzerine kurulu; bunlar başlangıç noktasıdır, son karar parmaklarının.</p>
     <nav class="order" aria-label="Adımlar">
-      <a href="#pedal">Tone Hammer</a><a href="#relief">1 Sap boşluğu</a><a href="#action">2 Tel yüksekliği</a><a href="#nut">3 Üst eşik</a><a href="#pickup">4 Manyetik</a><a href="#oktav">5 Oktav</a><a href="#son">6 Son kontrol</a><a href="#devre">Devre şemaları</a><a href="#belirti">Belirti tablosu</a><a href="#parcalar">Parçalar</a><a href="#sozluk">Sözlük</a>
+      <a href="#relief">1 Sap boşluğu</a><a href="#action">2 Tel yüksekliği</a><a href="#nut">3 Üst eşik</a><a href="#pickup">4 Manyetik</a><a href="#oktav">5 Oktav</a><a href="#son">6 Son kontrol</a><a href="#devre">Devre şemaları</a><a href="#belirti">Belirti tablosu</a><a href="#parcalar">Parçalar</a><a href="#sozluk">Sözlük</a>
     </nav>
   </header>
 
@@ -131,21 +138,7 @@ svg text{font-family:var(--body)}
     <div class="spec" id="spec"></div>
   </section>
 
-  <section class="step" id="pedal">
-    <div class="step-head"><span class="num">P1</span><h2>Aguilar Tone Hammer V2 · başlangıç ayarı</h2></div>
-    <p>Seçili bas için sahneye çıkmadan önceki sıfır noktası. Saat 12 = düz (ne artırır ne keser). İnce ayarı sahnede, sistemi duyarak yapıyorsun.</p>
-    <div class="knobs" id="knobs"></div>
-    <div class="mine"><span class="who" data-f="who"></span><span class="note" id="thNote"></span></div>
-    <ul class="do">
-      <li><b>Sıra:</b> Basın üzerindeki EQ'yu düz al (aktif baslarda), pedalın EQ'sunu saat 12'ye getir, önce Gain'i ayarla, sonra EQ, en son Volume.</li>
-      <li><b>Gain:</b> En sert vuruşunda ses dağılmıyorsa doğru yerdesin; dağılıyorsa biraz geri al. Aktif baslar daha yüksek çıkışlı olduğu için daha düşükte başlar.</li>
-      <li><b>Volume:</b> Pedal açıkken ve bypass'tayken ses seviyesi aynı duyulacak şekilde eşitle.</li>
-      <li><b>DI Pre/Post:</b> Ses masasına senin EQ'lu tonunun gitmesini istiyorsan Post; ses teknisyeni ham sinyal isterse Pre.</li>
-      <li><b>Ground lift:</b> Sadece DI'da uğultu varsa bas.</li>
-      <li><b>Drive:</b> Başlangıçta kapalı; açınca Gain ile birlikte çalışır.</li>
-      <li>Pedal 18V adaptörle çalışır. EQ düğmelerinin aralığı geniş (Bass ve Treble ±18 dB, Mid ±17 dB, Mid Freq 180 Hz–1 kHz); saat 12'den bir saatlik dönüş bile duyulur bir fark yaratır.</li>
-    </ul>
-  </section>
+  
 
   <!-- 1 -->
   <section class="step" id="relief">
@@ -560,15 +553,16 @@ function render(){
     <div><div class="k">Truss rod</div><div class="v">${d.rod}</div></div>
     <div><div class="k">Köprü</div><div class="v">${d.bridge0}</div></div>
     <div class="full hwgrid"><div><div class="k">Donanım</div><ul class="hw">${d.hw.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><div class="k">Elektronik</div><ul class="hw">${d.el.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>`;
-  const th=d.th;const kn=[["Gain",th.g],["Bass",th.b],["Mid Level",th.ml],["Mid Freq",th.mf],["Treble",th.t],["Volume",th.v]];
-  document.getElementById("knobs").innerHTML=kn.map(([n,h])=>{const a=(h-12)*30;const r=a*Math.PI/180;const x=40+24*Math.sin(r),y=40-24*Math.cos(r);const hh=Math.floor(h),mm=h%1?":30":"";
+  const th=d.th;const KN=document.getElementById("knobs");if(KN){const kn=[["Gain",th.g],["Bass",th.b],["Mid Level",th.ml],["Mid Freq",th.mf],["Treble",th.t],["Volume",th.v]];
+  KN.innerHTML=kn.map(([n,h])=>{const a=(h-12)*30;const r=a*Math.PI/180;const x=40+24*Math.sin(r),y=40-24*Math.cos(r);const hh=Math.floor(h),mm=h%1?":30":"";
     return `<div class="knob"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M ${40-34*Math.sin(150*Math.PI/180)} ${40+34*Math.cos(150*Math.PI/180)*-1} A34 34 0 1 1 ${40+34*Math.sin(150*Math.PI/180)} ${40-34*Math.cos(150*Math.PI/180)}" fill="none" stroke="var(--line)" stroke-width="3"/><circle cx="40" cy="40" r="28" fill="var(--ink)"/><line x1="40" y1="40" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--brass)" stroke-width="4" stroke-linecap="round"/></svg><b>${n}</b><span class="mono">saat ${hh}${mm}</span></div>`;}).join("")+`<div class="knob sw"><b>Drive</b><span>Kapalı</span><b>DI</b><span>Post</span></div>`;
-  document.getElementById("thNote").textContent=th.note;
+  document.getElementById("thNote").textContent=th.note;}
   document.querySelectorAll("[data-f]").forEach(el=>{el.textContent=d[el.dataset.f]||"";});
   const rows=[["Yarıçap","rad"],["Relief (mm)","rel"],["Tel yüksekliği (mm)","act"],["Manyetik kalın / ince (mm)","pu"]];
   let h="<thead><tr><th></th>"+keys.map(k=>`<th class="${k===cur?"on":""}">${B[k].tab}<br><span style="text-transform:none;letter-spacing:0">${B[k].short}</span></th>`).join("")+"</tr></thead><tbody>";
   rows.forEach(r=>{h+=`<tr><td style="font-weight:500">${r[0]}</td>`+keys.map(k=>`<td class="mono ${k===cur?"on":""}">${B[k][r[1]]}</td>`).join("")+"</tr>";});
-  document.getElementById("cmp").innerHTML=h+"</tbody>";
+  const CM=document.getElementById("cmp");if(CM)CM.innerHTML=h+"</tbody>";
+  if(window.afterRender)afterRender(d,cur);
 }
 render();
 </script>

@@ -1,0 +1,16 @@
+{
+  "name": "Sahne Düzeni",
+  "short_name": "Sahne Düzeni",
+  "description": "Dört bas için Tone Hammer ve KZ ZAS kulak içi mix ayarları",
+  "lang": "tr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#13171B",
+  "theme_color": "#1B2127",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
