@@ -128,7 +128,7 @@ svg text{font-family:var(--body)}
     <div class="eyebrow">Sahne Düzeni · bas, pedal, kulak içi</div>
     <h1>Sahne düzeni</h1>
     <p class="lede">Seçtiğin basa göre Tone Hammer başlangıç ayarı ve KZ ZAS kulak içi mix ayarı; Behringer P2 kablolu ve Sennheiser kablosuz sistem için. Sap ve tel ayarları ayrı uygulamada: <a href="../bas-anahtari/" style="color:var(--brass)">Bas Anahtarı</a>.</p>
-    <nav class="order" aria-label="Bölümler"><a href="#pedal">Tone Hammer</a><a href="#iem">Kulak içi mix</a><a href="#p2">Behringer P2</a><a href="#senn">Sennheiser</a><a href="#bas-siniri">Son seviye bas</a></nav>
+    <nav class="order" aria-label="Bölümler"><a href="#pedal">Tone Hammer</a><a href="#iem">Kulak içi bas tonu</a><a href="#p2">Behringer P2</a><a href="#senn">Sennheiser</a><a href="#bas-siniri">Son seviye bas</a></nav>
   </header>
 
   <section style="display:flex;flex-direction:column;gap:12px" aria-label="Bas seçimi">
@@ -154,43 +154,37 @@ svg text{font-family:var(--body)}
   </section>
 
   <section class="step" id="iem">
-    <div class="step-head"><span class="num">IEM</span><h2>Kulak içi mix · KZ ZAS</h2></div>
-    <p>Hedef: Dream Theater dinler gibi. Basın önde ve dolgun, ama davul, gitar, klavye ve vokal her an net. KZ ZAS'ın kendi EQ'su yok; P2'de de yok. Bu yüzden "EQ ayarı" iki yerde yapılır: ses masasındaki kulak içi gönderimin (aux) seviyeleri ve o gönderimin EQ'su, artı kullandığın alıcının birkaç ayarı.</p>
+    <div class="step-head"><span class="num">IEM</span><h2>Kulak içi bas tonu · KZ ZAS</h2></div>
+    <p>Hedef: kulağına gelen bas tonu etli, dolu ve altlı olsun; notalar cıncık gibi net ayrılsın; slap geldiğinde çiğ bir şekilde patlamasın. KZ ZAS'ın ve P2'nin kendi EQ'su yok, bu yüzden ayar ses masasında, senin bas kanalında yapılır.</p>
 
-    <h3>1 · Mix tarifi · sesçiye vereceğin oranlar</h3>
-    <p style="font-size:.9rem;color:var(--muted)">Senin basın 0 dB referans. Diğerleri ona göre ne kadar kısık olmalı. Benim önerdiğim başlangıç oranları; sahnede kulağınla düzelt.</p>
-    <div class="tbl"><table class="mix">
-      <thead><tr><th>Kaynak</th><th>Seviye</th><th>Neden</th></tr></thead>
-      <tbody>
-        <tr><td><b>Senin basın</b> (Tone Hammer DI, Post)</td><td class="mono lvl">0 dB</td><td>Mix'in omurgası; en önde.</td></tr>
-        <tr><td>Kick</td><td class="mono lvl">−2 dB</td><td>Bas ile kilitlendiğin şey; bastan hemen sonra gelir.</td></tr>
-        <tr><td>Solist vokal</td><td class="mono lvl">−3 dB</td><td>Giriş ve dönüşleri kaçırmamak için.</td></tr>
-        <tr><td>Snare</td><td class="mono lvl">−4 dB</td><td>Zaman hissi.</td></tr>
-        <tr><td>Elektro gitar(lar)</td><td class="mono lvl">−5 dB</td><td>Riff'lerle birlikte basmak için net ama arkada.</td></tr>
-        <tr><td>Klavye / synth</td><td class="mono lvl">−6 dB</td><td>Akor geçişlerini duymak için.</td></tr>
-        <tr><td>Click / sequence (varsa)</td><td class="mono lvl">−6 dB</td><td>Sadece senin kulağına.</td></tr>
-        <tr><td>Tomlar</td><td class="mono lvl">−7 dB</td><td>Dolguları takip etmeye yeter.</td></tr>
-        <tr><td>Back vokaller</td><td class="mono lvl">−9 dB</td><td>Arka planda.</td></tr>
-        <tr><td>Overhead / ziller</td><td class="mono lvl">−10 dB</td><td>ZAS'ın tizi yüksek seste sertleşir; düşük tut.</td></tr>
-      </tbody>
-    </table></div>
+    <h3>Nereye uygulanır</h3>
+    <p>Bu ayarlar yalnızca <b>senin basının kulak içine giden sesi</b> için. Diğer enstrümanlar bu eğriden etkilenmez. Masada sesçiden Tone Hammer DI'ını <b>ikinci bir kanala kopyalamasını</b> iste: ilki salona (FOH) gider, ikincisi sadece senin kulak içi gönderimine. Aşağıdaki EQ ve dinamik ayarları o ikinci kanala yapılır; salondaki bas sesin değişmez.</p>
 
-    <h3>2 · Kulak içi gönderimin EQ'su · dijital masada</h3>
-    <p style="font-size:.9rem;color:var(--muted)">Masada aux/IEM çıkışına EQ koyulabiliyorsa bu eğriyi iste. Alçak frekansları kesen filtre (HPF) seçili basa göre değişir.</p>
+    <h3>Bas kanalı EQ'su · etli, dolu, altlı</h3>
     <figure>
-      <svg id="eqsvg" viewBox="0 0 360 200" role="img" aria-label="KZ ZAS için önerilen kulak içi EQ eğrisi"></svg>
+      <svg id="eqsvg" viewBox="0 0 360 200" role="img" aria-label="Kulak içi bas kanalı için önerilen EQ eğrisi"></svg>
     </figure>
     <div class="tbl"><table>
-      <thead><tr><th>Bant</th><th>Frekans</th><th>Ayar</th><th>Neden</th></tr></thead>
+      <thead><tr><th>Bant</th><th>Frekans</th><th>Ayar</th><th>Ne yapar</th></tr></thead>
       <tbody>
-        <tr><td>HPF (alçak kesme)</td><td class="mono" id="hpfCell">—</td><td class="mono">12 dB/okt</td><td id="hpfWhy">—</td></tr>
-        <tr><td>Low shelf</td><td class="mono">70 Hz</td><td class="mono">+2 dB</td><td>Son seviye bas: göğüste hissedilen alt; daha fazlası çatırdatır.</td></tr>
-        <tr><td>Peak</td><td class="mono">250 Hz</td><td class="mono">−2 dB · Q 1,2</td><td>ZAS'ın orta-bas şişkinliği; bas ile kick birbirine karışmasın.</td></tr>
-        <tr><td>Peak</td><td class="mono">3,5 kHz</td><td class="mono">−1,5 dB · Q 2</td><td>Uzun sette kulak yorgunluğunu azaltır.</td></tr>
-        <tr><td>High shelf</td><td class="mono">8 kHz</td><td class="mono">−2 dB</td><td>ZAS'ın parlak tizi ve zil sertliği.</td></tr>
-        <tr><td>Limiter</td><td class="mono">çıkış</td><td class="mono">açık</td><td>Ani tepeleri keser; hem kulağını hem sürücüleri korur.</td></tr>
+        <tr><td>HPF</td><td class="mono" id="hpfCell">—</td><td class="mono">12 dB/okt</td><td id="hpfWhy">—</td></tr>
+        <tr><td>Peak · alt</td><td class="mono">80 Hz</td><td class="mono">+3 dB · Q 0,9</td><td>Göğüste hissedilen alt. Son seviye budur; daha fazlası ZAS'ı çatırdatır.</td></tr>
+        <tr><td>Peak · et</td><td class="mono">150 Hz</td><td class="mono">+1,5 dB · Q 1</td><td>Gövde, dolgunluk.</td></tr>
+        <tr><td>Peak · çamur</td><td class="mono">320 Hz</td><td class="mono">−2 dB · Q 1,2</td><td>ZAS'ın orta-bas şişkinliğini alır; alt dolu kalır ama notalar birbirine yapışmaz.</td></tr>
+        <tr><td>Peak · tanım</td><td class="mono">900 Hz</td><td class="mono">+1 dB · Q 1,5</td><td>Notaları cıncık gibi ayırır; hızlı pasajlar net duyulur.</td></tr>
+        <tr><td>Peak · slap çiğliği</td><td class="mono">3 kHz</td><td class="mono">−3 dB · Q 2</td><td>Slap ve pop'taki sert "klik". Masada dinamik EQ varsa bunu dinamik yap (aşağıda).</td></tr>
+        <tr><td>High shelf</td><td class="mono">6 kHz</td><td class="mono" id="hsCell">−3 dB</td><td>Perde ve tel tıkırtısı, slap'in tiz kırbacı.</td></tr>
       </tbody>
     </table></div>
+
+    <h3>Dinamik · slap patlamasın</h3>
+    <p style="font-size:.9rem;color:var(--muted)">EQ sesin rengini, kompresör ve limiter ise ani tepeleri kontrol eder. Slap'in kulağında patlamasını asıl bunlar engeller.</p>
+    <div class="dev">
+      <div><div class="k">Kompresör</div><div class="v">Ratio <b>4:1</b> · attack <b>3–5 ms</b> · release <b>80–120 ms</b>. Eşiği parmakla çalarken 1–2 dB, slap'te 4–6 dB sıkıştıracak yere koy; kaybolan seviyeyi make-up gain ile geri ver.</div></div>
+      <div><div class="k">Dinamik EQ (varsa)</div><div class="v"><b>3 kHz</b>, en fazla <b>−4 dB</b>, yalnızca slap vuruşunda devreye girecek eşik. Parmakla çalarken ton hiç değişmez, slap gelince çiğlik yumuşar.</div></div>
+      <div><div class="k">Limiter</div><div class="v">Kanalın ya da kulak içi gönderiminin sonunda, <b>açık</b>. Kompresörün kaçırdığı pop tepelerini keser; hem kulağını hem ZAS'ın sürücülerini korur.</div></div>
+      <div><div class="k">Sıra</div><div class="v">HPF → EQ → kompresör → (dinamik EQ) → limiter. Çoğu dijital masada kanal sırası zaten böyledir.</div></div>
+    </div>
     <div class="mine"><span class="who" data-f="who"></span><span class="note" id="iemNote"></span></div>
   </section>
 
@@ -199,9 +193,9 @@ svg text{font-family:var(--body)}
     <div class="dev">
       <div><div class="k">Mod anahtarı</div><div class="v">Cihazın içinde. Masa tek kanal aux gönderiyorsa <b>MONO</b>, stereo mix gönderiyorsa <b>STEREO</b>.</div></div>
       <div><div class="k">Volume</div><div class="v">En kısıkta başla, saat 11–1 arasında çalış. Yetmiyorsa düğmeyi sonuna açma; sesçiden gönderimi artırmasını iste.</div></div>
-      <div><div class="k">EQ / limiter</div><div class="v">P2'de yok. Bu yüzden 2. adımdaki EQ ve limiter masada yapılmalı.</div></div>
+      <div><div class="k">EQ / limiter</div><div class="v">P2'de yok. Bu yüzden EQ, kompresör ve limiter masada, bas kanalında yapılmalı.</div></div>
       <div><div class="k">Pil</div><div class="v">2 × AAA, yaklaşık 12 saat. Her sahneye yeni pille çık.</div></div>
-      <div class="full"><div class="k">ZAS ile not</div><div class="v">ZAS çok hassas (≈112 dB). P2'nin küçük bir volüm hareketi bile büyük fark yapar; bası volümle değil mix oranıyla öne çıkar.</div></div>
+      <div class="full"><div class="k">ZAS ile not</div><div class="v">ZAS çok hassas (≈112 dB). P2'nin küçük bir volüm hareketi bile büyük fark yapar; bası P2'nin volümüyle değil, masadaki bas kanalının seviyesiyle öne çıkar.</div></div>
     </div>
   </section>
 
@@ -209,7 +203,7 @@ svg text{font-family:var(--body)}
     <div class="step-head"><span class="num">EK</span><h2>Sennheiser kablosuz · ew IEM G4</h2></div>
     <p style="font-size:.9rem;color:var(--muted)">Sahnelerde en sık denk gelinen Sennheiser alıcısı EK IEM G4. Farklı bir model çıkarsa menü adları çoğunlukla benzer.</p>
     <div class="dev">
-      <div class="full"><div class="k">Mode · önerilen: Focus</div><div class="v">Sesçiden <b>sol kanala yalnızca kendi basını</b>, <b>sağ kanala grup mix'ini</b> göndermesini iste. Sonra alıcıdaki <b>Balance</b> ile basını istediğin kadar öne çekersin; sesçiye her seferinde seslenmen gerekmez. Masa tek stereo mix gönderiyorsa Mode: Stereo, Balance ortada.</div></div>
+      <div class="full"><div class="k">Mode · önerilen: Focus</div><div class="v">Sesçiden <b>sol kanala yalnızca kendi basını</b> (EQ'lu ikinci kanal), <b>sağ kanala grup mix'ini</b> göndermesini iste. Sonra alıcıdaki <b>Balance</b> ile basını istediğin kadar öne çekersin; sesçiye her seferinde seslenmen gerekmez. Masa tek stereo mix gönderiyorsa Mode: Stereo, Balance ortada.</div></div>
       <div><div class="k">High Boost</div><div class="v"><b>0</b>. ZAS'ın tizi zaten parlak; boost sertleştirir.</div></div>
       <div><div class="k">Limiter</div><div class="v"><b>Açık</b> (Advanced menü). Sert vuruşlarda tepe kırpar.</div></div>
       <div><div class="k">Volume boost</div><div class="v"><b>Kapalı</b> ya da en düşük. ZAS hassas; gerek yok.</div></div>
@@ -221,9 +215,9 @@ svg text{font-family:var(--body)}
     <div class="step-head"><span class="num">!</span><h2>Patlatmadan son seviye bas</h2></div>
     <ul class="do">
       <li><b>Önce oturuş.</b> ZAS'ta kulağına en sıkı oturan ucu kullan; köpük uçlar bası ve izolasyonu belirgin artırır. Bas eksik geliyorsa ilk bakılacak yer burası.</li>
-      <li><b>Bası mix'le öne çıkar, EQ ile değil.</b> 70 Hz'de +2 dB'den fazlası sürücüyü zorlar; çatırtı ve "pır pır" titreme yapar.</li>
+      <li><b>Bası fader'la öne çıkar, EQ ile değil.</b> 80 Hz'de +3 dB'den fazlası sürücüyü zorlar; çatırtı ve "pır pır" titreme yapar.</li>
       <li><b>HPF'yi basa göre koy.</b> <span id="hpfRule">—</span></li>
-      <li><b>Çatırtı duyarsan</b> önce 60–70 Hz'yi geri al, sonra volümü. Volümü kısmak tek başına bası da götürür.</li>
+      <li><b>Çatırtı duyarsan</b> önce 80 Hz'yi geri al, sonra volümü. Volümü kısmak tek başına bası da götürür.</li>
       <li><b>Limiter hep açık.</b> P2'de yoksa masada iste.</li>
       <li class="warn">Kulakların enstrümanın. ZAS sızdırmaz olduğu için bas yoğun mix'i düşük genel seviyede kurabilirsin; uzun setlerde volümü yüksekte tutma.</li>
     </ul>
@@ -233,23 +227,23 @@ svg text{font-family:var(--body)}
 
 <script>
 const IEM={
- b1:{hpf:28,str:"B",note:"6 telli: B teli 31 Hz. Piezo açıkken kulak içinde tiz artar; piezo volümünü yükselttiğinde sesçiden 8 kHz'i bir kademe daha kısmasını iste."},
- b2:{hpf:28,str:"B",note:"5 telli: B teli 31 Hz. 5J-Hot'un yüksek çıkışı kulak içinde ilk öne çıkan şey olur; gönderimi diğer baslardan 1–2 dB düşük başlat."},
- b3:{hpf:38,str:"E",note:"4 telli J: E teli 41 Hz. AV '74'lerin orta-üst karakteri mix'te kendini zaten duyurur; 250 Hz kesmesini −1 dB'ye indirebilirsin."},
- b4:{hpf:38,str:"E",note:"4 telli P: E teli 41 Hz. P bas'ın alt-ortası güçlü; 250 Hz kesmesi en çok bu basta işe yarar. Kick ile ayrışması için kick'i −3 dB'ye çekmeyi dene."}
+ b1:{hpf:28,hs:-4,str:"B",note:"Piezo açıkken slap kulakta daha da çiğ gelir: 6 kHz shelf'i −4 dB'de tut, piezo kapalıysa −3 yeter. 6 telde C teli de parlak; dinamik EQ en çok bu basta işe yarar."},
+ b2:{hpf:28,hs:-3,str:"B",note:"5J-Hot ve aktif preamp en yüksek çıkışı verir: kompresör eşiğini diğer baslardan biraz yukarıda başlat ki parmakla çalarken sürekli sıkıştırmasın. J-Retro'daki Bright kapalı kalsın; slap'teki çiğliğin ilk kaynağı odur."},
+ b3:{hpf:38,hs:-3,str:"E",note:"Pasif J: slap'te en parlak ses köprü manyetiğinden gelir; slap bölümlerinde iki volümü eşit tut. J zaten net olduğu için 900 Hz artışına çoğu zaman gerek kalmaz."},
+ b4:{hpf:38,hs:-2,str:"E",note:"P bas ve hafif teller: slap daha az çiğ, alt-ortası güçlü. 320 Hz kesmesi bu basta en çok işe yarar; 900 Hz artışı notaları ayırır. Shelf −2 dB yeterli."}
 };
 function afterRender(d,k){
   const m=IEM[k]; if(!m) return;
   const why=m.str==="B"?"B teli 31 Hz'te titrer; filtre bunun altında kalmalı ki temel ses kesilmesin.":"E teli 41 Hz; altındaki uğultu ve sahne gürültüsü atılır, sürücü rahatlar.";
   const set=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=t;};
-  set("hpfCell",m.hpf+" Hz"); set("hpfWhy",why); set("iemNote",m.note);
+  set("hpfCell",m.hpf+" Hz"); set("hsCell",(m.hs+"").replace("-","−")+" dB"); set("hpfWhy",why); set("iemNote",m.note);
   set("hpfRule","Seçili bas için "+m.hpf+" Hz. "+why+" B telli baslarda 28 Hz, 4 tellilerde 38 Hz.");
   const svg=document.getElementById("eqsvg"); if(!svg) return;
   const X=f=>36+(Math.log10(f)-Math.log10(20))/3*314, Y=g=>100-Math.max(-9,Math.min(9,g))*8;
   const pk=(f,f0,g,bw)=>g*Math.exp(-Math.pow(Math.log2(f/f0)/bw,2));
-  const G=f=>-10*Math.log10(1+Math.pow(m.hpf/f,4))+2/(1+Math.pow(f/70,2))+pk(f,250,-2,0.6)+pk(f,3500,-1.5,0.4)-2/(1+Math.pow(8000/f,2));
+  const G=f=>-10*Math.log10(1+Math.pow(m.hpf/f,4))+pk(f,80,3,0.9)+pk(f,150,1.5,0.7)+pk(f,320,-2,0.6)+pk(f,900,1,0.45)+pk(f,3000,-3,0.4)+m.hs/(1+Math.pow(6000/f,2));
   let p="";for(let i=0;i<=160;i++){const f=20*Math.pow(1000,i/160);p+=(i?"L":"M")+X(f).toFixed(1)+" "+Y(G(f)).toFixed(1);}
-  const ticks=[[50,"50"],[100,"100"],[250,"250"],[1000,"1k"],[3500,"3,5k"],[8000,"8k"]];
+  const ticks=[[80,"80"],[150,"150"],[320,"320"],[900,"900"],[3000,"3k"],[6000,"6k"]];
   svg.innerHTML=`<line x1="36" y1="100" x2="350" y2="100" stroke="var(--line)" stroke-width="1"/>
    <line x1="36" y1="52" x2="350" y2="52" stroke="var(--line)" stroke-dasharray="2 4"/><line x1="36" y1="148" x2="350" y2="148" stroke="var(--line)" stroke-dasharray="2 4"/>
    <text class="s-mut" x="30" y="56" text-anchor="end">+6</text><text class="s-mut" x="30" y="104" text-anchor="end">0</text><text class="s-mut" x="30" y="152" text-anchor="end">−6</text>
