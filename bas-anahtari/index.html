@@ -238,7 +238,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <!-- 4 -->
   <section class="step" id="pickup">
     <div class="step-head"><span class="num">4</span><h2>Manyetik yüksekliği</h2></div>
-    <p>Son perdeye basılıyken manyetik kutbunun üstü ile telin altı arasını ölç. Kalın tel tarafı her zaman biraz daha aşağıda durur.</p>
+    <p>Son perdeye basılıyken manyetik kutbunun üstü ile telin altı arasını çelik cetvelle ölç: kalın tel tarafında en kalın telin, ince tel tarafında en ince telin altından. Kalın tel tarafı her zaman biraz daha aşağıda durur.</p>
+    <p style="font-size:.9rem;color:var(--muted)">Kaynaklar: Fender'ın bas fabrika tablosu (vintage tip manyetik: kalın taraf 8/64" ≈ 3,2 mm, ince taraf 6/64" ≈ 2,4 mm; 5 telli ve kalın tellerde artırılır) ve Yamaha bas kılavuzu (kutuplar telden 2–3 mm). 1/64" ≈ 0,4 mm.</p>
     <figure>
       <svg viewBox="0 0 360 200" role="img" aria-label="Manyetik kesiti: kalın tel tarafı yaklaşık 3,2 mm, ince tel tarafı yaklaşık 2,4 mm">
         <rect x="70" y="104" width="220" height="30" rx="6" fill="var(--wood)" stroke="var(--ink)" stroke-width="1.2"/>
@@ -257,8 +258,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     </figure>
     <div class="mine"><span class="who" data-f="who"></span><span class="val" data-f="pickup"></span><span class="note" data-f="pickupNote"></span></div>
     <ul class="do">
-      <li><b>Çok yakın:</b> mıknatıs teli çeker; dalgalı, kararsız ses, kısa sustain, üst perdelerde detone.</li>
+      <li><b>Çok yakın:</b> mıknatıs teli çeker; dalgalı, kararsız ses (wolf tone), kısa sustain, üst perdelerde detone, sert vuruşta tel kutba çarpar.</li>
       <li><b>Çok uzak:</b> ses incelir, çıkış düşer.</li>
+      <li><b>İki manyetikli baslarda</b> sap manyetiğini köprüdekinden 0,3–0,5 mm daha aşağıda tut: tel sapa yakın noktada daha geniş salınır.</li>
       <li>Yükseklikten sonra teller arası dengeyi kulakla kontrol et: hangi tel zayıfsa o taraf biraz yükseltilir. İki manyetikli baslarda ikisini aynı seviyede dinle (balans orta / iki volüm tam).</li>
     </ul>
   </section>
@@ -497,10 +499,10 @@ const B={
   action:"B ≈ 2,4 – 2,6 mm · C ≈ 2,0 mm (17. perde)",
   bridge:"Her tel kendi köprü parçasında: yükseklik o parçanın vidalarıyla. 40\" yarıçap düz olduğu için altı tel neredeyse aynı çizgide durur. Yükseklik değişince piezo sesinde tel dengesini de dinle.",
   nut:"Kemik eşik; 6 telde B oluğu en kritik olanıdır, açık B telinde vızıltıya dikkat.",
-  pickup:"Kalın tel ≈ 3,2 mm · ince tel ≈ 2,4 mm",
-  pickupNote:"Aktif bas: ölçmeden önce 9V pili yenile, EQ düğmelerini ortaya (düz) al. Balans düğmesi ortada iki manyetiği eşit dinle.",
+  pickup:"Low B tarafı ≈ 3 mm · high C tarafı ≈ 2 mm",
+  pickupNote:"Yamaha kılavuzu kutupların telden 2–3 mm uzakta olmasını öneriyor; fazla yaklaşınca manyetik çekiş sustain'i ve çalınabilirliği bozuyor. Sap manyetiğini köprüdekinden biraz aşağıda tut. Piezo köprüde olduğu için onun yüksekliği ayrıca ayarlanmaz. Ölçmeden önce 9V pili yenile, EQ düğmelerini ortaya (düz) al; balans ortadayken iki manyetiği eşit dinle.",
   intonation:"Her tel parçası kendi oktav vidasıyla ayrı ileri-geri gider. 35\" ölçekte B teli genelde en geride durur.",
-  rad:"40\"",rel:"0,20–0,25",act:"B 2,4–2,6 · C 2,0",pu:"3,2 / 2,4"},
+  rad:"40\"",rel:"0,20–0,25",act:"B 2,4–2,6 · C 2,0",pu:"3 / 2"},
  b2:{tab:"Bas 2",short:"Squier VM Jazz V",
   th:{g:9,b:12,ml:12.5,mf:11,t:12,v:12,note:"Aguilar 5J-Hot ve aktif preamp: çıkış en yüksek bu basta, Gain en düşükte başlar. J-Retro'yu düz al, Bright kapalı. Alt-ortada küçük bir artış B telini mikste net tutar."},
   hw:["Fender HiMass köprü","Squier VM Jazz V sap ve gövde, 9,5\" klavye"],
@@ -512,10 +514,10 @@ const B={
   action:"B ≈ 2,6 – 2,8 mm · G ≈ 2,0 mm (17. perde)",
   bridge:"HiMass: her eşikte iki küçük alyan vida (yükseklik), arkada yıldız vida (oktav). İki vidayı eşit çevir.",
   nut:"Fender sentetik/kemik eşik; açık B telinde vızıltı varsa oluk derin olabilir.",
-  pickup:"B tarafı ≈ 3,2 – 3,6 mm · G tarafı ≈ 2,4 – 2,8 mm",
-  pickupNote:"Aguilar 5J-Hot yüksek çıkışlı; standart değerlerin biraz altında (daha uzakta) başla. John East preamp'ı düz konuma al, pili yenile.",
+  pickup:"B tarafı ≈ 3,6 – 4,0 mm · G tarafı ≈ 2,4 – 2,8 mm",
+  pickupNote:"5 telli olduğu için Fender'ın 3,2 mm değerinin üstü: B teli daha geniş titrer. Aguilar 5J-Hot'ların 6 mm Alnico V mıknatısları güçlü çeker ve aşırı sarımlı oldukları için çıkış zaten yüksek; yaklaştırmaya gerek yok. Sap manyetiği köprüdekinden 0,3–0,5 mm aşağıda. John East preamp'ı düz konuma al, pili yenile.",
   intonation:"HiMass eşiklerinde arkadaki vida saat yönünde sıkılınca eşik geri gelir. B teli en geride olur.",
-  rad:"9,5\"",rel:"0,30–0,35",act:"B 2,6–2,8 · G 2,0",pu:"3,2–3,6 / 2,4–2,8"},
+  rad:"9,5\"",rel:"0,30–0,35",act:"B 2,6–2,8 · G 2,0",pu:"3,6–4,0 / 2,4–2,8"},
  b3:{tab:"Bas 3",short:"SX SJB75C",
   th:{g:11.5,b:12.5,ml:12.5,mf:13.5,t:12.5,v:12,note:"Pasif J bas: Gain daha yukarıda. AV '74 manyetiklerin orta-üst karakterini öne çıkarmak için orta frekans biraz sağda, hafif artışla. Basın üzerindeki iki volümü tam aç, tonu tam aç (No-Load) konumunda başla."},
   hw:["Schaller Bass 2000 köprü","Schaller vintage tip nikel burgular","SX SJB75C alder gövde ve sap, 12\" klavye"],
@@ -528,7 +530,7 @@ const B={
   bridge:"Schaller 2000: yükseklik eşikteki alyan vidalarla, oktav arkadaki vidayla. 12\" yarıçapta eşik kavisi 9,5\" baslardan biraz daha yumuşak olur.",
   nut:"Eşik orijinal ise oluk yüksekliğini kontrol et; yeni sap/eşik kombinasyonlarında sık sorun çıkar.",
   pickup:"E tarafı ≈ 3,2 mm · G tarafı ≈ 2,4 mm",
-  pickupNote:"American Vintage '74 alnico manyetikler teli kolay çeker; fazla yaklaştırma. Köprü ve sap manyetiğini iki volüm tam açıkken dengeli duyacak şekilde ayarla.",
+  pickupNote:"Fender'ın vintage tip bas değeri (8/64\" / 6/64\"). American Vintage '74 alnico manyetikler teli kolay çeker; fazla yaklaştırma. Sap manyetiği köprüdekinden 0,3–0,5 mm aşağıda. İki volüm tam açıkken ikisini dengeli duyacak şekilde son ayarı kulakla yap.",
   intonation:"Arkadaki vida saat yönünde = eşik geri. 4 telde eşikler genelde E'den G'ye hafif öne doğru bir sıra oluşturur.",
   rad:"12\"",rel:"0,25–0,30",act:"E 2,4 · G 2,0",pu:"3,2 / 2,4"},
  b4:{tab:"Bas 4",short:"Squier P (modlu)",
@@ -543,7 +545,7 @@ const B={
   bridge:"Gotoh 203B-4C: her eşikte iki küçük alyan (yükseklik), arkada vida (oktav). İnce teller geniş titrediği için çok alçaltma.",
   nut:"Graph Tech TUSQ XL: kendinden yağlı, tel takılmaz. Sadece oluk yüksekliğini kontrol et.",
   pickup:"E–A yarısı ≈ 3,2 mm · D–G yarısı ≈ 2,4 mm",
-  pickupNote:"Custom Shop '62 split-coil iki ayrı yarıdan oluşur; her yarı kendi iki vidasıyla ayrı ayarlanır. Alnico mıknatıs teli çekebilir, fazla yaklaştırma.",
+  pickupNote:"Fender'ın vintage tip bas değeri (8/64\" / 6/64\"). Custom Shop '62 split-coil iki ayrı yarıdan oluşur; E–A yarısını E telinin, D–G yarısını G telinin altında ölç, her yarıyı kendi iki vidasıyla ayarla. Alnico mıknatıs teli çekebilir, fazla yaklaştırma.",
   intonation:"Arkadaki vida saat yönünde = eşik geri. Hafif tellerde basınç değişimi daha belirgin, oktavı akortlu ve çalma pozisyonunda ayarla.",
   rad:"9,5\"",rel:"0,25–0,30",act:"E 2,4 · G 2,0",pu:"3,2 / 2,4"}
 };
